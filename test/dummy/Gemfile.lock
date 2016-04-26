@@ -1,3 +1,9 @@
+PATH
+  remote: ../../../
+  specs:
+    request_authorizer (1.0.0)
+      rails (~> 4.2.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -153,6 +159,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   rails (= 4.2.6)
+  request_authorizer (= 1.0.0)!
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring

@@ -7,11 +7,11 @@ require "request_authorizer/version"
 Gem::Specification.new do |s|
   s.name        = "request_authorizer"
   s.version     = RequestAuthorizer::VERSION
-  s.authors     = ["juniormesquitadandao"]
+  s.authors     = ["Marcelo Junior"]
   s.email       = ["juniormesquitadandao@gmail.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of RequestAuthorizer."
-  s.description = "TODO: Description of RequestAuthorizer."
+  s.homepage    = "https://github.com/juniormesquitadandao/request_authorizer"
+  s.summary     = "RequestAuthorizer"
+  s.description = "RequestAuthorizer"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
