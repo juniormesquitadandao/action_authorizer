@@ -115,17 +115,19 @@ module AuthorizeRequest
 
   module ClassMethods
     def can? request
-      byebug
-      params = request.try(:params) || request[:params]
-      params = params.dup
-
       authorize_request = "#{params[:controller]}_authorizer".classify.constantize
 
-      authorize_request.new(params).can?
+      params = request.params.dup
+
+      authorize_request.new( params, user_by_ request ).can?
     end
 
     def cannot? request
       !can? request
+    end
+
+    def user_by_ request
+      request.env["warden"].user
     end
 
     def skip_default_params
@@ -139,6 +141,8 @@ module AuthorizeRequest
         authorize_default_params
       end
     end
+
+
   end
 
 end
