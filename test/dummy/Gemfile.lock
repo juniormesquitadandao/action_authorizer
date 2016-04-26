@@ -1,5 +1,5 @@
 PATH
-  remote: ../../../
+  remote: ../../../authorize_request
   specs:
     authorize_request (1.0.0)
       rails (~> 4.2.6)

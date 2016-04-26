@@ -119,7 +119,7 @@ module AuthorizeRequest
 
       params = request.params.dup
 
-      authorize_request.new( params, user_by_ request ).can?
+      authorize_request.new( params, user_by_(request) ).can?
     end
 
     def cannot? request
