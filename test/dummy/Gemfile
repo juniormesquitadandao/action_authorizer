@@ -46,3 +46,4 @@ group :development do
 end
 
 gem 'authorize_request', '1.0.0', path: '../../../'
+gem 'devise'
