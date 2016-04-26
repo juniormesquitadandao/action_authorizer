@@ -23,6 +23,11 @@
 
 </ul>
 <%= yield %>
+<% if user_signed_in? %>
+  <p>
+    <span><%= current_user %></span>
+  </p>
+<% end %>
 
 </body>
 </html>

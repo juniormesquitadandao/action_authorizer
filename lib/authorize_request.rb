@@ -4,8 +4,9 @@ module AuthorizeRequest
   included do
     attr_reader :unauthorized_params
 
-    def initialize(params)
+    def initialize(params, user)
       @params = params
+      @user = user
 
       skip_params
       set_action_name
@@ -115,10 +116,8 @@ module AuthorizeRequest
 
   module ClassMethods
     def can? request
-      authorize_request = "#{params[:controller]}_authorizer".classify.constantize
-
       params = request.params.dup
-
+      authorize_request = "#{params[:controller]}_authorizer".classify.constantize
       authorize_request.new( params, user_by_(request) ).can?
     end
 

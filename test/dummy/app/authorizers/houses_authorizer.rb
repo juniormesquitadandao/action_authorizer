@@ -13,11 +13,24 @@ class HousesAuthorizer < ApplicationAuthorizer
   # end
 
   # Specify which parameters you want to use for each action.
-  # def authorize_params
-  #   {
-  #     index: {
-  #       param_one: [], param_two: %w( value_one, value_two, ...)
-  #     }
-  #   }
-  # end
+  def authorize_default_params
+    {
+      index: {},
+      show: {
+        id: @user.house_ids
+      },
+      new: nil,
+      edit: {
+        id: @user.house_ids
+      },
+      create: {},
+      update: {
+        id: @user.house_ids,
+        house: {}
+      },
+      destroy: {
+        id: @user.house_ids
+      }
+    }
+  end
 end
