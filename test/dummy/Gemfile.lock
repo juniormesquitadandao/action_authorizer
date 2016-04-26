@@ -1,7 +1,7 @@
 PATH
   remote: ../../../
   specs:
-    request_authorizer (1.0.0)
+    authorize_request (1.0.0)
       rails (~> 4.2.6)
 
 GEM
@@ -154,12 +154,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  authorize_request (= 1.0.0)!
   byebug
   coffee-rails (~> 4.1.0)
   jbuilder (~> 2.0)
   jquery-rails
   rails (= 4.2.6)
-  request_authorizer (= 1.0.0)!
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
