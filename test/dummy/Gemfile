@@ -45,4 +45,4 @@ group :development do
   gem 'spring'
 end
 
-gem 'request_authorizer', '1.0.0', path: '../../../'
+gem 'authorize_request', '1.0.0', path: '../../../'

@@ -1,29 +1,31 @@
-module RequestAuthorizer
+module AuthorizeRequest
   module Generators
     class InstallGenerator < Rails::Generators::Base
       source_root File.expand_path("..", __FILE__)
 
-      desc "Creates an initializer with default request_authorizer configuration and copy locale file"
+      desc "Creates an initializer with default authorize_request configuration and copy locale file"
 
-      def create_application_request_authorizer_file
-        create_file "app/authorizers/application_request_authorizer.rb", <<-RUBY
-class ApplicationRequestAuthorizer
-  include RequestAuthorizer
+      def create_application_request_authorize_file
+        create_file "app/authorizers/application_authorize_request.rb", <<-RUBY
+class ApplicationAuthorizeRequest
+  include AuthorizeRequest
 end
         RUBY
       end
 
-      def create_application_authorizer_file
+      def create_application_authorize_file
         create_file "app/authorizers/application_authorizer.rb", <<-RUBY
-class ApplicationAuthorizer < ApplicationRequestAuthorizer
+class ApplicationAuthorizer < ApplicationAuthorizeRequest
+  # Skip the following parameters for all requests [:utf8, :_method, :authenticity_token, :commit]
   # skip_default_params
-  # authorizer_default_params
+  # Authorize the predefined actions with their respective parameters
+  # authorize_default_params
 end
         RUBY
       end
 
       def update_routes
-        insert_into_file "config/routes.rb", "  constraints -> (request){ ApplicationRequestAuthorizer.can? request } do\n" , :after => "Rails.application.routes.draw do\n"
+        insert_into_file "config/routes.rb", "  constraints -> (request){ ApplicationAuthorizeRequest.can? request } do\n" , :after => "Rails.application.routes.draw do\n"
         insert_into_file "config/routes.rb", "\n  end" , :before => "\nend"
       end
 

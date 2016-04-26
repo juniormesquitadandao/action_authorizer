@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    request_authorizer (1.0.0)
+    authorize_request (1.0.0)
       rails (~> 4.2.6)
 
 GEM
@@ -106,7 +106,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  request_authorizer!
+  authorize_request!
   sqlite3
 
 BUNDLED WITH

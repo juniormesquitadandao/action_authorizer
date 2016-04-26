@@ -1,1 +1,1 @@
-rvm --create use 2.3.0@request_authorizer
+rvm --create use 2.3.0@authorize_request

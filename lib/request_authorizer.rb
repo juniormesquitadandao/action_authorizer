@@ -1,4 +1,4 @@
-module RequestAuthorizer
+module AuthorizeRequest
   extend ActiveSupport::Concern
 
   included do
@@ -38,7 +38,7 @@ module RequestAuthorizer
       [:utf8, :_method, :authenticity_token, :commit]
     end
 
-    def authorizer_default_params
+    def authorize_default_params
       {
         index: @attribute_names,
         show: {
@@ -93,19 +93,19 @@ module RequestAuthorizer
       @checked_params = @params.extract!(:controller)
       @unauthorized_params = {}
 
-      authorizer_action
-      authorizer_attribute_names if can?
+      authorize_action
+      authorize_attribute_names if can?
 
       @unauthorized_params.merge! @params
     end
 
-    def authorizer_action
+    def authorize_action
       @checked_params.merge! @params.extract!(:action)
       @authorized_params = @authorized_params[@action_name]
       @unauthorized_params = @checked_params unless @authorized_params
     end
 
-    def authorizer_attribute_names
+    def authorize_attribute_names
       @authorized_attributes = {}
       @authorized_params.keys.each do |authorized_param_name|
         @authorized_attributes.merge! @params.extract!(authorized_param_name)
@@ -118,9 +118,9 @@ module RequestAuthorizer
       params = request.try(:params) || request[:params]
       params = params.dup
 
-      request_authorizer = "#{params[:controller]}_authorizer".classify.constantize
+      authorize_request = "#{params[:controller]}_authorizer".classify.constantize
 
-      request_authorizer.new(params).can?
+      authorize_request.new(params).can?
     end
 
     def cannot? request
@@ -133,9 +133,9 @@ module RequestAuthorizer
       end
     end
 
-    def authorizer_default_params
+    def authorize_default_params
       define_method :authorized_params do
-        authorizer_default_params
+        authorize_default_params
       end
     end
   end

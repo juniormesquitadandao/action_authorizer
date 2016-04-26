@@ -1,3 +1,3 @@
-class ApplicationRequestAuthorizer
-  include RequestAuthorizer
+class ApplicationAuthorizeRequest
+  include AuthorizeRequest
 end

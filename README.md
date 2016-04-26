@@ -1,4 +1,4 @@
-# request_authorizer
-Request Authorizer
+# authorize_request
+Authorize Request
 
-rails g request_authorizer:install
+rails g authorize_request:install
