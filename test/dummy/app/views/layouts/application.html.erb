@@ -11,6 +11,13 @@
 <ul class="hmenu">
   <%= render 'devise/menu/registration_items' %>
   <%= render 'devise/menu/login_items' %>
+
+<% if user_signed_in? %>
+  <li>
+  <%= link_to('Users', users_index_path) %>
+  </li>
+<% end %>
+
 </ul>
 <%= yield %>
 
