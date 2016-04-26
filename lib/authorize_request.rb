@@ -115,6 +115,7 @@ module AuthorizeRequest
 
   module ClassMethods
     def can? request
+      byebug
       params = request.try(:params) || request[:params]
       params = params.dup
 
