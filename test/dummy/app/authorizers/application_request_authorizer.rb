@@ -1,0 +1,3 @@
+class ApplicationRequestAuthorizer
+  include RequestAuthorizer
+end

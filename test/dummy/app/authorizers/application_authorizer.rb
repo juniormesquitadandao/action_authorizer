@@ -1,0 +1,4 @@
+class ApplicationAuthorizer < ApplicationRequestAuthorizer
+  skip_default_params
+  authorizer_default_params
+end
