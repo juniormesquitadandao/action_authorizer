@@ -45,5 +45,5 @@ group :development do
   gem 'spring'
 end
 
-gem 'authorize_request', '1.0.0', path: '../../../authorize_request'
+gem 'action_authorizer', '1.0.0', path: '../../../action_authorizer'
 gem 'devise'

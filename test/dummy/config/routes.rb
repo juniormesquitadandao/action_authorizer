@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
-  constraints -> (request){ ApplicationAuthorizeRequest.can? request } do
+
+  def authorize! &block
+    constraints ActionAuthorizer::Constraint.new, &block
+  end
+
+  authorize! do
     # The priority is based upon order of creation: first created -> highest priority.
     # See how all your routes lay out with "rake routes".
 
@@ -59,4 +64,5 @@ Rails.application.routes.draw do
     #     resources :products
     #   end
   end
+
 end

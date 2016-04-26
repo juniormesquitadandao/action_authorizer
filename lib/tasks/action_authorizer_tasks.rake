@@ -1,4 +1,4 @@
 # desc "Explaining what the task does"
-# task :authorize_request do
+# task :action_authorizer do
 #   # Task goes here
 # end
