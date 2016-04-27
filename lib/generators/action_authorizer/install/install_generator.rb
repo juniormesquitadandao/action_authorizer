@@ -4,9 +4,13 @@ class ActionAuthorizer::InstallGenerator < Rails::Generators::Base # :nodoc:
   def create_application_authorize_file
     create_file "app/authorizers/application_authorizer.rb", <<-RUBY
 class ApplicationAuthorizer < ActionAuthorizer::Base
+
+  protected
+
   def authenticated
     request.env['warden'].user
   end
+
 end
     RUBY
   end
