@@ -1,4 +1,4 @@
-module ActionController
+module ActionAuthorizer
   class Constraint
     def matches? request
       false
