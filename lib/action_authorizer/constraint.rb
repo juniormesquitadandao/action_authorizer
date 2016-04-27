@@ -1,7 +1,5 @@
-module ActionAuthorizer
-  class Constraint
-    def matches? request
-      false
-    end
+class ActionAuthorizer::Constraint
+  def matches? request
+    false
   end
 end

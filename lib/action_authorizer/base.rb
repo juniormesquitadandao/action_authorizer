@@ -1,4 +1,2 @@
-module ActionAuthorizer
-  class Base
-  end
+class ActionAuthorizer::Base
 end
