@@ -1,11 +1,16 @@
 class ActionAuthorizer::Constraint
   def matches? request
-    params = request.params.dup
+    @request = request
 
+    params = request.params.dup
     controller = params.extract!(:controller)[:controller]
     authorizer = "#{controller}_authorizer".classify.constantize
-
     action = params.extract!(:action)[:action]
-    authorizer.new(action, params).authorized?
+
+    authorizer.new(authenticated, action, params).authorized?
+  end
+
+  def authenticated
+    @request.env['warden'].user
   end
 end

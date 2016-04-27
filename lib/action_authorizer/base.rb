@@ -1,6 +1,7 @@
 class ActionAuthorizer::Base
 
-  def initialize(action, params = {})
+  def initialize(authenticated, action, params = {})
+    @authenticated = authenticated
     @action = action
     @params = params
   end
