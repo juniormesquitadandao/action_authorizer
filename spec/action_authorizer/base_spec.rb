@@ -12,8 +12,6 @@ RSpec.describe 'Base' do
      request
   end
 
-  it { expect(ActionAuthorizer::Base).to be_truthy }
-
   context '#index' do
 
     describe 'not authorize' do
