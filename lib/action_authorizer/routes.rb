@@ -1,5 +1,6 @@
-require "active_support/core_ext/object/try"
-require "active_support/core_ext/hash/slice"
+require 'active_support/core_ext/object/try'
+require 'active_support/core_ext/hash/slice'
+require 'action_dispatch'
 
 class ActionDispatch::Routing::Mapper
   def authorize!

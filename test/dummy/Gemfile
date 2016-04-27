@@ -45,5 +45,9 @@ group :development do
   gem 'spring'
 end
 
+group :development, :test do
+  gem 'rspec-rails', '3.4.2'
+end
+
 gem 'action_authorizer', '1.0.0', path: '../../../action_authorizer'
 gem 'devise'
