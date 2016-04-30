@@ -1,22 +1,25 @@
 class ActionAuthorizer::InstallGenerator < Rails::Generators::Base # :nodoc:
-  desc "Creates an initializer with default action_authorizer configuration and copy locale file"
+  desc 'Creates an initializer with default action_authorizer configuration and copy locale file'
 
   def create_application_authorize_file
-    create_file "app/authorizers/application_authorizer.rb", <<-RUBY
+    create_file 'app/authorizers/application_authorizer.rb', <<-RUBY
 class ApplicationAuthorizer < ActionAuthorizer::Base
-
-  protected
-
-  def authenticated
-    request.env['warden'].user
+end
+    RUBY
   end
 
+  def create_action_authorizer_file
+    create_file 'config/initializers/action_authorizer.rb', <<-RUBY
+class ActionAuthorizer::Constraint
+  # def authenticated
+  #   @request.env['warden'].user
+  # end
 end
     RUBY
   end
 
   def update_routes
-    insert_into_file "config/routes.rb", "  authorize! do\n" , :after => "Rails.application.routes.draw do\n"
-    insert_into_file "config/routes.rb", "\n  end" , :before => "\nend"
+    insert_into_file 'config/routes.rb', '  authorize! do\n', after: 'Rails.application.routes.draw do\n'
+    insert_into_file 'config/routes.rb', '\n  end', before: '\nend'
   end
 end
