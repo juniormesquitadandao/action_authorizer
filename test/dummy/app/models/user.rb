@@ -5,8 +5,17 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :group
+  has_many :houses
 
   def to_s
     email
+  end
+
+  def user_group?
+    group.name == 'user'
+  end
+
+  def admin_group?
+    !user_group?
   end
 end

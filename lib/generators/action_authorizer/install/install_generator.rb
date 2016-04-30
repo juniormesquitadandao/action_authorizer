@@ -8,20 +8,21 @@ end
     RUBY
   end
 
-  def create_action_authorizer_file
-    initializer "action_authorizer.rb" do
-      <<-RUBY
-class ActionAuthorizer::Constraint
+  def update_application_controller_file
+    inject_into_file 'app/controllers/application_controller.rb', before: "\nend" do <<-RUBY
+\n
+  before_action :authorize!, unless: :devise_controller?
+
+  include ActionAuthorizer
+
   # def authenticated
-  #   @request.env['warden'].user
+  #   current_user
   # end
-end
+
+  # def unauthorized_response_on_production
+  #   render file: Rails.root.join('public/404'), layout: false, status: :not_found
+  # end
       RUBY
     end
-  end
-
-  def update_routes
-    route "authorize! do"
-    insert_into_file 'config/routes.rb', "\n  end", before: "\nend"
   end
 end

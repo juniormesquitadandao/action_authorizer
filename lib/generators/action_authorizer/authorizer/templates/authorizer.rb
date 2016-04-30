@@ -13,7 +13,7 @@ class <%= controller_class_name %>Authorizer < ApplicationAuthorizer
 
   def show
     # true
-    # { id: @authenticated.<%= singular_table_name %>_ids }
+    # { id: authenticated.<%= singular_table_name %>_ids }
   end
 
   def new
@@ -22,7 +22,7 @@ class <%= controller_class_name %>Authorizer < ApplicationAuthorizer
 
   def edit
     # true
-    # { id: @authenticated.<%= singular_table_name %>_ids }
+    # { id: authenticated.<%= singular_table_name %>_ids }
   end
 
   def create
@@ -31,12 +31,12 @@ class <%= controller_class_name %>Authorizer < ApplicationAuthorizer
 
   def update
     # true
-    # { id: @authenticated.<%= singular_table_name %>_ids }
+    # { id: authenticated.<%= singular_table_name %>_ids }
   end
 
   def destroy
     # true
-    # { id: @authenticated.<%= singular_table_name %>_ids }
+    # { id: authenticated.<%= singular_table_name %>_ids }
   end
 
 end
