@@ -5,17 +5,6 @@ RSpec.describe 'Base' do
   let(:user_two) { double('Authenticated', user?: true, house_ids: [2]) }
   let(:admin) { double('Authenticated', admin?: true) }
 
-  def request controller, action, others = {}
-     params = {
-      controller: controller.to_s,
-      action: action.to_s,
-     }
-     params.merge! others
-
-     request = double('Request', params: params)
-     request
-  end
-
   context '#index' do
     describe 'not authorize' do
       it { expect(HousesAuthorizer.new(guest, 'index')).not_to be_authorized }

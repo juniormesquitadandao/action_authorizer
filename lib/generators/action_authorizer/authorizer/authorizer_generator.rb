@@ -9,7 +9,11 @@ class ActionAuthorizer::AuthorizerGenerator < Rails::Generators::NamedBase
 
   check_class_collision suffix: 'Authorizer'
 
-  def create_authorizer_files
+  def create_authorizer_file
     template 'authorizer.rb', File.join('app/authorizers', controller_class_path, "#{controller_file_name}_authorizer.rb")
+  end
+
+  def create_authorizer_spec_file
+    template 'authorizer_spec.rb', File.join('spec/authorizers', controller_class_path, "#{controller_file_name}_authorizer_spec.rb")
   end
 end

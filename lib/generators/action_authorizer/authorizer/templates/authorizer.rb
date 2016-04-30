@@ -3,7 +3,7 @@ require_dependency "<%= namespaced_file_path %>/application_authorizer"
 
 <% end -%>
 <% module_namespacing do -%>
-class <%= controller_class_name %>Controller < ApplicationAuthorizer
+class <%= controller_class_name %>Authorizer < ApplicationAuthorizer
 
 <% unless options[:singleton] -%>
   def index

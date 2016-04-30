@@ -9,17 +9,19 @@ end
   end
 
   def create_action_authorizer_file
-    create_file 'config/initializers/action_authorizer.rb', <<-RUBY
+    initializer "action_authorizer.rb" do
+      <<-RUBY
 class ActionAuthorizer::Constraint
   # def authenticated
   #   @request.env['warden'].user
   # end
 end
-    RUBY
+      RUBY
+    end
   end
 
   def update_routes
-    insert_into_file 'config/routes.rb', '  authorize! do\n', after: 'Rails.application.routes.draw do\n'
-    insert_into_file 'config/routes.rb', '\n  end', before: '\nend'
+    route "authorize! do"
+    insert_into_file 'config/routes.rb', "\n  end", before: "\nend"
   end
 end
