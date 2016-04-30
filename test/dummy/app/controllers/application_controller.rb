@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authorize!, unless: :devise_controller?
 
-  include ActionAuthorizer
+  include ActionAuthorizer::Config
 
   # def authenticated
   #   current_user

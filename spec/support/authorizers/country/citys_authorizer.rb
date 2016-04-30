@@ -1,47 +1,31 @@
 class Country::CitysAuthorizer < ApplicationAuthorizer
 
   def index
-    @authenticated
+    authenticated
   end
 
   def show
-    if @authenticated.try(:user?)
-      { id: @authenticated.house_ids }
-    elsif @authenticated.try(:admin?)
-      true
-    end
+    authenticated
   end
 
   def new
-    @authenticated
+    authenticated.try :admin_group?
   end
 
   def edit
-    if @authenticated.try(:user?)
-      { id: @authenticated.house_ids }
-    elsif @authenticated.try(:admin?)
-      true
-    end
+    authenticated.try :admin_group?
   end
 
   def create
-    @authenticated
+    authenticated.try :admin_group?
   end
 
   def update
-    if @authenticated.try(:user?)
-      { id: @authenticated.house_ids }
-    elsif @authenticated.try(:admin?)
-      true
-    end
+    authenticated.try :admin_group?
   end
 
   def destroy
-    if @authenticated.try(:user?)
-      { id: @authenticated.house_ids }
-    elsif @authenticated.try(:admin?)
-      true
-    end
+    authenticated.try :admin_group?
   end
 
 end

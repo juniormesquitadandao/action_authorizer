@@ -1,7 +1,7 @@
 class WelcomeAuthorizer < ApplicationAuthorizer
 
   def index
-    # true
+    true
   end
 
 end
