@@ -5,8 +5,11 @@ class HousesAuthorizer < ApplicationAuthorizer
   end
 
   def show
-    @authenticated
-    # { id: authenticated.house_ids }
+    if @authenticated.try :user_group?
+      { id: @authenticated.house_ids }
+    else
+      @authenticated
+    end
   end
 
   def new
@@ -14,8 +17,11 @@ class HousesAuthorizer < ApplicationAuthorizer
   end
 
   def edit
-    @authenticated
-    # { id: authenticated.house_ids }
+    if @authenticated.try :user_group?
+      { id: @authenticated.house_ids }
+    else
+      @authenticated
+    end
   end
 
   def create
@@ -23,13 +29,19 @@ class HousesAuthorizer < ApplicationAuthorizer
   end
 
   def update
-    @authenticated
-    # { id: authenticated.house_ids }
+    if @authenticated.try :user_group?
+      { id: @authenticated.house_ids }
+    else
+      @authenticated
+    end
   end
 
   def destroy
-    @authenticated
-    # { id: authenticated.house_ids }
+    if @authenticated.try :user_group?
+      { id: @authenticated.house_ids }
+    else
+      @authenticated
+    end
   end
 
 end

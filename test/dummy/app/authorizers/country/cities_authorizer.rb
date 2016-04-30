@@ -6,7 +6,6 @@ class Country::CitiesAuthorizer < ApplicationAuthorizer
 
   def show
     @authenticated
-    # { id: authenticated.country_city_ids }
   end
 
   def new
@@ -14,8 +13,7 @@ class Country::CitiesAuthorizer < ApplicationAuthorizer
   end
 
   def edit
-    @authenticated
-    # { id: authenticated.country_city_ids }
+    @authenticated.try :admin_group?
   end
 
   def create
@@ -23,13 +21,11 @@ class Country::CitiesAuthorizer < ApplicationAuthorizer
   end
 
   def update
-    @authenticated
-    # { id: authenticated.country_city_ids }
+    @authenticated.try :admin_group?
   end
 
   def destroy
-    @authenticated
-    # { id: authenticated.country_city_ids }
+    @authenticated.try :admin_group?
   end
 
 end
