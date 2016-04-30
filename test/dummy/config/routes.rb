@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   authorize! do
+    namespace :country do
+        resources :cities
+    end
     # The priority is based upon order of creation: first created -> highest priority.
     # See how all your routes lay out with "rake routes".
 
