@@ -1,7 +1,7 @@
 class UsersAuthorizer < ApplicationAuthorizer
 
   def index
-    # true
+    @authenticated
   end
 
 end

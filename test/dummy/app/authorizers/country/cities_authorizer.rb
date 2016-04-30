@@ -1,34 +1,34 @@
-class Country::CitysAuthorizer < ApplicationAuthorizer
+class Country::CitiesAuthorizer < ApplicationAuthorizer
 
   def index
-    # true
+    @authenticated
   end
 
   def show
-    # true
+    @authenticated
     # { id: authenticated.country_city_ids }
   end
 
   def new
-    # true
+    @authenticated
   end
 
   def edit
-    # true
+    @authenticated
     # { id: authenticated.country_city_ids }
   end
 
   def create
-    # true
+    @authenticated
   end
 
   def update
-    # true
+    @authenticated
     # { id: authenticated.country_city_ids }
   end
 
   def destroy
-    # true
+    @authenticated
     # { id: authenticated.country_city_ids }
   end
 
