@@ -5,7 +5,11 @@ class HousesAuthorizer < ApplicationAuthorizer
   end
 
   def show
-    { id: @authenticated.try(:house_ids) || [] }
+    if @authenticated.try(:user?)
+      { id: @authenticated.house_ids }
+    elsif @authenticated.try(:admin?)
+      true
+    end
   end
 
   def new
@@ -13,7 +17,11 @@ class HousesAuthorizer < ApplicationAuthorizer
   end
 
   def edit
-    { id: @authenticated.try(:house_ids) || [] }
+    if @authenticated.try(:user?)
+      { id: @authenticated.house_ids }
+    elsif @authenticated.try(:admin?)
+      true
+    end
   end
 
   def create
@@ -21,11 +29,19 @@ class HousesAuthorizer < ApplicationAuthorizer
   end
 
   def update
-    { id: @authenticated.try(:house_ids) || [] }
+    if @authenticated.try(:user?)
+      { id: @authenticated.house_ids }
+    elsif @authenticated.try(:admin?)
+      true
+    end
   end
 
   def destroy
-    { id: @authenticated.try(:house_ids) || [] }
+    if @authenticated.try(:user?)
+      { id: @authenticated.house_ids }
+    elsif @authenticated.try(:admin?)
+      true
+    end
   end
 
 end

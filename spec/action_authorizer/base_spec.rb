@@ -1,9 +1,9 @@
 RSpec.describe 'Base' do
 
   let(:guest) { nil }
-  let(:user_one) { double('Authenticated', house_ids: [1]) }
-  let(:user_two) { double('Authenticated', house_ids: [2]) }
-  let(:admin) { double('Authenticated', house_ids: [1, 2]) }
+  let(:user_one) { double('Authenticated', user?: true, house_ids: [1]) }
+  let(:user_two) { double('Authenticated', user?: true, house_ids: [2]) }
+  let(:admin) { double('Authenticated', admin?: true) }
 
   def request controller, action, others = {}
      params = {
