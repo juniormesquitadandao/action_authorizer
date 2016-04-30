@@ -5,11 +5,19 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-one = User.create email: 'one@email.com', password: 'password'
-two = User.create email: 'two@email.com', password: 'password'
+
+chicago = Country::City.create name: 'Chicago'
+copenhagen = Country::City.create name: 'Copenhagen'
+
+admin_group = Group.create name: 'admin'
+user_group = Group.create name: 'user'
+
+admin = User.create email: 'admin@email.com', password: 'password', group: admin_group
+one = User.create email: 'one@email.com', password: 'password', group: user_group
+two = User.create email: 'two@email.com', password: 'password', group: user_group
 
 House.create [
-  { street: 'A', user: one},
-  { street: 'B', user: one},
-  { street: 'C', user: two}
+  { street: 'A', user: one, city: chicago },
+  { street: 'B', user: one, city: copenhagen },
+  { street: 'C', user: two, city: chicago }
 ]
