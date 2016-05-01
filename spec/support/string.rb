@@ -1,11 +1,11 @@
 class String
 
   def classify
-    'WelcomeAuthorizer'
+    self.split('_').map(&:capitalize).join('')
   end
 
   def constantize
-    Object.const_get('WelcomeAuthorizer')
+    Object.const_get(self)
   end
 
   def present?

@@ -34,6 +34,21 @@ RSpec.describe 'Config' do
   end
 
   context '#unauthorized?' do
+
+    it 'instance authorizer' do
+      welcome_authorizer = double 'WelcomeAuthorizer', unauthorized?: true
+      expect(WelcomeAuthorizer).to receive(:new).with(nil, 'index', {}) { welcome_authorizer }
+      @welcome.unauthorized?
+    end
+
+    it 'not instance authorizer' do
+      allow(@welcome).to receive(:controller_path) { 'outher' }
+      message = %(undefined authorizer
+run generator action_authorizer:authorizer)
+
+      expect { @welcome.unauthorized? }.to raise_error NameError, message
+    end
+
     describe 'success when' do
       it 'result nil' do
         expect(@welcome).to be_unauthorized
@@ -44,60 +59,40 @@ RSpec.describe 'Config' do
         expect(@welcome).to be_unauthorized
       end
 
-      it 'result values exclude param value' do
+      it 'result values exclude params value' do
         allow_any_instance_of(WelcomeAuthorizer).to receive(:index).and_return( { key: [] } )
         allow_any_instance_of(Hash).to receive(:except).and_return( { key: 1 } )
         expect(@welcome).to be_unauthorized
-      end
 
-      it 'result values exclude param value' do
         allow_any_instance_of(WelcomeAuthorizer).to receive(:index).and_return( { key: [1, 2] } )
         allow_any_instance_of(Hash).to receive(:except).and_return( { key: 3 } )
         expect(@welcome).to be_unauthorized
       end
     end
 
-    # describe 'success when params empty and @result' do
-    #   it 'nil' do
-    #     expect(@welcome).to be_unauthorized
-    #   end
+    describe 'fail when' do
+      it 'result true' do
+        allow_any_instance_of(WelcomeAuthorizer).to receive(:index).and_return( true )
+        expect(@welcome).not_to be_unauthorized
+      end
 
-    #   it 'false' do
-    #     allow_any_instance_of(WelcomeAuthorizer).to receive(:index).and_return( false )
-    #     expect(@welcome).to be_unauthorized
-    #   end
-    # end
+      it 'result present and params empty' do
+        allow_any_instance_of(WelcomeAuthorizer).to receive(:index).and_return( {} )
+        expect(@welcome).not_to be_unauthorized
 
-    # describe 'success when params any and @result' do
-    #   it 'nil' do
-    #     allow(@welcome).to receive(:params).and_return( { key: 'value' } )
-    #     expect(@welcome).to be_unauthorized
-    #   end
+        allow_any_instance_of(WelcomeAuthorizer).to receive(:index).and_return( { key: [] } )
+        expect(@welcome).not_to be_unauthorized
 
-    #   it 'false' do
-    #     allow(@welcome).to receive(:params).and_return( { key: 'value' } )
-    #     allow_any_instance_of(WelcomeAuthorizer).to receive(:index).and_return( false )
-    #     expect(@welcome).to be_unauthorized
-    #   end
-    # end
+        allow_any_instance_of(WelcomeAuthorizer).to receive(:index).and_return( { key: [1, 2] } )
+        expect(@welcome).not_to be_unauthorized
+      end
 
-
-    # describe 'fail when' do
-    #   it 'true' do
-    #     allow_any_instance_of(WelcomeAuthorizer).to receive(:index) { true }
-    #     expect(@welcome).not_to be_unauthorized
-    #   end
-
-    #   it '{}' do
-    #     allow_any_instance_of(WelcomeAuthorizer).to receive(:index).and_return( {} )
-    #     expect(@welcome).to be_unauthorized
-    #   end
-
-    #   it '{}' do
-    #     allow_any_instance_of(WelcomeAuthorizer).to receive(:index).and_return( { key: 'value' } )
-    #     expect(@welcome).to be_unauthorized
-    #   end
-    # end
+      it 'result values include params value' do
+        allow_any_instance_of(WelcomeAuthorizer).to receive(:index).and_return( { key: [1, 3, 2] } )
+        allow_any_instance_of(Hash).to receive(:except).and_return( { key: 3 } )
+        expect(@welcome).not_to be_unauthorized
+      end
+    end
   end
     # def unauthorized?
     #   authorizer = "#{controller_path}_authorizer".classify.constantize
