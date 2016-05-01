@@ -24,11 +24,11 @@ RSpec.describe Country::CitiesController, type: :controller do
   # Country::City. As you add validations to Country::City, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {name: 'name'}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {name: nil}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -103,14 +103,14 @@ RSpec.describe Country::CitiesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {name: 'other'}
       }
 
       it "updates the requested country_city" do
         city = Country::City.create! valid_attributes
         put :update, {:id => city.to_param, :country_city => new_attributes}, valid_session
         city.reload
-        skip("Add assertions for updated state")
+        expect(city.name).to eq 'other'
       end
 
       it "assigns the requested country_city as @country_city" do

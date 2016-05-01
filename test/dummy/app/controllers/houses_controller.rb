@@ -4,7 +4,7 @@ class HousesController < ApplicationController
   # GET /houses
   # GET /houses.json
   def index
-    @houses = House.all
+    @houses = current_user.houses
   end
 
   # GET /houses/1
@@ -24,7 +24,7 @@ class HousesController < ApplicationController
   # POST /houses
   # POST /houses.json
   def create
-    @house = House.new(house_params.merge(user_id: current_user.id))
+    @house = House.new(house_params.merge(user: current_user))
 
     respond_to do |format|
       if @house.save
@@ -69,6 +69,6 @@ class HousesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def house_params
-      params.require(:house).permit(:street, :user_id)
+      params.require(:house).permit(:street)
     end
 end

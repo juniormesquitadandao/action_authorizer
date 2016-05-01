@@ -13,11 +13,11 @@ RSpec.describe UsersAuthorizer, type: :authorizer do
     end
 
     describe 'not authorize' do
-      it { expect(UsersAuthorizer.new(guest_user, 'index')).not_to be_authorized }
+      it { expect(UsersAuthorizer.new(guest_user, 'index')).to be_unauthorized }
 
-      it { expect(UsersAuthorizer.new(one_user, 'index')).not_to be_authorized }
+      it { expect(UsersAuthorizer.new(one_user, 'index')).to be_unauthorized }
 
-      it { expect(UsersAuthorizer.new(two_user, 'index')).not_to be_authorized }
+      it { expect(UsersAuthorizer.new(two_user, 'index')).to be_unauthorized }
     end
   end
 

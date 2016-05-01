@@ -54,4 +54,12 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.include Devise::TestHelpers, type: :controller
+
+  config.before :each, type: :controller do
+    allow(controller).to receive(:authenticate_user!)
+    allow(controller).to receive(:authorize!)
+  end
+
 end

@@ -20,6 +20,10 @@ class ActionAuthorizer::Base
     end
   end
 
+  def authorized?
+    !unauthorized?
+  end
+
   private
 
   def unauthorized_params

@@ -111,12 +111,12 @@ RSpec.describe 'Config' do
   end
 
   it 'not instance authorizer' do
-    allow(@welcome_controller).to receive(:controller_path) { 'outhers' }
+    allow(@welcome_controller).to receive(:controller_path) { 'others' }
     expect { @welcome_controller.unauthorized? }.to raise_error NameError
   end
 
   it 'instance authorizer with module' do
-    allow(@dashboad_admins_controller).to receive(:controller_path) { 'dashboad/outhers' }
+    allow(@dashboad_admins_controller).to receive(:controller_path) { 'dashboad/others' }
     expect { @dashboad_admins_controller.unauthorized? }.to raise_error NameError
   end
 

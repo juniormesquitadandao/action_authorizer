@@ -17,7 +17,7 @@ RSpec.describe HousesAuthorizer, type: :authorizer do
     end
 
     describe 'not authorize' do
-      it { expect(HousesAuthorizer.new(guest_user, 'index')).not_to be_authorized }
+      it { expect(HousesAuthorizer.new(guest_user, 'index')).to be_unauthorized }
     end
   end
 
@@ -33,11 +33,11 @@ RSpec.describe HousesAuthorizer, type: :authorizer do
     end
 
     describe 'not authorize' do
-      it { expect(HousesAuthorizer.new(guest_user, 'show', id: '1')).not_to be_authorized }
+      it { expect(HousesAuthorizer.new(guest_user, 'show', id: '1')).to be_unauthorized }
 
-      it { expect(HousesAuthorizer.new(one_user, 'show', id: '2')).not_to be_authorized }
+      it { expect(HousesAuthorizer.new(one_user, 'show', id: '2')).to be_unauthorized }
 
-      it { expect(HousesAuthorizer.new(two_user, 'show', id: '1')).not_to be_authorized }
+      it { expect(HousesAuthorizer.new(two_user, 'show', id: '1')).to be_unauthorized }
     end
   end
 
@@ -51,7 +51,7 @@ RSpec.describe HousesAuthorizer, type: :authorizer do
     end
 
     describe 'not authorize' do
-      it { expect(HousesAuthorizer.new(guest_user, 'new')).not_to be_authorized }
+      it { expect(HousesAuthorizer.new(guest_user, 'new')).to be_unauthorized }
     end
   end
 
@@ -67,11 +67,11 @@ RSpec.describe HousesAuthorizer, type: :authorizer do
     end
 
     describe 'not authorize' do
-      it { expect(HousesAuthorizer.new(guest_user, 'edit', id: '1')).not_to be_authorized }
+      it { expect(HousesAuthorizer.new(guest_user, 'edit', id: '1')).to be_unauthorized }
 
-      it { expect(HousesAuthorizer.new(one_user, 'edit', id: '2')).not_to be_authorized }
+      it { expect(HousesAuthorizer.new(one_user, 'edit', id: '2')).to be_unauthorized }
 
-      it { expect(HousesAuthorizer.new(two_user, 'edit', id: '1')).not_to be_authorized }
+      it { expect(HousesAuthorizer.new(two_user, 'edit', id: '1')).to be_unauthorized }
     end
   end
 
@@ -85,7 +85,7 @@ RSpec.describe HousesAuthorizer, type: :authorizer do
     end
 
     describe 'not authorize' do
-      it { expect(HousesAuthorizer.new(guest_user, 'create')).not_to be_authorized }
+      it { expect(HousesAuthorizer.new(guest_user, 'create')).to be_unauthorized }
     end
   end
 
@@ -101,11 +101,11 @@ RSpec.describe HousesAuthorizer, type: :authorizer do
     end
 
     describe 'not authorize' do
-      it { expect(HousesAuthorizer.new(guest_user, 'update', id: '1')).not_to be_authorized }
+      it { expect(HousesAuthorizer.new(guest_user, 'update', id: '1')).to be_unauthorized }
 
-      it { expect(HousesAuthorizer.new(one_user, 'update', id: '2')).not_to be_authorized }
+      it { expect(HousesAuthorizer.new(one_user, 'update', id: '2')).to be_unauthorized }
 
-      it { expect(HousesAuthorizer.new(two_user, 'update', id: '1')).not_to be_authorized }
+      it { expect(HousesAuthorizer.new(two_user, 'update', id: '1')).to be_unauthorized }
     end
   end
 
@@ -121,11 +121,11 @@ RSpec.describe HousesAuthorizer, type: :authorizer do
     end
 
     describe 'not authorize' do
-      it { expect(HousesAuthorizer.new(guest_user, 'destroy', id: '1')).not_to be_authorized }
+      it { expect(HousesAuthorizer.new(guest_user, 'destroy', id: '1')).to be_unauthorized }
 
-      it { expect(HousesAuthorizer.new(one_user, 'destroy', id: '2')).not_to be_authorized }
+      it { expect(HousesAuthorizer.new(one_user, 'destroy', id: '2')).to be_unauthorized }
 
-      it { expect(HousesAuthorizer.new(two_user, 'destroy', id: '1')).not_to be_authorized }
+      it { expect(HousesAuthorizer.new(two_user, 'destroy', id: '1')).to be_unauthorized }
     end
   end
 

@@ -20,15 +20,20 @@ require 'rails_helper'
 
 RSpec.describe HousesController, type: :controller do
 
+  before(:each) do
+    User.create! email: 'one@email', password: 'password'
+    allow(controller).to receive(:current_user) { User.first }
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # House. As you add validations to House, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {street: 'name'}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {street: nil}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -38,8 +43,13 @@ RSpec.describe HousesController, type: :controller do
 
   describe "GET #index" do
     it "assigns all houses as @houses" do
-      house = House.create! valid_attributes
+      house = House.create! valid_attributes.merge(user: User.first)
+
+      user = User.create! email: 'two@email', password: 'password'
+      House.create! street: 'ohter', user: user
+
       get :index, {}, valid_session
+
       expect(assigns(:houses)).to eq([house])
     end
   end
@@ -103,14 +113,14 @@ RSpec.describe HousesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {street: 'other'}
       }
 
       it "updates the requested house" do
         house = House.create! valid_attributes
         put :update, {:id => house.to_param, :house => new_attributes}, valid_session
         house.reload
-        skip("Add assertions for updated state")
+        expect(house.street).to eq 'other'
       end
 
       it "assigns the requested house as @house" do

@@ -1,31 +1,31 @@
 class Country::CitiesAuthorizer < ApplicationAuthorizer
 
   def index
-    @authenticated
+    authenticated
   end
 
   def show
-    @authenticated
+    authenticated
   end
 
   def new
-    @authenticated
+    authenticated.try :admin_group?
   end
 
   def edit
-    @authenticated.try :admin_group?
+    authenticated.try :admin_group?
   end
 
   def create
-    @authenticated
+    authenticated.try :admin_group?
   end
 
   def update
-    @authenticated.try :admin_group?
+    authenticated.try :admin_group?
   end
 
   def destroy
-    @authenticated.try :admin_group?
+    authenticated.try :admin_group?
   end
 
 end

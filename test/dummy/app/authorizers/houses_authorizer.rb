@@ -8,7 +8,7 @@ class HousesAuthorizer < ApplicationAuthorizer
     if authenticated.try :user_group?
       { id: authenticated.house_ids }
     else
-      authenticated
+      authenticated.try :admin_group?
     end
   end
 
@@ -20,7 +20,7 @@ class HousesAuthorizer < ApplicationAuthorizer
     if authenticated.try :user_group?
       { id: authenticated.house_ids }
     else
-      authenticated
+      authenticated.try :admin_group?
     end
   end
 
@@ -32,7 +32,7 @@ class HousesAuthorizer < ApplicationAuthorizer
     if authenticated.try :user_group?
       { id: authenticated.house_ids }
     else
-      authenticated
+      authenticated.try :admin_group?
     end
   end
 
@@ -40,7 +40,7 @@ class HousesAuthorizer < ApplicationAuthorizer
     if authenticated.try :user_group?
       { id: authenticated.house_ids }
     else
-      authenticated
+      authenticated.try :admin_group?
     end
   end
 
