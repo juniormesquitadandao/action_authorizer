@@ -36,4 +36,16 @@ end
     end
   end
 
+  def update_application_helper_file
+    inject_into_file 'app/helpers/application_helper.rb', before: "\nend" do <<-RUBY
+\n
+  include ActionAuthorizer::Helper
+
+  # def authenticated
+  #   current_user
+  # end
+      RUBY
+    end
+  end
+
 end
