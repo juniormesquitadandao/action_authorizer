@@ -1,2 +1,0 @@
-module Country::CitiesHelper
-end

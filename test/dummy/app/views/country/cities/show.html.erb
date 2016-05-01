@@ -5,5 +5,7 @@
   <%= @country_city.name %>
 </p>
 
+<% if authorized? 'country/cities', :edit, id: @country_city.id  %>
 <%= link_to 'Edit', edit_country_city_path(@country_city) %> |
+<% end  %>
 <%= link_to 'Back', country_cities_path %>

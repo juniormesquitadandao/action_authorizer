@@ -16,9 +16,15 @@
       <tr>
         <td><%= house.street %></td>
         <td><%= house.user %></td>
+<% if authorized? :houses, :show, id: house.id  %>
         <td><%= link_to 'Show', house %></td>
+<% end  %>
+<% if authorized? :houses, :edit, id: house.id  %>
         <td><%= link_to 'Edit', edit_house_path(house) %></td>
+<% end  %>
+<% if authorized? :houses, :destroy, id: house.id  %>
         <td><%= link_to 'Destroy', house, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<% end  %>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +32,6 @@
 
 <br>
 
+<% if authorized? :houses, :new  %>
 <%= link_to 'New House', new_house_path %>
+<% end  %>
