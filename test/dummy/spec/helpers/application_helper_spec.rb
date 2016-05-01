@@ -10,6 +10,6 @@ require 'rails_helper'
 #     end
 #   end
 # end
-RSpec.describe WelcomeHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe ApplicationHelper, type: :helper do
+  it { expect(helper).to be_is_a ActionAuthorizer::Helper }
 end
