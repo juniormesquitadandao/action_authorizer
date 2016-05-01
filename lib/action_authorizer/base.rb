@@ -11,8 +11,10 @@ class ActionAuthorizer::Base
   def unauthorized?
     @result = send(@action)
 
-    if !@result.kind_of?(Hash) || @params.empty?
+    if !@result.kind_of?(Hash)
       @result.blank?
+    elsif @params.empty?
+      false
     else
       unauthorized_params.any?
     end
