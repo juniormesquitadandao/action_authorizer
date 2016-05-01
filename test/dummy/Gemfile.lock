@@ -2,7 +2,9 @@ PATH
   remote: ../../../action_authorizer
   specs:
     action_authorizer (1.0.0)
-      rails (~> 4.2.6)
+      devise
+      rails
+      rspec-rails
 
 GEM
   remote: https://rubygems.org/
@@ -187,7 +189,7 @@ DEPENDENCIES
   action_authorizer (= 1.0.0)!
   byebug
   coffee-rails (~> 4.1.0)
-  devise
+  devise (= 4.0.1)
   jbuilder (~> 2.0)
   jquery-rails
   rails (= 4.2.6)
