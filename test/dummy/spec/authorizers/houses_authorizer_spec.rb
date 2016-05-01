@@ -46,12 +46,12 @@ RSpec.describe HousesAuthorizer, type: :authorizer do
       it { expect(HousesAuthorizer.new(one_user, 'new')).to be_authorized }
 
       it { expect(HousesAuthorizer.new(two_user, 'new')).to be_authorized }
-
-      it { expect(HousesAuthorizer.new(admin_user, 'new')).to be_authorized }
     end
 
     describe 'not authorize' do
       it { expect(HousesAuthorizer.new(guest_user, 'new')).to be_unauthorized }
+
+      it { expect(HousesAuthorizer.new(admin_user, 'new')).to be_unauthorized }
     end
   end
 
@@ -80,12 +80,12 @@ RSpec.describe HousesAuthorizer, type: :authorizer do
       it { expect(HousesAuthorizer.new(one_user, 'create')).to be_authorized }
 
       it { expect(HousesAuthorizer.new(two_user, 'create')).to be_authorized }
-
-      it { expect(HousesAuthorizer.new(admin_user, 'create')).to be_authorized }
     end
 
     describe 'not authorize' do
       it { expect(HousesAuthorizer.new(guest_user, 'create')).to be_unauthorized }
+
+      it { expect(HousesAuthorizer.new(admin_user, 'create')).to be_unauthorized }
     end
   end
 

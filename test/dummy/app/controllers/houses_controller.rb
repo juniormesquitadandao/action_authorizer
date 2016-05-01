@@ -5,6 +5,7 @@ class HousesController < ApplicationController
   # GET /houses.json
   def index
     @houses = current_user.houses
+    @houses = House.all if current_user.admin_group?
   end
 
   # GET /houses/1

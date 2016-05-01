@@ -21,7 +21,8 @@ require 'rails_helper'
 RSpec.describe HousesController, type: :controller do
 
   before(:each) do
-    User.create! email: 'one@email', password: 'password'
+    Group.create! name: 'user'
+    User.create! email: 'one@email', password: 'password', group: Group.first
     allow(controller).to receive(:current_user) { User.first }
   end
 

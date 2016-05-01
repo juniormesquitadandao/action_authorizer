@@ -13,7 +13,7 @@ class HousesAuthorizer < ApplicationAuthorizer
   end
 
   def new
-    authenticated
+    authenticated.try :user_group?
   end
 
   def edit
@@ -25,7 +25,7 @@ class HousesAuthorizer < ApplicationAuthorizer
   end
 
   def create
-    authenticated
+    authenticated.try :user_group?
   end
 
   def update
