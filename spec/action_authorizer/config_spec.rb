@@ -3,6 +3,7 @@ RSpec.describe 'Config' do
   before(:each) do
     @application_controller = ApplicationController.new
     @welcome_controller = WelcomeController.new
+    @dashboad_admins_controller = Dashboard::AdminsController.new
   end
 
   it '#authenticated' do
@@ -34,20 +35,6 @@ RSpec.describe 'Config' do
   end
 
   context '#unauthorized?' do
-
-    it 'instance authorizer' do
-      welcome_authorizer = double 'WelcomeAuthorizer', unauthorized?: true
-      expect(WelcomeAuthorizer).to receive(:new).with(nil, 'index', {}) { welcome_authorizer }
-      @welcome_controller.unauthorized?
-    end
-
-    it 'not instance authorizer' do
-      allow(@welcome_controller).to receive(:controller_path) { 'outher' }
-      message = %(undefined authorizer
-run generator action_authorizer:authorizer)
-
-      expect { @welcome_controller.unauthorized? }.to raise_error NameError, message
-    end
 
     describe 'success when' do
       it 'result nil' do
@@ -109,6 +96,28 @@ run generator action_authorizer:authorizer)
 
       expect { @application_controller.unauthorize! }.to raise_error ActionController::RoutingError, message
     end
+  end
+
+  it 'instance authorizer' do
+    welcome_authorizer = double 'WelcomeAuthorizer', unauthorized?: true
+    expect(WelcomeAuthorizer).to receive(:new).with(nil, 'index', {}) { welcome_authorizer }
+    @welcome_controller.unauthorized?
+  end
+
+  it 'instance authorizer with module' do
+    dashboard_admins_authorizer = double 'Dashboard::AdminsAuthorizer', unauthorized?: true
+    expect(Dashboard::AdminsAuthorizer).to receive(:new).with(nil, 'index', {}) { dashboard_admins_authorizer }
+    @dashboad_admins_controller.unauthorized?
+  end
+
+  it 'not instance authorizer' do
+    allow(@welcome_controller).to receive(:controller_path) { 'outhers' }
+    expect { @welcome_controller.unauthorized? }.to raise_error NameError
+  end
+
+  it 'instance authorizer with module' do
+    allow(@dashboad_admins_controller).to receive(:controller_path) { 'dashboad/outhers' }
+    expect { @dashboad_admins_controller.unauthorized? }.to raise_error NameError
   end
 
 end

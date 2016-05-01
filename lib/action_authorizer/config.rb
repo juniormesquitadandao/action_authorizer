@@ -18,15 +18,7 @@ module ActionAuthorizer::Config
     end
 
     def unauthorized?
-      begin
-        authorizer = "#{controller_path}_authorizer".classify.constantize
-      rescue NameError => e
-        message = %(undefined authorizer
-run generator action_authorizer:authorizer)
-
-        raise NameError, message, e.backtrace
-      end
-
+      authorizer = "#{controller_path}_authorizer".classify.constantize
       authorizer.new(authenticated, action_name, params.except(:controller, :action)).unauthorized?
     end
 
