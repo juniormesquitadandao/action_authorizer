@@ -25,4 +25,15 @@ end
       RUBY
     end
   end
+
+  def update_rails_helper_file
+    inject_into_file 'spec/rails_helper.rb', before: "\nend" do <<-RUBY
+\n
+  config.before :each, type: :controller do
+    allow(controller).to receive(:authorize!)
+  end
+      RUBY
+    end
+  end
+
 end
