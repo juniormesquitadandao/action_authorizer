@@ -1,4 +1,7 @@
 # Action Authorizer
+
+file: app/authorizers/gems_authorizer.rb
+
 ```ruby
 class GemsAuthorizer < ApplicationAuthorizer
 
@@ -36,6 +39,8 @@ class GemsAuthorizer < ApplicationAuthorizer
 
 end
 ```
+
+file: spec/authorizers/gems_authorizer_spec.rb
 
 ```ruby
 require 'rails_helper'
