@@ -10,13 +10,13 @@ Gem::Specification.new do |s|
   s.authors     = ["Marcelo Junior"]
   s.email       = ["juniormesquitadandao@gmail.com"]
   s.homepage    = "https://github.com/juniormesquitadandao/action_authorizer"
-  s.summary     = "ActionAuthorizer"
-  s.description = "ActionAuthorizer"
+  s.summary     = "Action Authorizer"
+  s.description = "Action Authorizer"
   s.license     = "MIT"
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["lib/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  s.add_dependency "rails"
+  s.require_paths = ["lib"]
 
-  s.add_development_dependency "yard"
+  s.add_dependency "rails", ">= 4.2.0", "< 5.1"
 end
