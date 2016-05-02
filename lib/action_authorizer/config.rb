@@ -9,7 +9,7 @@ module ActionAuthorizer::Config
       current_user
     end
 
-    def unauthorized_response_on_production
+    def respond_unauthorized_on_production_environment
       render file: Rails.root.join('public/404'), layout: false, status: :not_found
     end
 
@@ -24,7 +24,7 @@ module ActionAuthorizer::Config
 
     def unauthorize!
       if Rails.env.production?
-        unauthorized_response_on_production
+        respond_unauthorized_on_production_environment
       else
         raise ActionController::RoutingError, "No route matches [#{env['REQUEST_METHOD']}] #{env['PATH_INFO'].inspect}"
       end
