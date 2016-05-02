@@ -1,3 +1,74 @@
+# Install
+
+update file: Gemfile
+
+```ruby
+gem 'action_authorizer'
+```
+
+execute in console.
+
+```console
+bundle install
+rails generate action_authorizer:install
+```
+
+generated file: app/authorizers/application_authorizer.rb
+
+```ruby
+class ApplicationAuthorizer < ActionAuthorizer::Base
+end
+```
+
+updated file: app/controllers/application_controller.rb
+
+```ruby
+class ApplicationController < ActionController::Base
+...
+  before_action :authorize!, unless: :devise_controller?
+
+  include ActionAuthorizer::Config
+
+  # def authenticated
+  #   current_user
+  # end
+
+  # def unauthorized_response_on_production
+  #   render file: Rails.root.join('public/404'), layout: false, status: :not_found
+  # end
+end
+```
+
+updated file: spec/rails_helper.rb
+
+```ruby
+RSpec.configure do |config|
+...
+  config.before :each, type: :controller do
+    allow(controller).to receive(:authorize!)
+  end
+end
+```
+
+updated file: app/helpers/application_helper.rb
+
+```ruby
+module ApplicationHelper
+...
+  include ActionAuthorizer::Helper
+
+  # def authenticated
+  #   current_user
+  # end
+end
+```
+
+
+```console
+rails generate action_authorizer:authorizer gems
+rails generate action_authorizer:authorizer dashboard/gems
+```
+
 # Action Authorizer
 
 file: app/authorizers/gems_authorizer.rb
@@ -175,19 +246,4 @@ RSpec.describe GemsAuthorizer, type: :authorizer do
   # end
 
 end
-```
-
-## Install
-
-```ruby
-gem 'action_authorizer'
-```
-
-```console
-rails generate action_authorizer:install
-```
-
-```console
-rails generate action_authorizer:authorizer gems
-rails generate action_authorizer:authorizer dashboard/gems
 ```
