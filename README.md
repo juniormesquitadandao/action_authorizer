@@ -24,7 +24,8 @@ updated: app/controllers/application_controller.rb
 
 ```ruby
 class ApplicationController < ActionController::Base
-...
+  # ...
+
   before_action :authorize!, unless: :devise_controller?
 
   include ActionAuthorizer::Config
@@ -43,7 +44,8 @@ updated: app/helpers/application_helper.rb
 
 ```ruby
 module ApplicationHelper
-...
+  # ...
+
   # Add helpers to check authorization authenticated.
   # def unauthorized? controller, action, params = {}
   # def authorized? controller, action, params = {}
@@ -65,7 +67,8 @@ updated: spec/rails_helper.rb
 
 ```ruby
 RSpec.configure do |config|
-...
+  # ...
+
   # Skip before_action :authorize! to all controller spec
   config.before :each, type: :controller do
     allow(controller).to receive(:authorize!)
