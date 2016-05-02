@@ -2,9 +2,7 @@ PATH
   remote: ../../../action_authorizer
   specs:
     action_authorizer (1.0.0)
-      devise
       rails
-      rspec-rails
 
 GEM
   remote: https://rubygems.org/
