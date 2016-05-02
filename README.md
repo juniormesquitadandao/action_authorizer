@@ -1,26 +1,26 @@
 # Install
 
-update file: Gemfile
+update: Gemfile
 
 ```ruby
 gem 'action_authorizer'
 ```
 
-execute in console.
+run
 
 ```console
 bundle install
 rails generate action_authorizer:install
 ```
 
-generated file: app/authorizers/application_authorizer.rb
+generated: app/authorizers/application_authorizer.rb
 
 ```ruby
 class ApplicationAuthorizer < ActionAuthorizer::Base
 end
 ```
 
-updated file: app/controllers/application_controller.rb
+updated: app/controllers/application_controller.rb
 
 ```ruby
 class ApplicationController < ActionController::Base
@@ -39,18 +39,7 @@ class ApplicationController < ActionController::Base
 end
 ```
 
-updated file: spec/rails_helper.rb
-
-```ruby
-RSpec.configure do |config|
-...
-  config.before :each, type: :controller do
-    allow(controller).to receive(:authorize!)
-  end
-end
-```
-
-updated file: app/helpers/application_helper.rb
+updated: app/helpers/application_helper.rb
 
 ```ruby
 module ApplicationHelper
@@ -63,15 +52,25 @@ module ApplicationHelper
 end
 ```
 
+updated: spec/rails_helper.rb
 
-```console
-rails generate action_authorizer:authorizer gems
-rails generate action_authorizer:authorizer dashboard/gems
+```ruby
+RSpec.configure do |config|
+...
+  config.before :each, type: :controller do
+    allow(controller).to receive(:authorize!)
+  end
+end
 ```
 
-# Action Authorizer
+run 
 
-file: app/authorizers/gems_authorizer.rb
+```console
+rails generate scaffold gem name
+rails generate action_authorizer:authorizer gems
+```
+
+generated: app/authorizers/gems_authorizer.rb
 
 ```ruby
 class GemsAuthorizer < ApplicationAuthorizer
@@ -111,7 +110,7 @@ class GemsAuthorizer < ApplicationAuthorizer
 end
 ```
 
-file: spec/authorizers/gems_authorizer_spec.rb
+generated: spec/authorizers/gems_authorizer_spec.rb
 
 ```ruby
 require 'rails_helper'
