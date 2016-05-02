@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   #   current_user
   # end
 
-  # def unauthorized_response_on_production
+  # def respond_unauthorized_on_production_environment
   #   render file: Rails.root.join('public/404'), layout: false, status: :not_found
   # end
 

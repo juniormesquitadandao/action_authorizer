@@ -4,7 +4,7 @@ class ActionAuthorizer::Base
 
   def initialize(authenticated, action, params = {})
     @authenticated = authenticated
-    @action = action
+    @action = action.to_sym
     @params = params
   end
 

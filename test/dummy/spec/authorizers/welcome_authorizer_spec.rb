@@ -9,13 +9,13 @@ RSpec.describe WelcomeAuthorizer, type: :authorizer do
 
   context '#index' do
     describe 'authorize' do
-      it { expect(WelcomeAuthorizer.new(guest_user, 'index')).to be_authorized }
+      it { expect(WelcomeAuthorizer.new(guest_user, :index)).to be_authorized }
 
-      it { expect(WelcomeAuthorizer.new(one_user, 'index')).to be_authorized }
+      it { expect(WelcomeAuthorizer.new(one_user, :index)).to be_authorized }
 
-      it { expect(WelcomeAuthorizer.new(two_user, 'index')).to be_authorized }
+      it { expect(WelcomeAuthorizer.new(two_user, :index)).to be_authorized }
 
-      it { expect(WelcomeAuthorizer.new(admin_user, 'index')).to be_authorized }
+      it { expect(WelcomeAuthorizer.new(admin_user, :index)).to be_authorized }
     end
   end
 

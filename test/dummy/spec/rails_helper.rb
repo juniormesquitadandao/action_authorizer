@@ -61,6 +61,7 @@ RSpec.configure do |config|
     allow(controller).to receive(:authenticate_user!)
   end
 
+  # Skip before_action :authorize! to all controller spec
   config.before :each, type: :controller do
     allow(controller).to receive(:authorize!)
   end
