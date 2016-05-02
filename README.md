@@ -176,6 +176,18 @@ RSpec.describe GemsAuthorizer, type: :authorizer do
 
 end
 ```
-# install
 
-rails g action_authorizer:install
+## Install
+
+```ruby
+gem 'action_authorizer'
+```
+
+```console
+rails generate action_authorizer:install
+```
+
+```console
+rails generate action_authorizer:authorizer gems
+rails generate action_authorizer:authorizer dashboard/gems
+```
