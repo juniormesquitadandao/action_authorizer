@@ -15,7 +15,7 @@ module ActionAuthorizer::Helper
 
     def unauthorized? controller, action, params = {}
       authorizer = "#{controller.to_s}_authorizer".classify.constantize
-      authorizer.new(authenticated, action.to_s, params).unauthorized?
+      authorizer.new(authenticated, action.to_sym, params).unauthorized?
     end
 
   end

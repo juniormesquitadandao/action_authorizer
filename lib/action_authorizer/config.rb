@@ -19,7 +19,7 @@ module ActionAuthorizer::Config
 
     def unauthorized?
       authorizer = "#{controller_path}_authorizer".classify.constantize
-      authorizer.new(authenticated, action_name, params.except(:controller, :action)).unauthorized?
+      authorizer.new(authenticated, action_name.to_sym, params.except(:controller, :action)).unauthorized?
     end
 
     def unauthorize!

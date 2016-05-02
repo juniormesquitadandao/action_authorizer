@@ -15,7 +15,7 @@ RSpec.describe 'Helper' do
   end
 
   it '#unauthorized?' do
-    expect(WelcomeAuthorizer).to receive(:new).with(nil, 'index', {id: 1}){ double('WelcomeAuthorizer', unauthorized?: true) }
+    expect(WelcomeAuthorizer).to receive(:new).with(nil, :index, {id: 1}){ double('WelcomeAuthorizer', unauthorized?: true) }
     helper.unauthorized? :welcome, :index, id: 1
   end
 

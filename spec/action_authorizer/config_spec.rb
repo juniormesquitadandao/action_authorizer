@@ -11,9 +11,9 @@ RSpec.describe 'Config' do
     @application_controller.authenticated
   end
 
-  it '#unauthorized_response_on_production' do
+  it '#respond_unauthorized_on_production_environment' do
     expect(@application_controller).to receive(:render).with(file: Rails.root.join('public/404'), layout: false, status: :not_found)
-    @application_controller.unauthorized_response_on_production
+    @application_controller.respond_unauthorized_on_production_environment
   end
 
   context '#authorize!' do
@@ -86,7 +86,7 @@ RSpec.describe 'Config' do
     it 'when production env' do
       allow(Env).to receive(:production?).and_return( true )
 
-      expect(@application_controller).to receive(:unauthorized_response_on_production)
+      expect(@application_controller).to receive(:respond_unauthorized_on_production_environment)
 
       @application_controller.unauthorize!
     end
@@ -100,13 +100,13 @@ RSpec.describe 'Config' do
 
   it 'instance authorizer' do
     welcome_authorizer = double 'WelcomeAuthorizer', unauthorized?: true
-    expect(WelcomeAuthorizer).to receive(:new).with(nil, 'index', {}) { welcome_authorizer }
+    expect(WelcomeAuthorizer).to receive(:new).with(nil, :index, {}) { welcome_authorizer }
     @welcome_controller.unauthorized?
   end
 
   it 'instance authorizer with module' do
     dashboard_admins_authorizer = double 'Dashboard::AdminsAuthorizer', unauthorized?: true
-    expect(Dashboard::AdminsAuthorizer).to receive(:new).with(nil, 'index', {}) { dashboard_admins_authorizer }
+    expect(Dashboard::AdminsAuthorizer).to receive(:new).with(nil, :index, {}) { dashboard_admins_authorizer }
     @dashboad_admins_controller.unauthorized?
   end
 

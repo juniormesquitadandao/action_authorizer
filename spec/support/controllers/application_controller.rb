@@ -9,8 +9,6 @@ class ApplicationController
     }
   end
 
-  protected
-
   include ActionAuthorizer::Config
 
   def current_user
