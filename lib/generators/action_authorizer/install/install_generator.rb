@@ -9,11 +9,11 @@ end
   end
 
   def update_application_controller_file
-    inject_into_file 'app/controllers/application_controller.rb', before: "\nend" do <<-RUBY
-\n
-  before_action :authorize!, unless: :devise_controller?
-
+    inject_into_file 'app/controllers/application_controller.rb', after: "class ApplicationController < ActionController::Base" do <<-RUBY
+  \n
   include ActionAuthorizer::Config
+
+  before_action :authorize!, unless: :devise_controller?
 
   # def authenticated
   #   current_user
@@ -27,8 +27,8 @@ end
   end
 
   def update_application_helper_file
-    inject_into_file 'app/helpers/application_helper.rb', before: "\nend" do <<-RUBY
-\n
+    inject_into_file 'app/helpers/application_helper.rb', after: "module ApplicationHelper" do <<-RUBY
+  \n
   # Add helpers to check authorization authenticated.
   # def unauthorized? controller, action, params = {}
   # def authorized? controller, action, params = {}
@@ -39,7 +39,6 @@ end
   #   authozired? :gems, :show, id: 1
   #   authozired? :gems, :show, id: '1'
   include ActionAuthorizer::Helper
-
   # def authenticated
   #   current_user
   # end
@@ -48,8 +47,8 @@ end
   end
 
   def update_rails_helper_file
-    inject_into_file 'spec/rails_helper.rb', before: "\nend" do <<-RUBY
-\n
+    inject_into_file 'spec/rails_helper.rb', after: "RSpec.configure do |config|" do <<-RUBY
+  \n
   # Skip before_action :authorize! to all controller spec
   config.before :each, type: :controller do
     allow(controller).to receive(:authorize!)

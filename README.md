@@ -24,8 +24,6 @@ updated: app/controllers/application_controller.rb
 
 ```ruby
 class ApplicationController < ActionController::Base
-  # ...
-
   before_action :authorize!, unless: :devise_controller?
 
   include ActionAuthorizer::Config
@@ -37,6 +35,8 @@ class ApplicationController < ActionController::Base
   # def respond_unauthorized_on_production_environment
   #   render file: Rails.root.join('public/404'), layout: false, status: :not_found
   # end
+
+  # ...
 end
 ```
 
@@ -44,7 +44,6 @@ updated: app/helpers/application_helper.rb
 
 ```ruby
 module ApplicationHelper
-  # ...
 
   # Add helpers to check authorization authenticated.
   # def unauthorized? controller, action, params = {}
@@ -60,6 +59,8 @@ module ApplicationHelper
   # def authenticated
   #   current_user
   # end
+
+  # ...
 end
 ```
 
@@ -67,12 +68,12 @@ updated: spec/rails_helper.rb
 
 ```ruby
 RSpec.configure do |config|
-  # ...
 
   # Skip before_action :authorize! to all controller spec
   config.before :each, type: :controller do
     allow(controller).to receive(:authorize!)
   end
+  # ...
 end
 ```
 
