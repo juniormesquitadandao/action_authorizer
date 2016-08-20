@@ -49,11 +49,11 @@ module ApplicationHelper
   # def unauthorized? controller, action, params = {}
   # def authorized? controller, action, params = {}
   # ex.:
-  #   authozired? :gems, :index
-  #   authozired? 'gems', 'index'
-  #   authozired? 'dashborad/gems', 'index'
-  #   authozired? :gems, :show, id: 1
-  #   authozired? :gems, :show, id: '1'
+  #   authozired? :models, :index
+  #   authozired? 'models', 'index'
+  #   authozired? 'dashborad/models', 'index'
+  #   authozired? :models, :show, id: 1
+  #   authozired? :models, :show, id: '1'
   include ActionAuthorizer::Helper
 
   # def authenticated
@@ -80,11 +80,11 @@ end
 run 
 
 ```console
-rails generate scaffold gem name
-rails generate action_authorizer:authorizer gems
+rails generate scaffold model attribute
+rails generate action_authorizer:authorizer models
 ```
 
-generated: app/authorizers/gems_authorizer.rb
+generated: app/authorizers/models_authorizer.rb
 
 ```ruby
 # Authorize reference controller actions when return:
@@ -128,7 +128,7 @@ generated: app/authorizers/gems_authorizer.rb
 #       { id: ['1', '2'] }
 #     ex. to requested params {id: 'three', other: 'three'}:
 #       { id: ['one', 'two'] }
-class GemsAuthorizer < ApplicationAuthorizer
+class ModelsAuthorizer < ApplicationAuthorizer
 
   def index
     # true
@@ -136,7 +136,7 @@ class GemsAuthorizer < ApplicationAuthorizer
 
   def show
     # true
-    # { id: authenticated.gem_ids }
+    # { id: authenticated.model_ids }
   end
 
   def new
@@ -145,7 +145,7 @@ class GemsAuthorizer < ApplicationAuthorizer
 
   def edit
     # true
-    # { id: authenticated.gem_ids }
+    # { id: authenticated.model_ids }
   end
 
   def create
@@ -154,148 +154,148 @@ class GemsAuthorizer < ApplicationAuthorizer
 
   def update
     # true
-    # { id: authenticated.gem_ids }
+    # { id: authenticated.model_ids }
   end
 
   def destroy
     # true
-    # { id: authenticated.gem_ids }
+    # { id: authenticated.model_ids }
   end
 
 end
 ```
 
-generated: spec/authorizers/gems_authorizer_spec.rb
+generated: spec/authorizers/models_authorizer_spec.rb
 
 ```ruby
 require 'rails_helper'
 
-RSpec.describe GemsAuthorizer, type: :authorizer do
+RSpec.describe ModelsAuthorizer, type: :authorizer do
 
   # let(:guest_user) { nil }
-  # let(:one_user) { double('Authenticated', user_group?: true, gem_ids: [1]) }
-  # let(:two_user) { double('Authenticated', user_group?: true, gem_ids: [2]) }
+  # let(:one_user) { double('Authenticated', user_group?: true, model_ids: [1]) }
+  # let(:two_user) { double('Authenticated', user_group?: true, model_ids: [2]) }
   # let(:admin_user) { double('Authenticated', admin_group?: true) }
 
   # context '#index' do
   #   describe 'authorize' do
-  #     it { expect(GemsAuthorizer.new(one_user, :index)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(one_user, :index)).to be_authorized }
 
-  #     it { expect(GemsAuthorizer.new(two_user, :index)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(two_user, :index)).to be_authorized }
 
-  #     it { expect(GemsAuthorizer.new(admin_user, :index)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(admin_user, :index)).to be_authorized }
   #   end
 
   #   describe 'not authorize' do
-  #     it { expect(GemsAuthorizer.new(guest_user, :index)).to be_unauthorized }
+  #     it { expect(ModelsAuthorizer.new(guest_user, :index)).to be_unauthorized }
   #   end
   # end
 
   # context '#show' do
   #   describe 'authorize' do
-  #     it { expect(GemsAuthorizer.new(one_user, :show, id: 1)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(one_user, :show, id: 1)).to be_authorized }
 
-  #     it { expect(GemsAuthorizer.new(two_user, :show, id: 2)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(two_user, :show, id: 2)).to be_authorized }
 
-  #     it { expect(GemsAuthorizer.new(admin_user, :show, id: 1)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(admin_user, :show, id: 1)).to be_authorized }
 
-  #     it { expect(GemsAuthorizer.new(admin_user, :show, id: 2)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(admin_user, :show, id: 2)).to be_authorized }
   #   end
 
   #   describe 'not authorize' do
-  #     it { expect(GemsAuthorizer.new(guest_user, :show, id: 1)).to be_unauthorized }
+  #     it { expect(ModelsAuthorizer.new(guest_user, :show, id: 1)).to be_unauthorized }
 
-  #     it { expect(GemsAuthorizer.new(one_user, :show, id: 2)).to be_unauthorized }
+  #     it { expect(ModelsAuthorizer.new(one_user, :show, id: 2)).to be_unauthorized }
 
-  #     it { expect(GemsAuthorizer.new(two_user, :show, id: 1)).to be_unauthorized }
+  #     it { expect(ModelsAuthorizer.new(two_user, :show, id: 1)).to be_unauthorized }
   #   end
   # end
 
   # context '#new' do
   #   describe 'authorize' do
-  #     it { expect(GemsAuthorizer.new(one_user, :new)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(one_user, :new)).to be_authorized }
 
-  #     it { expect(GemsAuthorizer.new(two_user, :new)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(two_user, :new)).to be_authorized }
 
-  #     it { expect(GemsAuthorizer.new(admin_user, :new)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(admin_user, :new)).to be_authorized }
   #   end
 
   #   describe 'not authorize' do
-  #     it { expect(GemsAuthorizer.new(guest_user, :new)).to be_unauthorized }
+  #     it { expect(ModelsAuthorizer.new(guest_user, :new)).to be_unauthorized }
   #   end
   # end
 
   # context '#edit' do
   #   describe 'authorize' do
-  #     it { expect(GemsAuthorizer.new(one_user, :edit, id: 1)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(one_user, :edit, id: 1)).to be_authorized }
 
-  #     it { expect(GemsAuthorizer.new(two_user, :edit, id: 2)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(two_user, :edit, id: 2)).to be_authorized }
 
-  #     it { expect(GemsAuthorizer.new(admin_user, :edit, id: 1)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(admin_user, :edit, id: 1)).to be_authorized }
 
-  #     it { expect(GemsAuthorizer.new(admin_user, :edit, id: 2)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(admin_user, :edit, id: 2)).to be_authorized }
   #   end
 
   #   describe 'not authorize' do
-  #     it { expect(GemsAuthorizer.new(guest_user, :edit, id: 1)).to be_unauthorized }
+  #     it { expect(ModelsAuthorizer.new(guest_user, :edit, id: 1)).to be_unauthorized }
 
-  #     it { expect(GemsAuthorizer.new(one_user, :edit, id: 2)).to be_unauthorized }
+  #     it { expect(ModelsAuthorizer.new(one_user, :edit, id: 2)).to be_unauthorized }
 
-  #     it { expect(GemsAuthorizer.new(two_user, :edit, id: 1)).to be_unauthorized }
+  #     it { expect(ModelsAuthorizer.new(two_user, :edit, id: 1)).to be_unauthorized }
   #   end
   # end
 
   # context '#create' do
   #   describe 'authorize' do
-  #     it { expect(GemsAuthorizer.new(one_user, :create)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(one_user, :create)).to be_authorized }
 
-  #     it { expect(GemsAuthorizer.new(two_user, :create)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(two_user, :create)).to be_authorized }
 
-  #     it { expect(GemsAuthorizer.new(admin_user, :create)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(admin_user, :create)).to be_authorized }
   #   end
 
   #   describe 'not authorize' do
-  #     it { expect(GemsAuthorizer.new(guest_user, :create)).to be_unauthorized }
+  #     it { expect(ModelsAuthorizer.new(guest_user, :create)).to be_unauthorized }
   #   end
   # end
 
   # context '#update' do
   #   describe 'authorize' do
-  #     it { expect(GemsAuthorizer.new(one_user, :update, id: 1)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(one_user, :update, id: 1)).to be_authorized }
 
-  #     it { expect(GemsAuthorizer.new(two_user, :update, id: 2)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(two_user, :update, id: 2)).to be_authorized }
 
-  #     it { expect(GemsAuthorizer.new(admin_user, :update, id: 1)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(admin_user, :update, id: 1)).to be_authorized }
 
-  #     it { expect(GemsAuthorizer.new(admin_user, :update, id: 2)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(admin_user, :update, id: 2)).to be_authorized }
   #   end
 
   #   describe 'not authorize' do
-  #     it { expect(GemsAuthorizer.new(guest_user, :update, id: 1)).to be_unauthorized }
+  #     it { expect(ModelsAuthorizer.new(guest_user, :update, id: 1)).to be_unauthorized }
 
-  #     it { expect(GemsAuthorizer.new(one_user, :update, id: 2)).to be_unauthorized }
+  #     it { expect(ModelsAuthorizer.new(one_user, :update, id: 2)).to be_unauthorized }
 
-  #     it { expect(GemsAuthorizer.new(two_user, :update, id: 1)).to be_unauthorized }
+  #     it { expect(ModelsAuthorizer.new(two_user, :update, id: 1)).to be_unauthorized }
   #   end
   # end
 
   # context '#destroy' do
   #   describe 'authorize' do
-  #     it { expect(GemsAuthorizer.new(one_user, :destroy, id: 1)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(one_user, :destroy, id: 1)).to be_authorized }
 
-  #     it { expect(GemsAuthorizer.new(two_user, :destroy, id: 2)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(two_user, :destroy, id: 2)).to be_authorized }
 
-  #     it { expect(GemsAuthorizer.new(admin_user, :destroy, id: 1)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(admin_user, :destroy, id: 1)).to be_authorized }
 
-  #     it { expect(GemsAuthorizer.new(admin_user, :destroy, id: 2)).to be_authorized }
+  #     it { expect(ModelsAuthorizer.new(admin_user, :destroy, id: 2)).to be_authorized }
   #   end
 
   #   describe 'not authorize' do
-  #     it { expect(GemsAuthorizer.new(guest_user, :destroy, id: 1)).to be_unauthorized }
+  #     it { expect(ModelsAuthorizer.new(guest_user, :destroy, id: 1)).to be_unauthorized }
 
-  #     it { expect(GemsAuthorizer.new(one_user, :destroy, id: 2)).to be_unauthorized }
+  #     it { expect(ModelsAuthorizer.new(one_user, :destroy, id: 2)).to be_unauthorized }
 
-  #     it { expect(GemsAuthorizer.new(two_user, :destroy, id: 1)).to be_unauthorized }
+  #     it { expect(ModelsAuthorizer.new(two_user, :destroy, id: 1)).to be_unauthorized }
   #   end
   # end
 
@@ -305,11 +305,11 @@ end
 run with module namespacing
 
 ```console
-rails generate scaffold namespace/gem name
-rails generate action_authorizer:authorizer namespace/gems
+rails generate scaffold namespace/model name
+rails generate action_authorizer:authorizer namespace/models
 ```
 
-generated: app/authorizers/namespace/gems_authorizer.rb
+generated: app/authorizers/namespace/models_authorizer.rb
 
 ```ruby
 # Authorize reference controller actions when return:
@@ -353,7 +353,7 @@ generated: app/authorizers/namespace/gems_authorizer.rb
 #       { id: ['1', '2'] }
 #     ex. to requested params {id: 'three', other: 'three'}:
 #       { id: ['one', 'two'] }
-class Namespace::GemsAuthorizer < ApplicationAuthorizer
+class Namespace::ModelsAuthorizer < ApplicationAuthorizer
 
   def index
     # true
@@ -361,7 +361,7 @@ class Namespace::GemsAuthorizer < ApplicationAuthorizer
 
   def show
     # true
-    # { id: authenticated.namespace_gem_ids }
+    # { id: authenticated.namespace_model_ids }
   end
 
   def new
@@ -370,7 +370,7 @@ class Namespace::GemsAuthorizer < ApplicationAuthorizer
 
   def edit
     # true
-    # { id: authenticated.namespace_gem_ids }
+    # { id: authenticated.namespace_model_ids }
   end
 
   def create
@@ -379,148 +379,148 @@ class Namespace::GemsAuthorizer < ApplicationAuthorizer
 
   def update
     # true
-    # { id: authenticated.namespace_gem_ids }
+    # { id: authenticated.namespace_model_ids }
   end
 
   def destroy
     # true
-    # { id: authenticated.namespace_gem_ids }
+    # { id: authenticated.namespace_model_ids }
   end
 
 end
 ```
 
-generated: spec/authorizers/namespace/gems_authorizer_spec.rb
+generated: spec/authorizers/namespace/models_authorizer_spec.rb
 
 ```ruby
 require 'rails_helper'
 
-RSpec.describe Namespace::GemsAuthorizer, type: :authorizer do
+RSpec.describe Namespace::ModelsAuthorizer, type: :authorizer do
 
   # let(:guest_user) { nil }
-  # let(:one_user) { double('Authenticated', user_group?: true, namespace_gem_ids: [1]) }
-  # let(:two_user) { double('Authenticated', user_group?: true, namespace_gem_ids: [2]) }
+  # let(:one_user) { double('Authenticated', user_group?: true, namespace_model_ids: [1]) }
+  # let(:two_user) { double('Authenticated', user_group?: true, namespace_model_ids: [2]) }
   # let(:admin_user) { double('Authenticated', admin_group?: true) }
 
   # context '#index' do
   #   describe 'authorize' do
-  #     it { expect(Namespace::GemsAuthorizer.new(one_user, :index)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(one_user, :index)).to be_authorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(two_user, :index)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(two_user, :index)).to be_authorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(admin_user, :index)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(admin_user, :index)).to be_authorized }
   #   end
 
   #   describe 'not authorize' do
-  #     it { expect(Namespace::GemsAuthorizer.new(guest_user, :index)).to be_unauthorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(guest_user, :index)).to be_unauthorized }
   #   end
   # end
 
   # context '#show' do
   #   describe 'authorize' do
-  #     it { expect(Namespace::GemsAuthorizer.new(one_user, :show, id: 1)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(one_user, :show, id: 1)).to be_authorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(two_user, :show, id: 2)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(two_user, :show, id: 2)).to be_authorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(admin_user, :show, id: 1)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(admin_user, :show, id: 1)).to be_authorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(admin_user, :show, id: 2)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(admin_user, :show, id: 2)).to be_authorized }
   #   end
 
   #   describe 'not authorize' do
-  #     it { expect(Namespace::GemsAuthorizer.new(guest_user, :show, id: 1)).to be_unauthorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(guest_user, :show, id: 1)).to be_unauthorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(one_user, :show, id: 2)).to be_unauthorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(one_user, :show, id: 2)).to be_unauthorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(two_user, :show, id: 1)).to be_unauthorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(two_user, :show, id: 1)).to be_unauthorized }
   #   end
   # end
 
   # context '#new' do
   #   describe 'authorize' do
-  #     it { expect(Namespace::GemsAuthorizer.new(one_user, :new)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(one_user, :new)).to be_authorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(two_user, :new)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(two_user, :new)).to be_authorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(admin_user, :new)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(admin_user, :new)).to be_authorized }
   #   end
 
   #   describe 'not authorize' do
-  #     it { expect(Namespace::GemsAuthorizer.new(guest_user, :new)).to be_unauthorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(guest_user, :new)).to be_unauthorized }
   #   end
   # end
 
   # context '#edit' do
   #   describe 'authorize' do
-  #     it { expect(Namespace::GemsAuthorizer.new(one_user, :edit, id: 1)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(one_user, :edit, id: 1)).to be_authorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(two_user, :edit, id: 2)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(two_user, :edit, id: 2)).to be_authorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(admin_user, :edit, id: 1)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(admin_user, :edit, id: 1)).to be_authorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(admin_user, :edit, id: 2)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(admin_user, :edit, id: 2)).to be_authorized }
   #   end
 
   #   describe 'not authorize' do
-  #     it { expect(Namespace::GemsAuthorizer.new(guest_user, :edit, id: 1)).to be_unauthorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(guest_user, :edit, id: 1)).to be_unauthorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(one_user, :edit, id: 2)).to be_unauthorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(one_user, :edit, id: 2)).to be_unauthorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(two_user, :edit, id: 1)).to be_unauthorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(two_user, :edit, id: 1)).to be_unauthorized }
   #   end
   # end
 
   # context '#create' do
   #   describe 'authorize' do
-  #     it { expect(Namespace::GemsAuthorizer.new(one_user, :create)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(one_user, :create)).to be_authorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(two_user, :create)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(two_user, :create)).to be_authorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(admin_user, :create)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(admin_user, :create)).to be_authorized }
   #   end
 
   #   describe 'not authorize' do
-  #     it { expect(Namespace::GemsAuthorizer.new(guest_user, :create)).to be_unauthorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(guest_user, :create)).to be_unauthorized }
   #   end
   # end
 
   # context '#update' do
   #   describe 'authorize' do
-  #     it { expect(Namespace::GemsAuthorizer.new(one_user, :update, id: 1)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(one_user, :update, id: 1)).to be_authorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(two_user, :update, id: 2)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(two_user, :update, id: 2)).to be_authorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(admin_user, :update, id: 1)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(admin_user, :update, id: 1)).to be_authorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(admin_user, :update, id: 2)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(admin_user, :update, id: 2)).to be_authorized }
   #   end
 
   #   describe 'not authorize' do
-  #     it { expect(Namespace::GemsAuthorizer.new(guest_user, :update, id: 1)).to be_unauthorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(guest_user, :update, id: 1)).to be_unauthorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(one_user, :update, id: 2)).to be_unauthorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(one_user, :update, id: 2)).to be_unauthorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(two_user, :update, id: 1)).to be_unauthorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(two_user, :update, id: 1)).to be_unauthorized }
   #   end
   # end
 
   # context '#destroy' do
   #   describe 'authorize' do
-  #     it { expect(Namespace::GemsAuthorizer.new(one_user, :destroy, id: 1)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(one_user, :destroy, id: 1)).to be_authorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(two_user, :destroy, id: 2)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(two_user, :destroy, id: 2)).to be_authorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(admin_user, :destroy, id: 1)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(admin_user, :destroy, id: 1)).to be_authorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(admin_user, :destroy, id: 2)).to be_authorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(admin_user, :destroy, id: 2)).to be_authorized }
   #   end
 
   #   describe 'not authorize' do
-  #     it { expect(Namespace::GemsAuthorizer.new(guest_user, :destroy, id: 1)).to be_unauthorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(guest_user, :destroy, id: 1)).to be_unauthorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(one_user, :destroy, id: 2)).to be_unauthorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(one_user, :destroy, id: 2)).to be_unauthorized }
 
-  #     it { expect(Namespace::GemsAuthorizer.new(two_user, :destroy, id: 1)).to be_unauthorized }
+  #     it { expect(Namespace::ModelsAuthorizer.new(two_user, :destroy, id: 1)).to be_unauthorized }
   #   end
   # end
 
