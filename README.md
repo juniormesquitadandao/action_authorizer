@@ -132,33 +132,40 @@ class ModelsAuthorizer < ApplicationAuthorizer
 
   def index
     # true
+    # Model.where(user: authenticated).find(@params[:id]).avaliable?
   end
 
   def show
     # true
+    # Model.where(user: authenticated).find(@params[:id]).avaliable?
     # { id: authenticated.model_ids }
   end
 
   def new
     # true
+    # Model.where(user: authenticated).find(@params[:id]).avaliable?
   end
 
   def edit
     # true
+    # Model.where(user: authenticated).find(@params[:id]).avaliable?
     # { id: authenticated.model_ids }
   end
 
   def create
     # true
+    # Model.where(user: authenticated).find(@params[:id]).avaliable?
   end
 
   def update
     # true
+    # Model.where(user: authenticated).find(@params[:id]).avaliable?
     # { id: authenticated.model_ids }
   end
 
   def destroy
     # true
+    # Model.where(user: authenticated).find(@params[:id]).avaliable?
     # { id: authenticated.model_ids }
   end
 
@@ -357,33 +364,40 @@ class Namespace::ModelsAuthorizer < ApplicationAuthorizer
 
   def index
     # true
+    # Model.where(user: authenticated).find(@params[:id]).avaliable?
   end
 
   def show
     # true
+    # Model.where(user: authenticated).find(@params[:id]).avaliable?
     # { id: authenticated.namespace_model_ids }
   end
 
   def new
     # true
+    # Model.where(user: authenticated).find(@params[:id]).avaliable?
   end
 
   def edit
     # true
+    # Model.where(user: authenticated).find(@params[:id]).avaliable?
     # { id: authenticated.namespace_model_ids }
   end
 
   def create
     # true
+    # Model.where(user: authenticated).find(@params[:id]).avaliable?
   end
 
   def update
     # true
+    # Model.where(user: authenticated).find(@params[:id]).avaliable?
     # { id: authenticated.namespace_model_ids }
   end
 
   def destroy
     # true
+    # Model.where(user: authenticated).find(@params[:id]).avaliable?
     # { id: authenticated.namespace_model_ids }
   end
 
