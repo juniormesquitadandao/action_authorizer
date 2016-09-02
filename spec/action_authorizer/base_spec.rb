@@ -1,6 +1,6 @@
 RSpec.describe 'Base' do
 
-  it { expect { ApplicationAuthorizer.new(nil, :index).unauthorized? }.to raise_error NoMethodError }
+  it { expect { ApplicationAuthorizer.new({}, :index).unauthorized? }.to raise_error NoMethodError }
 
   context 'defineds' do
     before(:each) { expect_any_instance_of(ActionAuthorizer::Base).to receive(:unauthorized?) { true } }
