@@ -147,6 +147,11 @@ generated: app/authorizers/models_authorizer.rb
 #     ex. to requested params {id: 'three', other: 'three'}:
 #       { id: ['one', 'two'] }
 class ModelsAuthorizer < ApplicationAuthorizer
+  # All actions automatically validating the need of user logged.
+  # Skip this check for all actions:
+  # skip_all
+  # Or skip only for some actions:
+  # skip :index, :new, :destroy, ...
 
   def index
     # true
