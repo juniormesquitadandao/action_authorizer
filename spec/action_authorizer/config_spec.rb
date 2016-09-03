@@ -4,8 +4,8 @@ RSpec.describe 'Config' do
     @application_controller = ApplicationController.new
     @welcome_controller = WelcomeController.new
     @dashboad_admins_controller = Dashboard::AdminsController.new
-    @skip_all_controller = SkipAllController.new
-    @other_controller = OtherController.new
+    @public_controller = PublicController.new
+    @other_public_controller = OtherPublicController.new
   end
 
   it '#authenticated' do
@@ -62,6 +62,16 @@ RSpec.describe 'Config' do
         allow(@welcome_controller).to receive(:current_user).and_return( nil )
         expect(@welcome_controller).to be_unauthorized
       end
+
+      it '::skip_all' do
+        allow_any_instance_of(PublicAuthorizer).to receive(:index).and_return(nil)
+        expect(@public_controller).to be_unauthorized
+      end
+
+      it '::skip' do
+        allow_any_instance_of(OtherPublicAuthorizer).to receive(:index).and_return(nil)
+        expect(@other_public_controller).to be_unauthorized
+      end
     end
 
     describe 'fail when' do
@@ -88,11 +98,11 @@ RSpec.describe 'Config' do
       end
 
       it '::skip_all' do
-        expect(@skip_all_controller).not_to be_unauthorized
+        expect(@public_controller).not_to be_unauthorized
       end
 
       it '::skip' do
-        expect(@other_controller).not_to be_unauthorized
+        expect(@other_public_controller).not_to be_unauthorized
       end
     end
   end

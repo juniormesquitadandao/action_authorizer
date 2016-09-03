@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe UsersAuthorizer, type: :authorizer do
 
   let(:guest_user) { nil }
-  let(:one_user) { double('Authenticated', user_group?: true, user_ids: [1]) }
-  let(:two_user) { double('Authenticated', user_group?: true, user_ids: [2]) }
+  let(:one_user) { double('Authenticated', admin_group?: false, user_ids: [1]) }
+  let(:two_user) { double('Authenticated', admin_group?: false, user_ids: [2]) }
   let(:admin_user) { double('Authenticated', admin_group?: true) }
 
   context '#index' do

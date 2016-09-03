@@ -7,8 +7,7 @@ class ActionAuthorizer::Base
   end
 
   def unauthorized?
-    return false if skip_all || skip.include?(action)
-    return true if !authenticated
+    return true if !authenticated && !skip_all && skip.exclude?(action)
 
     @result = send(action)
     if !result.kind_of?(Hash)
@@ -18,6 +17,10 @@ class ActionAuthorizer::Base
     else
       unauthorized_params?
     end
+  end
+
+  def authorized?
+    !unauthorized?
   end
 
   class << self
@@ -45,7 +48,6 @@ class ActionAuthorizer::Base
     end
     unauthorized_params.any?
   end
-
 
   def skip_all
     false

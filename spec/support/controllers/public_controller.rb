@@ -1,12 +1,12 @@
 require File.expand_path('../application_controller', __FILE__)
 
-class SkipAllController < ApplicationController
+class PublicController < ApplicationController
 
   def index
   end
 
   def controller_path
-    'skip_all'
+    'public'
   end
 
   def action_name

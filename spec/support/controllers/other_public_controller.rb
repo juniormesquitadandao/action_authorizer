@@ -1,12 +1,12 @@
 require File.expand_path('../application_controller', __FILE__)
 
-class OtherController < ApplicationController
+class OtherPublicController < ApplicationController
 
   def index
   end
 
   def controller_path
-    'other'
+    'other_public'
   end
 
   def action_name

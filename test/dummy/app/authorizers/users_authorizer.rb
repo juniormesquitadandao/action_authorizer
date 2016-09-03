@@ -42,7 +42,7 @@
 class UsersAuthorizer < ApplicationAuthorizer
 
   def index
-    authenticated.try :admin_group?
+    authenticated.admin_group?
   end
 
 end
