@@ -39,7 +39,7 @@ class ActionAuthorizer::Base
 
   private
 
-  attr_reader :authenticated, :params, :action, :result
+  attr_reader :authenticated, :action, :params, :result
 
   def unauthorized_params?
     unauthorized_params = result.select do |name, values|
