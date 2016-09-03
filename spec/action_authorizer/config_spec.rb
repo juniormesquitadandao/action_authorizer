@@ -4,6 +4,8 @@ RSpec.describe 'Config' do
     @application_controller = ApplicationController.new
     @welcome_controller = WelcomeController.new
     @dashboad_admins_controller = Dashboard::AdminsController.new
+    @public_controller = PublicController.new
+    @other_public_controller = OtherPublicController.new
   end
 
   it '#authenticated' do
@@ -55,6 +57,21 @@ RSpec.describe 'Config' do
         allow_any_instance_of(Hash).to receive(:except).and_return( { key: 3 } )
         expect(@welcome_controller).to be_unauthorized
       end
+
+      it 'unauthenticated' do
+        allow(@welcome_controller).to receive(:current_user).and_return( nil )
+        expect(@welcome_controller).to be_unauthorized
+      end
+
+      it '::skip_all' do
+        allow_any_instance_of(PublicAuthorizer).to receive(:index).and_return(nil)
+        expect(@public_controller).to be_unauthorized
+      end
+
+      it '::skip' do
+        allow_any_instance_of(OtherPublicAuthorizer).to receive(:index).and_return(nil)
+        expect(@other_public_controller).to be_unauthorized
+      end
     end
 
     describe 'fail when' do
@@ -79,6 +96,14 @@ RSpec.describe 'Config' do
         allow_any_instance_of(Hash).to receive(:except).and_return( { key: 3 } )
         expect(@welcome_controller).not_to be_unauthorized
       end
+
+      it '::skip_all' do
+        expect(@public_controller).not_to be_unauthorized
+      end
+
+      it '::skip' do
+        expect(@other_public_controller).not_to be_unauthorized
+      end
     end
   end
 
@@ -100,13 +125,13 @@ RSpec.describe 'Config' do
 
   it 'instance authorizer' do
     welcome_authorizer = double 'WelcomeAuthorizer', unauthorized?: true
-    expect(WelcomeAuthorizer).to receive(:new).with(nil, :index, {}) { welcome_authorizer }
+    expect(WelcomeAuthorizer).to receive(:new).with({}, :index, {}) { welcome_authorizer }
     @welcome_controller.unauthorized?
   end
 
   it 'instance authorizer with module' do
     dashboard_admins_authorizer = double 'Dashboard::AdminsAuthorizer', unauthorized?: true
-    expect(Dashboard::AdminsAuthorizer).to receive(:new).with(nil, :index, {}) { dashboard_admins_authorizer }
+    expect(Dashboard::AdminsAuthorizer).to receive(:new).with({}, :index, {}) { dashboard_admins_authorizer }
     @dashboad_admins_controller.unauthorized?
   end
 

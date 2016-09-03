@@ -40,9 +40,9 @@
 #     ex. to requested params {id: 'three', other: 'three'}:
 #       { id: ['one', 'two'] }
 class WelcomeAuthorizer < ApplicationAuthorizer
+  skip_all
 
   def index
     true
   end
-
 end

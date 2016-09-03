@@ -1,7 +1,5 @@
 class ActionAuthorizer::Base
 
-  attr_reader :authenticated
-
   def initialize(authenticated, action, params = {})
     @authenticated = authenticated
     @action = action.to_sym
@@ -9,14 +7,15 @@ class ActionAuthorizer::Base
   end
 
   def unauthorized?
-    @result = send(@action)
+    return true if !authenticated && !skip_all && skip.exclude?(action)
 
-    if !@result.kind_of?(Hash)
-      @result.blank?
-    elsif @params.empty?
+    @result = send(action)
+    if !result.kind_of?(Hash)
+      result.blank?
+    elsif params.empty?
       false
     else
-      unauthorized_params.any?
+      unauthorized_params?
     end
   end
 
@@ -24,14 +23,38 @@ class ActionAuthorizer::Base
     !unauthorized?
   end
 
+  class << self
+    def skip_all
+      define_method(:skip_all) do
+        true
+      end
+    end
+
+    def skip *actions
+      define_method(:skip) do
+        actions
+      end
+    end
+  end
+
   private
 
-  def unauthorized_params
-    @unauthorized_params = @result.select do |name, values|
-      param_value = @params[name].to_s
+  attr_reader :authenticated, :action, :params, :result
+
+  def unauthorized_params?
+    unauthorized_params = result.select do |name, values|
+      param_value = params[name].to_s
       param_value.present? && values.map!{|v| v.to_s}.exclude?(param_value)
     end
-    @unauthorized_params
+    unauthorized_params.any?
+  end
+
+  def skip_all
+    false
+  end
+
+  def skip
+    []
   end
 
 end

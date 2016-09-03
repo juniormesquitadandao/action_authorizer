@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe HousesAuthorizer, type: :authorizer do
 
   let(:guest_user) { nil }
-  let(:one_user) { double('Authenticated', user_group?: true, house_ids: [1]) }
-  let(:two_user) { double('Authenticated', user_group?: true, house_ids: [2]) }
-  let(:admin_user) { double('Authenticated', admin_group?: true) }
+  let(:one_user) { double('Authenticated', admin_group?: false, user_group?: true, house_ids: [1]) }
+  let(:two_user) { double('Authenticated', admin_group?: false, user_group?: true, house_ids: [2]) }
+  let(:admin_user) { double('Authenticated', admin_group?: true, user_group?: false) }
 
   context '#index' do
     describe 'authorize' do

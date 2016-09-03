@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ["juniormesquitadandao@gmail.com"]
   s.homepage    = "https://github.com/juniormesquitadandao/action_authorizer"
   s.summary     = "Action Authorizer"
-  s.description = "Action Authorizer"
+  s.description = "ActionAuthorizer is a gem to authorize the controllers's actions. Designed to work with Devise and RSpec. Where each controller will have an authorizer with the same actions. Each authorizer's action will return your permission's result."
   s.license     = "MIT"
 
   s.files = Dir["lib/**/*", "MIT-LICENSE", "Rakefile", "README.md"]

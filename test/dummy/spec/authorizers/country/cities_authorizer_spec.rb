@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe Country::CitiesAuthorizer, type: :authorizer do
 
   let(:guest_user) { nil }
-  let(:one_user) { double('Authenticated', user_group?: true) }
-  let(:two_user) { double('Authenticated', user_group?: true) }
-  let(:admin_user) { double('Authenticated', admin_group?: true) }
+  let(:one_user) { double('Authenticated', admin_group?: false, user_group?: true) }
+  let(:two_user) { double('Authenticated', admin_group?: false, user_group?: true) }
+  let(:admin_user) { double('Authenticated', admin_group?: true, user_group?: false) }
 
   context '#index' do
     describe 'authorize' do

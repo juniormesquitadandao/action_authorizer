@@ -42,31 +42,31 @@
 class Country::CitiesAuthorizer < ApplicationAuthorizer
 
   def index
-    authenticated
+    true
   end
 
   def show
-    authenticated
+    true
   end
 
   def new
-    authenticated.try :admin_group?
+    authenticated.admin_group?
   end
 
   def edit
-    authenticated.try :admin_group?
+    authenticated.admin_group?
   end
 
   def create
-    authenticated.try :admin_group?
+    authenticated.admin_group?
   end
 
   def update
-    authenticated.try :admin_group?
+    authenticated.admin_group?
   end
 
   def destroy
-    authenticated.try :admin_group?
+    authenticated.admin_group?
   end
 
 end

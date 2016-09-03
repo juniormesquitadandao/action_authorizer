@@ -8,9 +8,9 @@ require_dependency "<%= namespaced_file_path %>/application_authorizer"
 RSpec.describe <%= controller_class_name %>Authorizer, type: :authorizer do
 
   # let(:guest_user) { nil }
-  # let(:one_user) { double('Authenticated', user_group?: true, <%= singular_table_name %>_ids: [1]) }
-  # let(:two_user) { double('Authenticated', user_group?: true, <%= singular_table_name %>_ids: [2]) }
-  # let(:admin_user) { double('Authenticated', admin_group?: true) }
+  # let(:one_user) { double('Authenticated', admin_group?: false, user_group?: true, <%= singular_table_name %>_ids: [1]) }
+  # let(:two_user) { double('Authenticated', admin_group?: false, user_group?: true, <%= singular_table_name %>_ids: [2]) }
+  # let(:admin_user) { double('Authenticated', admin_group?: true, user_group?: false) }
 
 <% unless options[:singleton] -%>
   # context '#index' do
