@@ -33,11 +33,18 @@ end
   # def unauthorized? controller, action, params = {}
   # def authorized? controller, action, params = {}
   # ex.:
-  #   authozired? :gems, :index
-  #   authozired? 'gems', 'index'
-  #   authozired? 'dashborad/gems', 'index'
-  #   authozired? :gems, :show, id: 1
-  #   authozired? :gems, :show, id: '1'
+  #   <% if authorized? :models, :index %>
+  #     <%= link_to 'Models', models_path %>
+  #   <% end %>
+  #   <% if authorized? 'dashborad/models', :index %>
+  #     <%= link_to 'Models Dashboard', dashboard_models_path %>
+  #   <% end %>
+  #   <% if authorized? :models, :show, id: @model.id %>
+  #     <%= link_to 'Model', model_path(@model)  %>
+  #   <% end %>
+  #   <% if authorized? :models, :edit, id: @model.to_param %>
+  #     <%= link_to 'Model', edit_model_path(@model) %>
+  #   <% end %>
   include ActionAuthorizer::Helper
   # def authenticated
   #   current_user

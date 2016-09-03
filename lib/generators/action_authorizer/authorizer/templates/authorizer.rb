@@ -54,7 +54,7 @@ class <%= controller_class_name %>Authorizer < ApplicationAuthorizer
 
   def show
     # true
-    # <%= singular_table_name.classify %>.find(params[:id]).avaliable_to(authenticated)
+    # <%= singular_table_name.classify %>.where(user: authenticated).find(params[:id]).avaliable?
     # { id: authenticated.<%= singular_table_name %>_ids }
   end
 
@@ -64,7 +64,7 @@ class <%= controller_class_name %>Authorizer < ApplicationAuthorizer
 
   def edit
     # true
-    # <%= singular_table_name.classify %>.find(params[:id]).avaliable_to(authenticated)
+    # <%= singular_table_name.classify %>.where(user: authenticated).find(params[:id]).avaliable?
     # { id: authenticated.<%= singular_table_name %>_ids }
   end
 
@@ -74,13 +74,13 @@ class <%= controller_class_name %>Authorizer < ApplicationAuthorizer
 
   def update
     # true
-    # <%= singular_table_name.classify %>.find(params[:id]).avaliable_to(authenticated)
+    # <%= singular_table_name.classify %>.where(user: authenticated).find(params[:id]).avaliable?
     # { id: authenticated.<%= singular_table_name %>_ids }
   end
 
   def destroy
     # true
-    # <%= singular_table_name.classify %>.find(params[:id]).avaliable_to(authenticated)
+    # <%= singular_table_name.classify %>.where(user: authenticated).find(params[:id]).avaliable?
     # { id: authenticated.<%= singular_table_name %>_ids }
   end
 
