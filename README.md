@@ -7,7 +7,7 @@ ActionAuthorizer is a gem to authorize the controllers's actions. Designed to wo
 update: Gemfile
 
 ```ruby
-gem 'action_authorizer', '1.0.4'
+gem 'action_authorizer', '1.0.6'
 ```
 
 run
