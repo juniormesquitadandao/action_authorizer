@@ -3,3 +3,4 @@ log/*.log
 pkg/
 .byebug_history
 .yardoc
+*.gem

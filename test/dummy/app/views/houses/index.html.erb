@@ -32,6 +32,4 @@
 
 <br>
 
-<% if authorized? :houses, :new  %>
-<%= link_to 'New House', new_house_path %>
-<% end  %>
+<%= link_to 'New House', new_house_path if authorized? :houses, :new %>

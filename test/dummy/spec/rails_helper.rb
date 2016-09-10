@@ -65,5 +65,4 @@ RSpec.configure do |config|
   config.before :each, type: :controller do
     allow(controller).to receive(:authorize!)
   end
-
 end

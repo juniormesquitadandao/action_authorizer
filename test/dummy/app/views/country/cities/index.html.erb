@@ -30,6 +30,4 @@
 
 <br>
 
-<% if authorized? 'country/cities', :new  %>
-<%= link_to 'New City', new_country_city_path %>
-<% end  %>
+<%= link_to 'New City', new_country_city_path if authorized? 'country/cities', :new %>

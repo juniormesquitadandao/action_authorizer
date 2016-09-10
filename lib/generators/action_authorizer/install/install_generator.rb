@@ -26,31 +26,24 @@ end
     end
   end
 
-  def update_application_helper_file
-    inject_into_file 'app/helpers/application_helper.rb', after: "module ApplicationHelper" do <<-RUBY
-  \n
+  def create_application_helper_file
+    create_file 'app/helpers/authorizer_helper.rb', <<-RUBY
+module AuthorizerHelper
   # Add helpers to check authorization authenticated.
   # def unauthorized? controller, action, params = {}
   # def authorized? controller, action, params = {}
   # ex.:
-  #   <% if authorized? :models, :index %>
-  #     <%= link_to 'Models', models_path %>
-  #   <% end %>
-  #   <% if authorized? 'dashborad/models', :index %>
-  #     <%= link_to 'Models Dashboard', dashboard_models_path %>
-  #   <% end %>
-  #   <% if authorized? :models, :show, id: @model.id %>
-  #     <%= link_to 'Model', model_path(@model)  %>
-  #   <% end %>
-  #   <% if authorized? :models, :edit, id: @model.to_param %>
-  #     <%= link_to 'Model', edit_model_path(@model) %>
-  #   <% end %>
+  #   <%= link_to 'Models', models_path if authorized? :models, :index %>
+  #   <%= link_to 'Models Dashboard', dashboard_models_path if authorized? 'dashborad/models', :index %>
+  #   <%= link_to 'Model', model_path(@model) if authorized? :models, :show, id: @model.id %>
+  #   <%= link_to 'Model', edit_model_path(@model) if authorized? :models, :edit, id: @model.to_param %>
   include ActionAuthorizer::Helper
+
   # def authenticated
   #   current_user
   # end
-      RUBY
-    end
+end
+    RUBY
   end
 
   def update_rails_helper_file

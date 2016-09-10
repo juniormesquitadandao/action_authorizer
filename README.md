@@ -28,9 +28,9 @@ updated: app/controllers/application_controller.rb
 
 ```ruby
 class ApplicationController < ActionController::Base
-  before_action :authorize!, unless: :devise_controller?
-
   include ActionAuthorizer::Config
+
+  before_action :authorize!, unless: :devise_controller?
 
   # def authenticated
   #   current_user
@@ -44,34 +44,23 @@ class ApplicationController < ActionController::Base
 end
 ```
 
-updated: app/helpers/application_helper.rb
+generated: app/helpers/authorizer_helper.rb
 
 ```ruby
-module ApplicationHelper
-
+module AuthorizerHelper
   # Add helpers to check authorization authenticated.
   # def unauthorized? controller, action, params = {}
   # def authorized? controller, action, params = {}
   # ex.:
-  #   <% if authorized? :models, :index %>
-  #     <%= link_to 'Models', models_path %>
-  #   <% end %>
-  #   <% if authorized? 'dashborad/models', :index %>
-  #     <%= link_to 'Models Dashboard', dashboard_models_path %>
-  #   <% end %>
-  #   <% if authorized? :models, :show, id: @model.id %>
-  #     <%= link_to 'Model', model_path(@model)  %>
-  #   <% end %>
-  #   <% if authorized? :models, :edit, id: @model.to_param %>
-  #     <%= link_to 'Model', edit_model_path(@model) %>
-  #   <% end %>
+  #   <%= link_to 'Models', models_path if authorized? :models, :index %>
+  #   <%= link_to 'Models Dashboard', dashboard_models_path if authorized? 'dashborad/models', :index %>
+  #   <%= link_to 'Model', model_path(@model) if authorized? :models, :show, id: @model.id %>
+  #   <%= link_to 'Model', edit_model_path(@model) if authorized? :models, :edit, id: @model.to_param %>
   include ActionAuthorizer::Helper
-
+  
   # def authenticated
   #   current_user
   # end
-
-  # ...
 end
 ```
 
