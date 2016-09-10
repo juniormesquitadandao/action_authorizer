@@ -47,9 +47,9 @@ require_dependency "<%= namespaced_file_path %>/application_authorizer"
 class <%= controller_class_name %>Authorizer < ApplicationAuthorizer
   # All actions automatically validating the need of user logged.
   # Skip this check for all actions:
-  # skip_all
-  # Or skip only for some actions:
-  # skip :index, :new, :destroy, ...
+  # skip_authentication
+  # Or skip_authentication_only for some actions:
+  # skip_authentication_only :index, :new, :destroy, ...
 
 <% unless options[:singleton] -%>
   def index

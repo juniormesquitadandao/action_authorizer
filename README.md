@@ -149,9 +149,9 @@ generated: app/authorizers/models_authorizer.rb
 class ModelsAuthorizer < ApplicationAuthorizer
   # All actions automatically validating the need of user logged.
   # Skip this check for all actions:
-  # skip_all
-  # Or skip only for some actions:
-  # skip :index, :new, :destroy, ...
+  # skip_authentication
+  # Or skip_authentication_only for some actions:
+  # skip_authentication_only :index, :new, :destroy, ...
 
   def index
     # true

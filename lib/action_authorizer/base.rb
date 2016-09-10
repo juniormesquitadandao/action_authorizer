@@ -7,7 +7,7 @@ class ActionAuthorizer::Base
   end
 
   def unauthorized?
-    return true if !authenticated && !skip_all && skip.exclude?(action)
+    return true if !authenticated && !skip_authentication && skip_authentication_only.exclude?(action)
 
     @result = send(action)
     if !result.kind_of?(Hash)
@@ -24,14 +24,14 @@ class ActionAuthorizer::Base
   end
 
   class << self
-    def skip_all
-      define_method(:skip_all) do
+    def skip_authentication
+      define_method(:skip_authentication) do
         true
       end
     end
 
-    def skip *actions
-      define_method(:skip) do
+    def skip_authentication_only *actions
+      define_method(:skip_authentication_only) do
         actions
       end
     end
@@ -49,11 +49,11 @@ class ActionAuthorizer::Base
     unauthorized_params.any?
   end
 
-  def skip_all
+  def skip_authentication
     false
   end
 
-  def skip
+  def skip_authentication_only
     []
   end
 

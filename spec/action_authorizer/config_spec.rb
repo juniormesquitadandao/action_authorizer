@@ -63,12 +63,12 @@ RSpec.describe 'Config' do
         expect(@welcome_controller).to be_unauthorized
       end
 
-      it '::skip_all' do
+      it '::skip_authentication' do
         allow_any_instance_of(PublicAuthorizer).to receive(:index).and_return(nil)
         expect(@public_controller).to be_unauthorized
       end
 
-      it '::skip' do
+      it '::skip_authentication_only' do
         allow_any_instance_of(OtherPublicAuthorizer).to receive(:index).and_return(nil)
         expect(@other_public_controller).to be_unauthorized
       end
@@ -97,11 +97,11 @@ RSpec.describe 'Config' do
         expect(@welcome_controller).not_to be_unauthorized
       end
 
-      it '::skip_all' do
+      it '::skip_authentication' do
         expect(@public_controller).not_to be_unauthorized
       end
 
-      it '::skip' do
+      it '::skip_authentication_only' do
         expect(@other_public_controller).not_to be_unauthorized
       end
     end

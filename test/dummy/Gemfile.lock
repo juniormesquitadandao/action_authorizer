@@ -1,7 +1,7 @@
 PATH
   remote: ../../../action_authorizer
   specs:
-    action_authorizer (1.0.4)
+    action_authorizer (1.0.5)
       rails (>= 4.2.0, < 5.1)
 
 GEM
@@ -184,7 +184,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  action_authorizer (= 1.0.4)!
+  action_authorizer (= 1.0.5)!
   byebug
   coffee-rails (~> 4.1.0)
   devise (= 4.0.1)

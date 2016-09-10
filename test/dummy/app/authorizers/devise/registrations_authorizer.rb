@@ -1,6 +1,6 @@
 class Devise::RegistrationsAuthorizer < ApplicationAuthorizer
 
-  skip :new, :create
+  skip_authentication_only :new, :create
 
   def new
     false

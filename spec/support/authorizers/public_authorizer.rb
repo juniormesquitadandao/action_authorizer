@@ -1,6 +1,6 @@
 class PublicAuthorizer < ApplicationAuthorizer
 
-  skip_all
+  skip_authentication
 
   def index
     true
