@@ -26,9 +26,9 @@ end
     end
   end
 
-  def create_application_helper_file
-    create_file 'app/helpers/authorizer_helper.rb', <<-RUBY
-module AuthorizerHelper
+  def create_action_authorizer_helper_file
+    create_file 'app/helpers/action_authorizer_helper.rb', <<-RUBY
+module ActionAuthorizerHelper
   # Add helpers to check authorization authenticated.
   # def unauthorized? controller, action, params = {}
   # def authorized? controller, action, params = {}

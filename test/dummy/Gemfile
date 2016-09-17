@@ -50,4 +50,4 @@ group :development, :test do
 end
 gem 'devise', '4.0.1'
 
-gem 'action_authorizer', '1.0.6', path: '../../../action_authorizer'
+gem 'action_authorizer', '1.0.7', path: '../../../action_authorizer'

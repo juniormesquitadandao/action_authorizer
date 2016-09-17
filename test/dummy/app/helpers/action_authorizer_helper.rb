@@ -1,4 +1,4 @@
-module AuthorizerHelper
+module ActionAuthorizerHelper
   # Add helpers to check authorization authenticated.
   # def unauthorized? controller, action, params = {}
   # def authorized? controller, action, params = {}

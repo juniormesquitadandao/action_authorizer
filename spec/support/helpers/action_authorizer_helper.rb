@@ -1,4 +1,4 @@
-class ApplicationHelper
+class ActionAuthorizerHelper
 
   include ActionAuthorizer::Helper
 

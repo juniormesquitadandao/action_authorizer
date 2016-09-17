@@ -1,5 +1,9 @@
 # ActionAuthorizer
 
+By [Marcelo Junior](https://github.com/juniormesquitadandao).
+
+[![Gem Version](https://badge.fury.io/rb/action_authorizer.svg)](https://badge.fury.io/rb/action_authorizer)
+
 ActionAuthorizer is a gem to authorize the controllers's actions. Designed to work with Devise and RSpec. Where each controller will have an authorizer with the same actions. Each authorizer's action will return your permission's result.
 
 # Installation
@@ -7,7 +11,7 @@ ActionAuthorizer is a gem to authorize the controllers's actions. Designed to wo
 update: Gemfile
 
 ```ruby
-gem 'action_authorizer', '1.0.6'
+gem 'action_authorizer', '1.0.7'
 ```
 
 run
@@ -44,10 +48,10 @@ class ApplicationController < ActionController::Base
 end
 ```
 
-generated: app/helpers/authorizer_helper.rb
+generated: app/helpers/action_authorizer_helper.rb
 
 ```ruby
-module AuthorizerHelper
+module ActionAuthorizerHelper
   # Add helpers to check authorization authenticated.
   # def unauthorized? controller, action, params = {}
   # def authorized? controller, action, params = {}
@@ -148,35 +152,35 @@ class ModelsAuthorizer < ApplicationAuthorizer
 
   def show
     # true
-    # Model.where(user: authenticated).find(@params[:id]).avaliable?
+    # Model.where(user: authenticated).find(params[:id]).avaliable?
     # { id: authenticated.model_ids }
   end
 
   def new
     # true
-    # Model.where(user: authenticated).find(@params[:id]).avaliable?
+    # Model.where(user: authenticated).find(params[:id]).avaliable?
   end
 
   def edit
     # true
-    # Model.where(user: authenticated).find(@params[:id]).avaliable?
+    # Model.where(user: authenticated).find(params[:id]).avaliable?
     # { id: authenticated.model_ids }
   end
 
   def create
     # true
-    # Model.where(user: authenticated).find(@params[:id]).avaliable?
+    # Model.where(user: authenticated).find(params[:id]).avaliable?
   end
 
   def update
     # true
-    # Model.where(user: authenticated).find(@params[:id]).avaliable?
+    # Model.where(user: authenticated).find(params[:id]).avaliable?
     # { id: authenticated.model_ids }
   end
 
   def destroy
     # true
-    # Model.where(user: authenticated).find(@params[:id]).avaliable?
+    # Model.where(user: authenticated).find(params[:id]).avaliable?
     # { id: authenticated.model_ids }
   end
 

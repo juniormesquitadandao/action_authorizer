@@ -1,6 +1,6 @@
 RSpec.describe 'Helper' do
 
-  let(:helper) { ApplicationHelper.new }
+  let(:helper) { ActionAuthorizerHelper.new }
 
   it { expect(helper).to be_is_a ActionAuthorizer::Helper }
 

@@ -5,18 +5,20 @@ require "action_authorizer/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "action_authorizer"
-  s.version     = ActionAuthorizer::VERSION
-  s.authors     = ["Marcelo Junior"]
-  s.email       = ["juniormesquitadandao@gmail.com"]
-  s.homepage    = "https://github.com/juniormesquitadandao/action_authorizer"
-  s.summary     = "Action Authorizer"
-  s.description = "ActionAuthorizer is a gem to authorize the controllers's actions. Designed to work with Devise and RSpec. Where each controller will have an authorizer with the same actions. Each authorizer's action will return your permission's result."
-  s.license     = "MIT"
+  s.name                  = "action_authorizer"
+  s.version               = ActionAuthorizer::VERSION.dup
+  s.platform              = Gem::Platform::RUBY
+  s.license               = "MIT"
+  s.summary               = "Action Authorizer"
+  s.email                 = "juniormesquitadandao@gmail.com"
+  s.homepage              = "https://github.com/juniormesquitadandao/action_authorizer"
+  s.description           = "ActionAuthorizer is a gem to authorize the controllers's actions. Designed to work with Devise and RSpec. Where each controller will have an authorizer with the same actions. Each authorizer's action will return your permission's result."
+  s.authors               = ["Marcelo Junior"]
 
-  s.files = Dir["lib/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  s.files                 = Dir["lib/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  s.test_files            = `git ls-files -- spec/action_authorizer/*`.split("\n")
+  s.require_paths         = ["lib"]
+  s.required_ruby_version = '>= 2.1.0'
 
-  s.require_paths = ["lib"]
-
-  s.add_dependency "rails", ">= 4.2.0", "< 5.1"
+  s.add_dependency("rails", ">= 4.1.0", "< 5.0")
 end
