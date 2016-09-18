@@ -4,7 +4,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "action_authorizer/version"
 
 # Describe your gem and declare its dependencies:
-Gem::Specification.new do |s|
+Gem::Specification.new 'action_authorizer', '1.1.0' do |s|
   s.name                  = "action_authorizer"
   s.version               = ActionAuthorizer::VERSION.dup
   s.platform              = Gem::Platform::RUBY
@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.description           = "ActionAuthorizer is a gem to authorize the controllers's actions. Designed to work with Devise and RSpec. Where each controller will have an authorizer with the same actions. Each authorizer's action will return your permission's result."
   s.authors               = ["Marcelo Junior"]
 
-  s.files                 = Dir["lib/**/*", "MIT-LICENSE", "Rakefile", "README.md", "*.gemspec"]
+  s.files                 = Dir["lib/**/*", "MIT-LICENSE", "README.md"]
   s.require_paths         = ["lib"]
   s.required_ruby_version = '>= 2.1.0'
 
