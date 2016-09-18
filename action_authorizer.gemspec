@@ -4,7 +4,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "action_authorizer/version"
 
 # Describe your gem and declare its dependencies:
-Gem::Specification.new 'action_authorizer', '1.1.1' do |s|
+Gem::Specification.new do |s|
   s.name                  = "action_authorizer"
   s.version               = ActionAuthorizer::VERSION.dup
   s.platform              = Gem::Platform::RUBY
