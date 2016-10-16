@@ -1,21 +1,35 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
-# Declare your gem's dependencies in action_authorizer.gemspec.
-# Bundler will treat runtime dependencies like base dependencies, and
-# development dependencies will be added by default to the :development group.
-gemspec
+gem 'rails', '3.0.20'
 
-# Declare any dependencies that are still in development here instead of in
-# your gemspec. These might include edge Rails or gems from your path or
-# Git. Remember to move these dependencies to your gemspec before releasing
-# your gem to rubygems.org.
+# Bundle edge Rails instead:
+# gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-# To use a debugger
-# gem 'byebug', group: [:development, :test]
+gem 'sqlite3'
+
+# Use unicorn as the web server
+# gem 'unicorn'
+
+# Deploy with Capistrano
+# gem 'capistrano'
+
+# To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
+# gem 'ruby-debug'
+# gem 'ruby-debug19', :require => 'ruby-debug'
+
+# Bundle the extra gems:
+# gem 'bj'
+# gem 'nokogiri'
+# gem 'sqlite3-ruby', :require => 'sqlite3'
+# gem 'aws-s3', :require => 'aws/s3'
+
+# Bundle gems for the local environment. Make sure to
+# put test-only gems in this group so their generators
+# and rake tasks are available in development mode:
+# group :development, :test do
+#   gem 'webrat'
+# end
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
-
-  gem 'rspec', '3.4.0'
+  gem 'rspec-rails'
 end

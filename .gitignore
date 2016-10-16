@@ -1,6 +1,4 @@
-.bundle/
+.bundle
+db/*.sqlite3
 log/*.log
-pkg/
-.byebug_history
-.yardoc
-*.gem
+tmp/
