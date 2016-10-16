@@ -10,4 +10,4 @@ RSpec::Core::RakeTask.new("spec") do |task|
 end
 task default: %w(spec)
 
-ActionAuthorizer::Application.load_tasks
+Rails.application.load_tasks

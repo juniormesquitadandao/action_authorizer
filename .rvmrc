@@ -1,1 +1,1 @@
-rvm --create use 2.0@action_authorizer-rails-4.0
+rvm --create use 2.1@action_authorizer-rails-4.1
