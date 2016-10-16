@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-ActionAuthorizer::Application.config.secret_token = 'ddee6c186aded73bb20c9fdf9c6b479c06e86903b7b399b18be4303943a65cc7cdc00a6bdcf4fd83bf79818e9c03d76bb66100dfd86405c7deaa6a51988dd606'
+ActionAuthorizer::Application.config.secret_token = 'aa081f8d114775ac321e0116ffc37ec5e57bf71770f988744e3cdc4b100354774767d3e62e397afd652b73c83e73fd26bb664cd60b0a5fdc62c1014d8f291665'
