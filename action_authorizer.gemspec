@@ -12,12 +12,12 @@ Gem::Specification.new do |s|
   s.summary               = "Action Authorizer"
   s.email                 = "juniormesquitadandao@gmail.com"
   s.homepage              = "https://github.com/juniormesquitadandao/action_authorizer"
-  s.description           = "ActionAuthorizer is a gem to authorize the controllers's actions. Designed to work with Devise and RSpec. Where each controller will have an authorizer with the same actions. Each authorizer's action will return your permission's result."
+  s.description           = "Rails authorization with controllers's actions."
   s.authors               = ["Marcelo Junior"]
 
   s.files                 = Dir["lib/**/*", "MIT-LICENSE", "README.md"]
   s.require_paths         = ["lib"]
-  s.required_ruby_version = '>= 2.1.0'
+  s.required_ruby_version = '>= 1.9'
 
-  s.add_dependency("rails", ">= 4.1.0", "< 5.0")
+  s.add_dependency("rails", ">= 3.0")
 end
