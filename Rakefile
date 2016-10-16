@@ -15,6 +15,7 @@ RDoc::Task.new(:rdoc) do |rdoc|
 end
 
 
+require "rake"
 require "rspec/core/rake_task"
 
 RSpec::Core::RakeTask.new("spec") do |task|
