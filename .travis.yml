@@ -1,5 +1,4 @@
 language: ruby
 
-branches:
-  only:
-  - developer
+rvm:
+  - 2.3.0
