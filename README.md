@@ -6,7 +6,7 @@ Rails authorization with controllers's actions.
 
 ActionAuthorizer is a gem to authorize the controllers's actions. Designed to work with Devise and RSpec. Where each controller will have an authorizer with the same actions. Each authorizer's action will return your permission's result.
 
-# Getting Started
+## Getting Started
 
 update: Gemfile
 
@@ -81,14 +81,18 @@ RSpec.configure do |config|
 end
 ```
 
-run with module
+### Authorizing models with module
+
+run
 
 ```console
 rails generate scaffold namespace/model name
 rails generate action_authorizer:authorizer namespace/model
 ```
 
-run without module
+### Authorizing models without module
+
+run
 
 ```console
 rails generate scaffold model attribute
@@ -201,125 +205,103 @@ RSpec.describe ModelsAuthorizer, type: :authorizer do
 
   # context '#index' do
   #   describe 'authorize' do
-  #     it { expect(ModelsAuthorizer.new(one_user, :index)).to be_authorized }
-
-  #     it { expect(ModelsAuthorizer.new(two_user, :index)).to be_authorized }
-
-  #     it { expect(ModelsAuthorizer.new(admin_user, :index)).to be_authorized }
+  #     it { is_expected.to authorize(one_user).access(:index) }
+  #     it { is_expected.to authorize(two_user).access(:index) }
+  #     it { is_expected.to authorize(admin_user).access(:index) }
   #   end
 
   #   describe 'not authorize' do
-  #     it { expect(ModelsAuthorizer.new(guest_user, :index)).to be_unauthorized }
+  #     it { is_expected.not_to authorize(one_user).access(:index) }
+  #     it { is_expected.not_to authorize(one_user).access(:index) }
+  #     it { is_expected.not_to authorize(guest_user).access(:index) }
   #   end
   # end
 
   # context '#show' do
   #   describe 'authorize' do
-  #     it { expect(ModelsAuthorizer.new(one_user, :show, id: 1)).to be_authorized }
-
-  #     it { expect(ModelsAuthorizer.new(two_user, :show, id: 2)).to be_authorized }
-
-  #     it { expect(ModelsAuthorizer.new(admin_user, :show, id: 1)).to be_authorized }
-
-  #     it { expect(ModelsAuthorizer.new(admin_user, :show, id: 2)).to be_authorized }
+  #     it { is_expected.to authorize(one_user).access(:show).with(id: 1) }
+  #     it { is_expected.to authorize(two_user).access(:show).with(id: 2) }
+  #     it { is_expected.to authorize(admin_user).access(:show).with(id: 1) }
+  #     it { is_expected.to authorize(admin_user).access(:show).with(id: 2) }
   #   end
 
   #   describe 'not authorize' do
-  #     it { expect(ModelsAuthorizer.new(guest_user, :show, id: 1)).to be_unauthorized }
-
-  #     it { expect(ModelsAuthorizer.new(one_user, :show, id: 2)).to be_unauthorized }
-
-  #     it { expect(ModelsAuthorizer.new(two_user, :show, id: 1)).to be_unauthorized }
+  #     it { is_expected.not_to authorize(guest_user).access(:show).with(id: 1) }
+  #     it { is_expected.not_to authorize(one_user).access(:show).with(id: 2) }
+  #     it { is_expected.not_to authorize(two_user).access(:show).with(id: 1) }
   #   end
   # end
 
   # context '#new' do
   #   describe 'authorize' do
-  #     it { expect(ModelsAuthorizer.new(one_user, :new)).to be_authorized }
-
-  #     it { expect(ModelsAuthorizer.new(two_user, :new)).to be_authorized }
-
-  #     it { expect(ModelsAuthorizer.new(admin_user, :new)).to be_authorized }
+  #     it { is_expected.to authorize(one_user).access(:new) }
+  #     it { is_expected.to authorize(two_user).access(:new) }
+  #     it { is_expected.to authorize(admin_user).access(:new) }
   #   end
 
   #   describe 'not authorize' do
-  #     it { expect(ModelsAuthorizer.new(guest_user, :new)).to be_unauthorized }
+  #     it { is_expected.not_to authorize(guest_user).access(:new) }
   #   end
   # end
 
   # context '#edit' do
   #   describe 'authorize' do
-  #     it { expect(ModelsAuthorizer.new(one_user, :edit, id: 1)).to be_authorized }
-
-  #     it { expect(ModelsAuthorizer.new(two_user, :edit, id: 2)).to be_authorized }
-
-  #     it { expect(ModelsAuthorizer.new(admin_user, :edit, id: 1)).to be_authorized }
-
-  #     it { expect(ModelsAuthorizer.new(admin_user, :edit, id: 2)).to be_authorized }
+  #     it { is_expected.to authorize(one_user).access(:edit).with(id: 1) }
+  #     it { is_expected.to authorize(two_user).access(:edit).with(id: 2) }
+  #     it { is_expected.to authorize(admin_user).access(:edit).with(id: 1) }
+  #     it { is_expected.to authorize(admin_user).access(:edit).with(id: 2) }
   #   end
 
   #   describe 'not authorize' do
-  #     it { expect(ModelsAuthorizer.new(guest_user, :edit, id: 1)).to be_unauthorized }
-
-  #     it { expect(ModelsAuthorizer.new(one_user, :edit, id: 2)).to be_unauthorized }
-
-  #     it { expect(ModelsAuthorizer.new(two_user, :edit, id: 1)).to be_unauthorized }
+  #     it { is_expected.not_to authorize(guest_user).access(:edit).with(id: 1) }
+  #     it { is_expected.not_to authorize(one_user).access(:edit).with(id: 2) }
+  #     it { is_expected.not_to authorize(two_user).access(:edit).with(id: 1) }
   #   end
   # end
 
   # context '#create' do
   #   describe 'authorize' do
-  #     it { expect(ModelsAuthorizer.new(one_user, :create)).to be_authorized }
-
-  #     it { expect(ModelsAuthorizer.new(two_user, :create)).to be_authorized }
-
-  #     it { expect(ModelsAuthorizer.new(admin_user, :create)).to be_authorized }
+  #     it { is_expected.to authorize(one_user).access(:create) }
+  #     it { is_expected.to authorize(two_user).access(:create) }
+  #     it { is_expected.to authorize(admin_user).access(:create) }
   #   end
 
   #   describe 'not authorize' do
-  #     it { expect(ModelsAuthorizer.new(guest_user, :create)).to be_unauthorized }
+  #     it { is_expected.not_to authorize(guest_user).access(:create) }
   #   end
   # end
 
   # context '#update' do
   #   describe 'authorize' do
-  #     it { expect(ModelsAuthorizer.new(one_user, :update, id: 1)).to be_authorized }
-
-  #     it { expect(ModelsAuthorizer.new(two_user, :update, id: 2)).to be_authorized }
-
-  #     it { expect(ModelsAuthorizer.new(admin_user, :update, id: 1)).to be_authorized }
-
-  #     it { expect(ModelsAuthorizer.new(admin_user, :update, id: 2)).to be_authorized }
+  #     it { is_expected.to authorize(one_user).access(:update).with(id: 1) }
+  #     it { is_expected.to authorize(two_user).access(:update).with(id: 2) }
+  #     it { is_expected.to authorize(admin_user).access(:update).with(id: 1) }
+  #     it { is_expected.to authorize(admin_user).access(:update).with(id: 2) }
   #   end
 
   #   describe 'not authorize' do
-  #     it { expect(ModelsAuthorizer.new(guest_user, :update, id: 1)).to be_unauthorized }
-
-  #     it { expect(ModelsAuthorizer.new(one_user, :update, id: 2)).to be_unauthorized }
-
-  #     it { expect(ModelsAuthorizer.new(two_user, :update, id: 1)).to be_unauthorized }
+  #     it { is_expected.not_to authorize(guest_user).access(:update).with(id: 1) }
+  #     it { is_expected.not_to authorize(one_user).access(:update).with(id: 2) }
+  #     it { is_expected.not_to authorize(two_user).access(:update).with(id: 1) }
   #   end
   # end
 
   # context '#destroy' do
   #   describe 'authorize' do
-  #     it { expect(ModelsAuthorizer.new(one_user, :destroy, id: 1)).to be_authorized }
-
-  #     it { expect(ModelsAuthorizer.new(two_user, :destroy, id: 2)).to be_authorized }
-
-  #     it { expect(ModelsAuthorizer.new(admin_user, :destroy, id: 1)).to be_authorized }
-
-  #     it { expect(ModelsAuthorizer.new(admin_user, :destroy, id: 2)).to be_authorized }
+  #     it { is_expected.to authorize(one_user).access(:destroy).with(id: 1) }
+  #     it { is_expected.to authorize(two_user).access(:destroy).with(id: 2) }
+  #     it { is_expected.to authorize(admin_user).access(:destroy).with(id: 1) }
+  #     it { is_expected.to authorize(admin_user).access(:destroy).with(id: 2) }
   #   end
 
   #   describe 'not authorize' do
-  #     it { expect(ModelsAuthorizer.new(guest_user, :destroy, id: 1)).to be_unauthorized }
-
-  #     it { expect(ModelsAuthorizer.new(one_user, :destroy, id: 2)).to be_unauthorized }
-
-  #     it { expect(ModelsAuthorizer.new(two_user, :destroy, id: 1)).to be_unauthorized }
+  #     it { is_expected.not_to authorize(guest_user).access(:destroy).with(id: 1) }
+  #     it { is_expected.not_to authorize(one_user).access(:destroy).with(id: 2) }
+  #     it { is_expected.not_to authorize(two_user).access(:destroy).with(id: 1) }
   #   end
   # end
 
 end
 ```
+
+## Authorizing Account's Record or Cancellation (Optional)
