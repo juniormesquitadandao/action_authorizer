@@ -4,11 +4,13 @@
 
 Rails authorization with controllers's actions.
 
-ActionAuthorizer is a gem to authorize the controllers's actions. Designed to work with Devise and RSpec. Where each controller will have an authorizer with the same actions. Each authorizer's action will return your permission's result.
+ActionAuthorizer is a gem to authorize the controllers's actions. Designed to work with RSpec and Devise. Where each controller will have an authorizer with the same actions. Each authorizer's action will return your permission's result.
 
 ## Getting Started
 
-update: Gemfile
+After setting up your Rspec and Devise! Set up your ActionAuthorizer.
+
+now configure your: Gemfile
 
 ```ruby
 gem 'action_authorizer', '~> 1.3'
@@ -21,34 +23,14 @@ bundle install
 rails generate action_authorizer:install
 ```
 
-generated: app/authorizers/application_authorizer.rb
+it will be generated: app/authorizers/application_authorizer.rb
 
 ```ruby
 class ApplicationAuthorizer < ActionAuthorizer::Base
 end
 ```
 
-updated: app/controllers/application_controller.rb
-
-```ruby
-class ApplicationController < ActionController::Base
-  include ActionAuthorizer::Config
-
-  before_action :authorize!, unless: :devise_controller?
-
-  # def authenticated
-  #   current_user
-  # end
-
-  # def respond_unauthorized_on_production_environment
-  #   render file: Rails.root.join('public/404'), layout: false, status: :not_found
-  # end
-
-  # ...
-end
-```
-
-generated: app/helpers/action_authorizer_helper.rb
+it will be generated: app/helpers/action_authorizer_helper.rb
 
 ```ruby
 module ActionAuthorizerHelper
@@ -73,11 +55,10 @@ module ActionAuthorizerHelper
 end
 ```
 
-updated: spec/rails_helper.rb
+now configure your: spec/rails_helper.rb
 
 ```ruby
 RSpec.configure do |config|
-
   # Skip before_action :authorize! to all controller spec
   config.before :each, type: :controller do
     allow(controller).to receive(:authorize!)
@@ -93,8 +74,29 @@ RSpec.configure do |config|
   # Or use Devise::TestHelpers#sign_in(user)
   #
   # config.include Devise::TestHelpers, type: :view
+end
+```
 
-  # ...
+now configure your: app/controllers/application_controller.rb
+
+```ruby
+class ApplicationController < ActionController::Base
+  include ActionAuthorizer::Config
+
+  # Prevent CSRF attacks by raising an exception.
+  # For APIs, you may want to use :null_session instead.
+  protect_from_forgery with: :exception
+
+  before_action :authenticate_user!
+  before_action :authorize!, unless: :devise_controller?
+
+  # def authenticated
+  #   current_user
+  # end
+
+  # def respond_unauthorized_on_production_environment
+  #   render file: Rails.root.join('public/404'), layout: false, status: :not_found
+  # end
 end
 ```
 
@@ -103,7 +105,6 @@ end
 run
 
 ```console
-rails generate scaffold namespace/model name
 rails generate action_authorizer:authorizer namespace/model
 ```
 
@@ -112,11 +113,10 @@ rails generate action_authorizer:authorizer namespace/model
 run
 
 ```console
-rails generate scaffold model attribute
 rails generate action_authorizer:authorizer model
 ```
 
-generated: app/authorizers/models_authorizer.rb
+it will be generated: app/authorizers/models_authorizer.rb
 
 ```ruby
 # Authorize reference controller actions when return:
@@ -208,7 +208,7 @@ class ModelsAuthorizer < ApplicationAuthorizer
 end
 ```
 
-generated: spec/authorizers/models_authorizer_spec.rb
+it will be generated: spec/authorizers/models_authorizer_spec.rb
 
 ```ruby
 require 'rails_helper'
