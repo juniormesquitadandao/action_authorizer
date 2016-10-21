@@ -60,6 +60,11 @@ module ActionAuthorizerHelper
   #   <%= link_to 'Models Dashboard', dashboard_models_path if authorized? 'dashborad/models', :index %>
   #   <%= link_to 'Model', model_path(@model) if authorized? :models, :show, id: @model.id %>
   #   <%= link_to 'Model', edit_model_path(@model) if authorized? :models, :edit, id: @model.to_param %>
+  #
+  #   <%= link_to 'Models', models_path if unauthorized? :models, :index %>
+  #   <%= link_to 'Models Dashboard', dashboard_models_path if unauthorized? 'dashborad/models', :index %>
+  #   <%= link_to 'Model', model_path(@model) if unauthorized? :models, :show, id: @model.id %>
+  #   <%= link_to 'Model', edit_model_path(@model) if unauthorized? :models, :edit, id: @model.to_param %>
   include ActionAuthorizer::Helper
   
   # def authenticated
@@ -81,8 +86,8 @@ RSpec.configure do |config|
   # Skip authorized? and unauthorized? to all view spec
   #
   # config.before :each, type: :view do
-    # allow(view).to receive(:authorized?).and_return(true)
-    # allow(view).to receive(:unauthorized?).and_return(true)
+  #   allow(view).to receive(:authorized?).and_return(true)
+  #   allow(view).to receive(:unauthorized?).and_return(true)
   # end
   #
   # Or use Devise::TestHelpers#sign_in(user)
@@ -140,7 +145,7 @@ generated: app/authorizers/models_authorizer.rb
 #       { id: ['1', '2'] }
 #     ex. to requested params {other: 'three'}:
 #       { id: ['one', 'two'] }
-
+#
 # Unauthorize reference controller actions when return:
 #   Blank values different hash:
 #     ex.:
@@ -221,7 +226,7 @@ RSpec.describe ModelsAuthorizer, type: :authorizer do
   #     it { is_expected.to authorize(two_user).access(:index) }
   #     it { is_expected.to authorize(admin_user).access(:index) }
   #   end
-
+  #
   #   describe 'not authorize' do
   #     it { is_expected.not_to authorize(one_user).access(:index) }
   #     it { is_expected.not_to authorize(one_user).access(:index) }
@@ -236,7 +241,7 @@ RSpec.describe ModelsAuthorizer, type: :authorizer do
   #     it { is_expected.to authorize(admin_user).access(:show).with(id: 1) }
   #     it { is_expected.to authorize(admin_user).access(:show).with(id: 2) }
   #   end
-
+  #
   #   describe 'not authorize' do
   #     it { is_expected.not_to authorize(guest_user).access(:show).with(id: 1) }
   #     it { is_expected.not_to authorize(one_user).access(:show).with(id: 2) }
@@ -250,7 +255,7 @@ RSpec.describe ModelsAuthorizer, type: :authorizer do
   #     it { is_expected.to authorize(two_user).access(:new) }
   #     it { is_expected.to authorize(admin_user).access(:new) }
   #   end
-
+  #
   #   describe 'not authorize' do
   #     it { is_expected.not_to authorize(guest_user).access(:new) }
   #   end
@@ -263,7 +268,7 @@ RSpec.describe ModelsAuthorizer, type: :authorizer do
   #     it { is_expected.to authorize(admin_user).access(:edit).with(id: 1) }
   #     it { is_expected.to authorize(admin_user).access(:edit).with(id: 2) }
   #   end
-
+  #
   #   describe 'not authorize' do
   #     it { is_expected.not_to authorize(guest_user).access(:edit).with(id: 1) }
   #     it { is_expected.not_to authorize(one_user).access(:edit).with(id: 2) }
@@ -277,7 +282,7 @@ RSpec.describe ModelsAuthorizer, type: :authorizer do
   #     it { is_expected.to authorize(two_user).access(:create) }
   #     it { is_expected.to authorize(admin_user).access(:create) }
   #   end
-
+  #
   #   describe 'not authorize' do
   #     it { is_expected.not_to authorize(guest_user).access(:create) }
   #   end
@@ -290,7 +295,7 @@ RSpec.describe ModelsAuthorizer, type: :authorizer do
   #     it { is_expected.to authorize(admin_user).access(:update).with(id: 1) }
   #     it { is_expected.to authorize(admin_user).access(:update).with(id: 2) }
   #   end
-
+  #
   #   describe 'not authorize' do
   #     it { is_expected.not_to authorize(guest_user).access(:update).with(id: 1) }
   #     it { is_expected.not_to authorize(one_user).access(:update).with(id: 2) }
@@ -305,7 +310,7 @@ RSpec.describe ModelsAuthorizer, type: :authorizer do
   #     it { is_expected.to authorize(admin_user).access(:destroy).with(id: 1) }
   #     it { is_expected.to authorize(admin_user).access(:destroy).with(id: 2) }
   #   end
-
+  #
   #   describe 'not authorize' do
   #     it { is_expected.not_to authorize(guest_user).access(:destroy).with(id: 1) }
   #     it { is_expected.not_to authorize(one_user).access(:destroy).with(id: 2) }
