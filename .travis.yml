@@ -1,4 +1,4 @@
 language: ruby
 rvm: 1.9
 script:
-  - "rake db:migrate spec"
+  - "rake db:drop db:create db:migrate db:seed spec"
