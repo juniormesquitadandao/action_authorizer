@@ -3,7 +3,9 @@
 <table>
   <tr>
     <th>Name</th>
+<% if current_user.admin? %>
     <th>User</th>
+<% end %>
     <th></th>
     <th></th>
     <th></th>
@@ -12,7 +14,9 @@
 <% @products.each do |product| %>
   <tr>
     <td><%= product.name %></td>
+<% if current_user.admin? %>
     <td><%= product.user %></td>
+<% end %>
     <td><%= link_to 'Show', product %></td>
     <td><%= link_to 'Edit', edit_product_path(product) %></td>
     <td><%= link_to 'Destroy', product, :confirm => 'Are you sure?', :method => :delete %></td>

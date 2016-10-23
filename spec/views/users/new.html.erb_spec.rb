@@ -2,10 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "users/new", :type => :view do
   before(:each) do
-    assign(:user, User.new(
-      :name => "MyString",
-      :admin => false
-    ))
+    assign(:user, User.new)
   end
 
   it "renders new user form" do
@@ -16,6 +13,12 @@ RSpec.describe "users/new", :type => :view do
       assert_select "input#user_name[name=?]", "user[name]"
 
       assert_select "input#user_admin[name=?]", "user[admin]"
+
+      assert_select "input#user_email[name=?]", "user[email]"
+
+      assert_select "input#user_password[name=?]", "user[password]"
+
+      assert_select "input#user_password_confirmation[name=?]", "user[password_confirmation]"
     end
   end
 end

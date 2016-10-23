@@ -5,11 +5,12 @@
   <%= @product.name %>
 </p>
 
-<p>
-  <b>User:</b>
-  <%= @product.user %>
-</p>
-
+<% if current_user.admin? %>
+  <p>
+    <b>User:</b>
+    <%= @product.user %>
+  </p>
+<% end %>
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>

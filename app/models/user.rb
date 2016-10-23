@@ -18,10 +18,10 @@ class User < ActiveRecord::Base
   end
 
   def self.for user
-    if user
+    if user && user.admin?
       where("id <> #{user.id}").all
     else
-      all
+      []
     end
   end
 end

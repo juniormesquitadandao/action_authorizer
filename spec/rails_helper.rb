@@ -57,4 +57,9 @@ RSpec.configure do |config|
     allow(controller).to receive(:authenticate_user!)
     allow(controller).to receive(:current_user).and_return(user)
   end
+
+  config.before :each, type: :view do
+    user = FactoryGirl.create :user, name:"Admin", email: "admin@email.com", admin: true
+    allow(view).to receive(:current_user).and_return(user)
+  end
 end

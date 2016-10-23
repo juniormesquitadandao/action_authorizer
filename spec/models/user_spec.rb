@@ -21,8 +21,8 @@ RSpec.describe User, :type => :model do
     guest = nil
 
     expect(User.for admin).to eq [one, two]
-    expect(User.for one).to eq [admin, two]
-    expect(User.for two).to eq [admin, one]
-    expect(User.for guest).to eq [admin, one, two]
+    expect(User.for one).to be_empty
+    expect(User.for two).to be_empty
+    expect(User.for guest).to be_empty
   end
 end
