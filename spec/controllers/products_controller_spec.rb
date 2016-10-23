@@ -39,8 +39,12 @@ RSpec.describe ProductsController, :type => :controller do
   describe "GET #index" do
     it "assigns all products as @products" do
       product = Product.create! valid_attributes
+
+      products = [Product.new]
+      expect(Product).to receive(:for).with(controller.current_user).and_return(products)
+
       get :index, {}, session: valid_session
-      expect(assigns(:products)).to eq([product])
+      expect(assigns(:products)).to eq(products)
     end
   end
 

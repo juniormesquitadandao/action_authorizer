@@ -16,4 +16,12 @@ class User < ActiveRecord::Base
   def to_s
     "#{name} (#{email})"
   end
+
+  def self.for user
+    if user
+      where("id <> #{user.id}").all
+    else
+      all
+    end
+  end
 end

@@ -39,8 +39,12 @@ RSpec.describe UsersController, :type => :controller do
   describe "GET #index" do
     it "assigns all users as @users" do
       user = User.create! valid_attributes
+
+      users = [User.new]
+      expect(User).to receive(:for).with(controller.current_user).and_return(users)
+
       get :index, {}, session: valid_session
-      expect(assigns(:users)).to eq([user])
+      expect(assigns(:users)).to eq(users)
     end
   end
 
@@ -49,13 +53,6 @@ RSpec.describe UsersController, :type => :controller do
       user = User.create! valid_attributes
       get :show, {id: user.to_param}, session: valid_session
       expect(assigns(:user)).to eq(user)
-    end
-
-    it "raise exception" do
-      user = controller.current_user
-      expect {
-        get :show, {id: user.to_param}, session: valid_session
-      }.to raise_exception ActiveRecord::RecordNotFound
     end
   end
 
@@ -71,13 +68,6 @@ RSpec.describe UsersController, :type => :controller do
       user = User.create! valid_attributes
       get :edit, {id: user.to_param}, session: valid_session
       expect(assigns(:user)).to eq(user)
-    end
-
-    it "raise exception" do
-      user = controller.current_user
-      expect {
-        get :edit, {id: user.to_param}, session: valid_session
-      }.to raise_exception ActiveRecord::RecordNotFound
     end
   end
 
@@ -153,13 +143,6 @@ RSpec.describe UsersController, :type => :controller do
         expect(response).to render_template("edit")
       end
     end
-
-    it "raise exception" do
-      user = controller.current_user
-      expect {
-        put :update, {id: user.to_param}, session: valid_session
-      }.to raise_exception ActiveRecord::RecordNotFound
-    end
   end
 
   describe "DELETE #destroy" do
@@ -174,13 +157,6 @@ RSpec.describe UsersController, :type => :controller do
       user = User.create! valid_attributes
       delete :destroy, {id: user.to_param}, session: valid_session
       expect(response).to redirect_to(users_url)
-    end
-
-    it "raise exception" do
-      user = controller.current_user
-      expect {
-        delete :destroy, {id: user.to_param}, session: valid_session
-      }.to raise_exception ActiveRecord::RecordNotFound
     end
   end
 
