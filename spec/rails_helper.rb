@@ -62,4 +62,18 @@ RSpec.configure do |config|
     user = FactoryGirl.create :user, name:"Admin", email: "admin@email.com", admin: true
     allow(view).to receive(:current_user).and_return(user)
   end
+
+  # Skip before_action :authorize! to all controller spec
+  config.before :each, type: :controller do
+    allow(controller).to receive(:authorize!)
+  end
+
+  # Skip authorized? and unauthorized? to all view spec
+  # config.before :each, type: :view do
+  #   allow(view).to receive(:authorized?).and_return(true)
+  #   allow(view).to receive(:unauthorized?).and_return(true)
+  # end
+  #
+  # Or use Devise::TestHelpers#sign_in(user)
+  # config.include Devise::TestHelpers, type: :view
 end
