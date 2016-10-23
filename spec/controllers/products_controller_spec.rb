@@ -68,6 +68,11 @@ RSpec.describe ProductsController, :type => :controller do
   end
 
   describe "POST #create" do
+    before(:each) do
+      user = FactoryGirl.create :user
+      allow(controller).to receive(:current_user).and_return(user)
+    end
+
     context "with valid params" do
       it "creates a new Product" do
         expect {

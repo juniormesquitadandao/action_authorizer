@@ -5,13 +5,19 @@ class Product < ActiveRecord::Base
 
   validates_presence_of :name, :user_id
 
-  validates_exclusion_of :user_id, in: User.where(admin: false).map!(&:id)
+  validate :user_id_reserved
 
   def self.for user
-    unless user.try :admin?
+    if user && !user.admin?
       user.products
     else
       self
     end
+  end
+
+  private
+
+  def user_id_reserved
+    errors.add(:user_id, :exclusion) if user.try(:reload).try(:admin?)
   end
 end

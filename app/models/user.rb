@@ -14,6 +14,6 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
   def to_s
-    "#{name}(#{email})"
+    "#{name} (#{email})"
   end
 end
