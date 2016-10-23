@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :product do
     name "Table"
-    user {User.find_by_email("admin@email.com") || create(:user) }
+    user_id { User.find_by_email("one@email.com").try(:id) || create(:user).id }
   end
 end

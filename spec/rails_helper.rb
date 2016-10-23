@@ -51,4 +51,10 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.before :each, type: :controller do
+    user = FactoryGirl.create :user, name:"Admin", email: "admin@email.com", admin: true
+    allow(controller).to receive(:authenticate_user!)
+    allow(controller).to receive(:current_user).and_return(user)
+  end
 end
