@@ -9,6 +9,6 @@ RSpec::Core::RakeTask.new("spec") do |task|
   task.verbose = false
 end
 
-ActionAuthorizer::Application.load_tasks
+# task default: %w(spec)
 
-task default: %w(spec)
+ActionAuthorizer::Application.load_tasks
