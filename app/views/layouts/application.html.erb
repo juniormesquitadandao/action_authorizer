@@ -8,6 +8,20 @@
 </head>
 <body>
 
+<ul class="hmenu">
+<% if user_signed_in? %>
+  <li>
+  <%= link_to('Products', products_path) %>
+  </li>
+  <li>
+  <%= link_to('Users', users_path) %>
+  </li>
+<% end %>
+
+  <%= render 'devise/menu/registration_items' %>
+  <%= render 'devise/menu/login_items' %>
+</ul>
+
 <%= yield %>
 
 </body>
