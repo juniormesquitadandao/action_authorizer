@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:juniormesquitadandao/action_authorizer.git
-  revision: 8d115b816089103641225a512678acedbeed904a
+  revision: 7e271f69b0e9c2eedf7034bb96c0ca07ab589123
   branch: developer
   specs:
     action_authorizer (1.3.0)
