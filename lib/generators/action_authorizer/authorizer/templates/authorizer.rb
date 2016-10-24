@@ -39,11 +39,6 @@
 #       { id: ['1', '2'] }
 #     ex. to requested params {id: 'three', other: 'three'}:
 #       { id: ['one', 'two'] }
-<% if namespaced? -%>
-require_dependency "<%= namespaced_file_path %>/application_authorizer"
-
-<% end -%>
-<% module_namespacing do -%>
 class <%= controller_class_name %>Authorizer < ApplicationAuthorizer
   # All actions automatically validating the need of user logged.
   # Skip this check for all actions:
@@ -90,4 +85,3 @@ class <%= controller_class_name %>Authorizer < ApplicationAuthorizer
   end
 
 end
-<% end -%>

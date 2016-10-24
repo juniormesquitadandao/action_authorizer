@@ -1,10 +1,5 @@
 require 'rails_helper'
 
-<% if namespaced? -%>
-require_dependency "<%= namespaced_file_path %>/application_authorizer"
-
-<% end -%>
-<% module_namespacing do -%>
 RSpec.describe <%= controller_class_name %>Authorizer, type: :authorizer do
 
   # let(:guest_user) { nil }
@@ -137,4 +132,3 @@ RSpec.describe <%= controller_class_name %>Authorizer, type: :authorizer do
   # end
 
 end
-<% end -%>
