@@ -1,39 +1,31 @@
 class ProductsAuthorizer < ApplicationAuthorizer
 
   def index
-    # true
+    true
   end
 
   def show
-    # true
-    # Product.where(user: authenticated).find(params[:id]).avaliable?
-    # { id: authenticated.product_ids }
+    authenticated.admin? || { id: authenticated.product_ids }
   end
 
   def new
-    # true
+    !authenticated.admin?
   end
 
   def edit
-    # true
-    # Product.where(user: authenticated).find(params[:id]).avaliable?
-    # { id: authenticated.product_ids }
+    !authenticated.admin? && { id: authenticated.product_ids }
   end
 
   def create
-    # true
+    !authenticated.admin?
   end
 
   def update
-    # true
-    # Product.where(user: authenticated).find(params[:id]).avaliable?
-    # { id: authenticated.product_ids }
+    !authenticated.admin? && { id: authenticated.product_ids }
   end
 
   def destroy
-    # true
-    # Product.where(user: authenticated).find(params[:id]).avaliable?
-    # { id: authenticated.product_ids }
+    !authenticated.admin? && { id: authenticated.product_ids }
   end
 
 end

@@ -1,44 +1,29 @@
 class Devise::RegistrationsAuthorizer < ApplicationAuthorizer
-  # All actions automatically validating the need of user logged.
-  # Skip this check for all actions:
-  # skip_authentication
-  # Or skip_authentication_only for some actions:
-  # skip_authentication_only :index, :new, :destroy, ...
 
-  def index
-    # true
-  end
-
-  def show
-    # true
-    # DeviseRegistration.where(user: authenticated).find(params[:id]).avaliable?
-    # { id: authenticated.devise_registration_ids }
-  end
-
+  # Account registration page
   def new
-    # true
   end
 
+  # Account edition page
   def edit
-    # true
-    # DeviseRegistration.where(user: authenticated).find(params[:id]).avaliable?
-    # { id: authenticated.devise_registration_ids }
+    true
   end
 
+  # Account registration submition
   def create
-    # true
   end
 
+  # Account edition submition
   def update
-    # true
-    # DeviseRegistration.where(user: authenticated).find(params[:id]).avaliable?
-    # { id: authenticated.devise_registration_ids }
+    true
   end
 
+  # Account cancellation page
   def destroy
-    # true
-    # DeviseRegistration.where(user: authenticated).find(params[:id]).avaliable?
-    # { id: authenticated.devise_registration_ids }
+  end
+
+  # Account cancellation submition
+  def cancel
   end
 
 end

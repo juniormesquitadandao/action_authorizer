@@ -1,39 +1,31 @@
 class UsersAuthorizer < ApplicationAuthorizer
 
   def index
-    # true
+    authenticated.admin?
   end
 
   def show
-    # true
-    # User.where(user: authenticated).find(params[:id]).avaliable?
-    # { id: authenticated.user_ids }
+    authenticated.admin?
   end
 
   def new
-    # true
+    authenticated.admin?
   end
 
   def edit
-    # true
-    # User.where(user: authenticated).find(params[:id]).avaliable?
-    # { id: authenticated.user_ids }
+    authenticated.admin?
   end
 
   def create
-    # true
+    authenticated.admin?
   end
 
   def update
-    # true
-    # User.where(user: authenticated).find(params[:id]).avaliable?
-    # { id: authenticated.user_ids }
+    authenticated.admin?
   end
 
   def destroy
-    # true
-    # User.where(user: authenticated).find(params[:id]).avaliable?
-    # { id: authenticated.user_ids }
+    authenticated.admin?
   end
 
 end
