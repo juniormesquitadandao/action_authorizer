@@ -59,6 +59,8 @@ RSpec.configure do |config|
   end
 
   config.before :each, type: :view do
+    view.extend ActionAuthorizerHelper if Rails.version >= '3.0'
+
     user = FactoryGirl.create :user, name:"Admin", email: "admin@email.com", admin: true
     allow(view).to receive(:current_user).and_return(user)
   end
