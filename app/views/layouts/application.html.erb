@@ -11,10 +11,10 @@
 <ul class="hmenu">
 <% if user_signed_in? %>
   <li>
-  <%= link_to('Products', products_path) %>
+  <%= link_to('Products', products_path) if authorized? :products, :index %>
   </li>
   <li>
-  <%= link_to('Users', users_path) %>
+  <%= link_to('Users', users_path) if authorized? :users, :index %>
   </li>
 <% end %>
 
