@@ -55,7 +55,16 @@ RSpec.configure do |config|
   config.before :each, type: :controller do
     user = FactoryGirl.create :user, name:"Admin", email: "admin@email.com", admin: true
     allow(controller).to receive(:authenticate_user!)
+    allow(controller).to receive(:current_user)
     allow(controller).to receive(:current_user).and_return(user)
+  end
+
+  # config.include Devise::TestHelpers, type: :controller
+  # config.include Devise::TestHelpers, type: :view
+
+  # Skip before_action :authorize! to all controller spec
+  config.before :each, type: :controller do
+    allow(controller).to receive(:authorize!)
   end
 
   config.before :each, type: :view do
@@ -65,17 +74,4 @@ RSpec.configure do |config|
     allow(view).to receive(:current_user).and_return(user)
   end
 
-  # Skip before_action :authorize! to all controller spec
-  config.before :each, type: :controller do
-    allow(controller).to receive(:authorize!)
-  end
-
-  # Skip authorized? and unauthorized? to all view spec
-  # config.before :each, type: :view do
-  #   allow(view).to receive(:authorized?).and_return(true)
-  #   allow(view).to receive(:unauthorized?).and_return(true)
-  # end
-  #
-  # Or use Devise::TestHelpers#sign_in(user)
-  # config.include Devise::TestHelpers, type: :view
 end
