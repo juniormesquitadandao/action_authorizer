@@ -63,8 +63,8 @@ RSpec.configure do |config|
   config.before :each, type: :view do
     view.extend ActionAuthorizerHelper if Rails.version > '3'
 
-    @one = FactoryGirl.create :user
-    @two = FactoryGirl.create :user, email: 'two@email.com'
+    @user = FactoryGirl.create :user
+    @other = FactoryGirl.create :user, email: 'other@email.com'
     @admin = FactoryGirl.create :user, email: 'admin@email.com', admin: true
   end
 

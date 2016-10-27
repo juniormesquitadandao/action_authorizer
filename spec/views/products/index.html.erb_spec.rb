@@ -18,7 +18,7 @@ RSpec.describe "products/index", :type => :view do
     render
 
     assert_select "tr>td", :text => "Table", :count => 1
-    assert_select "tr>td", :text => "One (one@email.com)", :count => 1
+    assert_select "tr>td", :text => "User (user@email.com)", :count => 1
     expect(rendered).not_to match( @link_to_new )
     expect(rendered).to match( @link_to_show )
     expect(rendered).not_to match( @link_to_edit )
@@ -26,12 +26,12 @@ RSpec.describe "products/index", :type => :view do
   end
 
   it "when product user" do
-    sign_in @one
+    sign_in @user
 
     render
 
     assert_select "tr>td", :text => "Table", :count => 1
-    assert_select "tr>td", :text => "One (one@email.com)", :count => 0
+    assert_select "tr>td", :text => "User (user@email.com)", :count => 0
     expect(rendered).to match( @link_to_new )
     expect(rendered).to match( @link_to_show )
     expect(rendered).to match( @link_to_edit )
@@ -39,12 +39,12 @@ RSpec.describe "products/index", :type => :view do
   end
 
   it "when other user" do
-    sign_in @two
+    sign_in @other
 
     render
 
     assert_select "tr>td", :text => "Table", :count => 1
-    assert_select "tr>td", :text => "One (one@email.com)", :count => 0
+    assert_select "tr>td", :text => "User (user@email.com)", :count => 0
     expect(rendered).to match( @link_to_new )
     expect(rendered).to match( @link_to_show )
     expect(rendered).not_to match( @link_to_edit )

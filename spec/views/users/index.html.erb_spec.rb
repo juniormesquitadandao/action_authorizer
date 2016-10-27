@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "users/index", :type => :view do
   before(:each) do
-    @user = @one
+    @user = @user
 
     assign(:users, [ @user ])
 
@@ -15,9 +15,9 @@ RSpec.describe "users/index", :type => :view do
   it "renders a list of users" do
     render
 
-    assert_select "tr>td", :text => "One", :count => 1
+    assert_select "tr>td", :text => "User", :count => 1
     assert_select "tr>td", :text => "No", :count => 1
-    assert_select "tr>td", :text => "one@email.com", :count => 1
+    assert_select "tr>td", :text => "user@email.com", :count => 1
   end
 
   it "when admin?" do
@@ -32,7 +32,7 @@ RSpec.describe "users/index", :type => :view do
   end
 
   it "when user" do
-    sign_in @one
+    sign_in @user
 
     render
 
@@ -43,7 +43,7 @@ RSpec.describe "users/index", :type => :view do
   end
 
   it "when other user" do
-    sign_in @two
+    sign_in @other
 
     render
 

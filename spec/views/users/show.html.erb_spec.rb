@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "users/show", :type => :view do
   before(:each) do
-    @user = assign(:user, @one)
+    @user = assign(:user, @user)
 
     @link_to_edit = link_to 'Edit', edit_user_path(@user)
   end
@@ -10,9 +10,9 @@ RSpec.describe "users/show", :type => :view do
   it "renders attributes in <p>" do
     render
 
-    expect(rendered).to match(/One/)
+    expect(rendered).to match(/User/)
     expect(rendered).to match(/No/)
-    expect(rendered).to match(/one@email.com/)
+    expect(rendered).to match(/user@email.com/)
   end
 
   it "when admin?" do
@@ -24,7 +24,7 @@ RSpec.describe "users/show", :type => :view do
   end
 
   it "when user" do
-    sign_in @one
+    sign_in @user
 
     render
 
@@ -32,7 +32,7 @@ RSpec.describe "users/show", :type => :view do
   end
 
   it "when other user" do
-    sign_in @two
+    sign_in @other
 
     render
 

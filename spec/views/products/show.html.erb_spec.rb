@@ -13,30 +13,30 @@ RSpec.describe "products/show", :type => :view do
     render
 
     expect(rendered).to match(/Table/)
-    expect(rendered).to match(/One/)
-    expect(rendered).to match(/one@email.com/)
+    expect(rendered).to match(/User/)
+    expect(rendered).to match(/user@email.com/)
     expect(rendered).not_to match(@link_to_edit)
   end
 
   it "when product user" do
-    sign_in @one
+    sign_in @user
 
     render
 
     expect(rendered).to match(/Table/)
-    expect(rendered).not_to match(/One/)
-    expect(rendered).not_to match(/one@email.com/)
+    expect(rendered).not_to match(/User/)
+    expect(rendered).not_to match(/user@email.com/)
     expect(rendered).to match(@link_to_edit)
   end
 
   it "when other user" do
-    sign_in @two
+    sign_in @other
 
     render
 
     expect(rendered).to match(/Table/)
-    expect(rendered).not_to match(/One/)
-    expect(rendered).not_to match(/one@email.com/)
+    expect(rendered).not_to match(/User/)
+    expect(rendered).not_to match(/user@email.com/)
     expect(rendered).not_to match(@link_to_edit)
   end
 end
