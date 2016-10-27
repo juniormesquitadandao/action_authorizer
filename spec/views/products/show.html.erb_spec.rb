@@ -7,27 +7,36 @@ RSpec.describe "products/show", :type => :view do
     @link_to_edit = link_to 'Edit', edit_product_path(@product)
   end
 
-  it "renders attributes in <p>" do
+  it "when admin?" do
+    sign_in @admin
+
     render
+
     expect(rendered).to match(/Table/)
     expect(rendered).to match(/One/)
     expect(rendered).to match(/one@email.com/)
-  end
-
-  it "when admin?" do
-    render
     expect(rendered).not_to match(@link_to_edit)
   end
 
   it "when product user" do
-    allow(view).to receive(:authenticated).and_return(@product.user)
+    sign_in @one
+
     render
+
+    expect(rendered).to match(/Table/)
+    expect(rendered).not_to match(/One/)
+    expect(rendered).not_to match(/one@email.com/)
     expect(rendered).to match(@link_to_edit)
   end
 
   it "when other user" do
-    allow(view).to receive(:authenticated).and_return(FactoryGirl.build(:user))
+    sign_in @two
+
     render
+
+    expect(rendered).to match(/Table/)
+    expect(rendered).not_to match(/One/)
+    expect(rendered).not_to match(/one@email.com/)
     expect(rendered).not_to match(@link_to_edit)
   end
 end

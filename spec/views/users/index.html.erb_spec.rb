@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "users/index", :type => :view do
   before(:each) do
-    @user = FactoryGirl.create(:user)
+    @user = @one
 
     assign(:users, [ @user ])
 
@@ -14,22 +14,39 @@ RSpec.describe "users/index", :type => :view do
 
   it "renders a list of users" do
     render
+
     assert_select "tr>td", :text => "One", :count => 1
     assert_select "tr>td", :text => "No", :count => 1
     assert_select "tr>td", :text => "one@email.com", :count => 1
   end
 
   it "when admin?" do
+    sign_in @admin
+
     render
+
     expect(rendered).to match( @link_to_new )
     expect(rendered).to match( @link_to_show )
     expect(rendered).to match( @link_to_edit )
     expect(rendered.index( @link_to_destroy )).to be_truthy
   end
 
-  it "when other user" do
-    allow(view).to receive(:authenticated).and_return(@user)
+  it "when user" do
+    sign_in @one
+
     render
+
+    expect(rendered).not_to match( @link_to_new )
+    expect(rendered).not_to match( @link_to_show )
+    expect(rendered).not_to match( @link_to_edit )
+    expect(rendered.index( @link_to_destroy )).to be_falsey
+  end
+
+  it "when other user" do
+    sign_in @two
+
+    render
+
     expect(rendered).not_to match( @link_to_new )
     expect(rendered).not_to match( @link_to_show )
     expect(rendered).not_to match( @link_to_edit )

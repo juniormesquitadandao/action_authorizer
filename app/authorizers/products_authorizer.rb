@@ -5,7 +5,7 @@ class ProductsAuthorizer < ApplicationAuthorizer
   end
 
   def show
-    authenticated.admin? || { id: authenticated.product_ids }
+    true
   end
 
   def new

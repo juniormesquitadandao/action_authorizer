@@ -12,14 +12,13 @@ RSpec.describe "products/index", :type => :view do
     @link_to_destroy = link_to 'Destroy', @product, :confirm => 'Are you sure?', :method => :delete
   end
 
-  it "renders a list of products" do
+  it "when admin?" do
+    sign_in @admin
+
     render
+
     assert_select "tr>td", :text => "Table", :count => 1
     assert_select "tr>td", :text => "One (one@email.com)", :count => 1
-  end
-
-  it "when admin?" do
-    render
     expect(rendered).not_to match( @link_to_new )
     expect(rendered).to match( @link_to_show )
     expect(rendered).not_to match( @link_to_edit )
@@ -27,8 +26,12 @@ RSpec.describe "products/index", :type => :view do
   end
 
   it "when product user" do
-    allow(view).to receive(:authenticated).and_return(@product.user)
+    sign_in @one
+
     render
+
+    assert_select "tr>td", :text => "Table", :count => 1
+    assert_select "tr>td", :text => "One (one@email.com)", :count => 0
     expect(rendered).to match( @link_to_new )
     expect(rendered).to match( @link_to_show )
     expect(rendered).to match( @link_to_edit )
@@ -36,10 +39,14 @@ RSpec.describe "products/index", :type => :view do
   end
 
   it "when other user" do
-    allow(view).to receive(:authenticated).and_return(@user)
+    sign_in @two
+
     render
-    expect(rendered).not_to match( @link_to_new )
-    expect(rendered).not_to match( @link_to_show )
+
+    assert_select "tr>td", :text => "Table", :count => 1
+    assert_select "tr>td", :text => "One (one@email.com)", :count => 0
+    expect(rendered).to match( @link_to_new )
+    expect(rendered).to match( @link_to_show )
     expect(rendered).not_to match( @link_to_edit )
     expect(rendered.index( @link_to_destroy )).to be_falsey
   end

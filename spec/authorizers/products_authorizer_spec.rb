@@ -23,19 +23,15 @@ RSpec.describe ProductsAuthorizer, type: :authorizer do
 
   context '#show' do
     describe 'authorize' do
-      it { expect(ProductsAuthorizer.new(one_user, :show, id: 1)).to be_authorized }
+      it { expect(ProductsAuthorizer.new(one_user, :show)).to be_authorized }
 
-      it { expect(ProductsAuthorizer.new(two_user, :show, id: 2)).to be_authorized }
+      it { expect(ProductsAuthorizer.new(two_user, :show)).to be_authorized }
 
       it { expect(ProductsAuthorizer.new(admin_user, :show)).to be_authorized }
     end
 
     describe 'not authorize' do
       it { expect(ProductsAuthorizer.new(guest_user, :show)).to be_unauthorized }
-
-      it { expect(ProductsAuthorizer.new(one_user, :show, id: 2)).to be_unauthorized }
-
-      it { expect(ProductsAuthorizer.new(two_user, :show, id: 1)).to be_unauthorized }
     end
   end
 
