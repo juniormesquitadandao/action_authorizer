@@ -59,19 +59,20 @@ now configure your: spec/rails_helper.rb
 
 ```ruby
 RSpec.configure do |config|
-  # Skip before_action :authorize! to all controller spec
+  config.include Devise::TestHelpers, type: :controller
   config.before :each, type: :controller do
-    allow(controller).to receive(:authorize!)
+    expect(controller).to receive(:authenticate_user!)
+    expect(controller).to receive(:authorize!)
   end
 
-  # Skip authorized? and unauthorized? to all view spec
-  # config.before :each, type: :view do
-  #   allow(view).to receive(:authorized?).and_return(true)
-  #   allow(view).to receive(:unauthorized?).and_return(true)
-  # end
-  #
-  # Or use Devise::TestHelpers#sign_in(user)
-  # config.include Devise::TestHelpers, type: :view
+  config.include Devise::TestHelpers, type: :view
+  config.before :each, type: :view do
+    view.extend ActionAuthorizerHelper if Rails.version > '3'
+
+    @user = FactoryGirl.create :user
+    @other = FactoryGirl.create :user, email: 'other@email.com'
+    @admin = FactoryGirl.create :user, email: 'admin@email.com', admin: true
+  end
 end
 ```
 
