@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @product.name %>
+</p>
+
+<% if current_user.admin? %>
+<p>
+  <b>User:</b>
+  <%= @product.user %>
+</p>
+<% end %>
+
+
+<%= link_to 'Edit', edit_product_path(@product) if authorized? :products, :edit, id: @product.id %> |
+<%= link_to 'Back', products_path %>

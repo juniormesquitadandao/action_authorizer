@@ -5,6 +5,7 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+require 'shoulda-matchers'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -50,4 +51,21 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+
+  config.include Devise::TestHelpers, type: :controller
+  config.before :each, type: :controller do
+    expect(controller).to receive(:authenticate_user!)
+    expect(controller).to receive(:authorize!)
+  end
+
+  config.include Devise::TestHelpers, type: :view
+  config.before :each, type: :view do
+    view.extend ActionAuthorizerHelper if Rails.version > '3'
+
+    @user = FactoryGirl.create :user
+    @other = FactoryGirl.create :user, email: 'other@email.com'
+    @admin = FactoryGirl.create :user, email: 'admin@email.com', admin: true
+  end
+
 end

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @user.name %>
+</p>
+
+<p>
+  <b>Admin?:</b>
+  <%= @user.admin ? "Yes" : "No" %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) if authorized? :users, :edit, id: @user.id %> |
+<%= link_to 'Back', users_path %>
