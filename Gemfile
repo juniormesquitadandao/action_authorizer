@@ -39,4 +39,11 @@ gem 'jquery-rails'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'shoulda-matchers'
 end
+
+gem 'byebug'
+gem 'devise'
+
+gem 'action_authorizer', '~> 1.3', git: 'git@github.com:juniormesquitadandao/action_authorizer.git', branch: 'developer'
