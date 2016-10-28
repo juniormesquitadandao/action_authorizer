@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "products/show", :type => :view do
   before(:each) do
-    @product = assign(:product, FactoryGirl.create(:product))
+    product = assign(:product, FactoryGirl.create(:product))
 
-    @link_to_edit = link_to 'Edit', edit_product_path(@product)
+    @link_to_edit = link_to 'Edit', edit_product_path(product)
   end
 
   it "when admin?" do

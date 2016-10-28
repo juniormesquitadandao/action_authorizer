@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "users/show", :type => :view do
   before(:each) do
-    @user = assign(:user, @user)
+    user = assign(:user, @user)
 
-    @link_to_edit = link_to 'Edit', edit_user_path(@user)
+    @link_to_edit = link_to 'Edit', edit_user_path(user)
   end
 
   it "renders attributes in <p>" do

@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe "products/index", :type => :view do
   before(:each) do
-    @product = FactoryGirl.create(:product)
+    product = FactoryGirl.create(:product)
 
-    assign(:products, [ @product ])
+    assign(:products, [ product ])
 
     @link_to_new = link_to 'New Product', new_product_path
-    @link_to_show = link_to 'Show', @product
-    @link_to_edit = link_to 'Edit', edit_product_path(@product)
-    @link_to_destroy = link_to 'Destroy', @product, :confirm => 'Are you sure?', :method => :delete
+    @link_to_show = link_to 'Show', product
+    @link_to_edit = link_to 'Edit', edit_product_path(product)
+    @link_to_destroy = link_to 'Destroy', product, :confirm => 'Are you sure?', :method => :delete
   end
 
   it "when admin?" do

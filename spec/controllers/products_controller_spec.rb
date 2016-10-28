@@ -39,8 +39,7 @@ RSpec.describe ProductsController, :type => :controller do
   describe "GET #index" do
     it "assigns all products as @products" do
       product = Product.create! valid_attributes
-
-      products = [Product.new]
+      products = [product]
       expect(Product).to receive(:for).with(controller.current_user).and_return(products)
 
       get :index, {}, session: valid_session
@@ -74,7 +73,7 @@ RSpec.describe ProductsController, :type => :controller do
   describe "POST #create" do
     before(:each) do
       user = FactoryGirl.create :user
-      allow(controller).to receive(:current_user).and_return(user)
+      expect(controller).to receive(:current_user).and_return(user)
     end
 
     context "with valid params" do
