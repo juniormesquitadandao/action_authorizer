@@ -61,7 +61,7 @@ RSpec.configure do |config|
 
   config.include Devise::TestHelpers, type: :view
   config.before :each, type: :view do
-    view.extend ActionAuthorizerHelper if Rails.version > '3'
+    view.extend ActionAuthorizerHelper if Rails.version < '3.1'
 
     @user = FactoryGirl.create :user
     @other = FactoryGirl.create :user, email: 'other@email.com'
