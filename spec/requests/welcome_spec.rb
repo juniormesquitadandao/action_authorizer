@@ -7,14 +7,14 @@ RSpec.describe "Welcome", :type => :request do
       FactoryGirl.create(:user)
 
       get root_path
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
 
       post user_session_path, user: {email: 'user@email.com', password: 'password'}
-      expect(response).to have_http_status(302)
+      expect(response).to have_http_status(:found)
       expect(response).to redirect_to root_path
 
       get root_path
-      expect(response).to have_http_status(301)
+      expect(response).to have_http_status(:moved_permanently)
       expect(response).to redirect_to products_path
     end
   end

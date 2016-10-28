@@ -1,4 +1,5 @@
 class Devise::RegistrationsAuthorizer < ApplicationAuthorizer
+  skip_authentication_only :new, :create
 
   # Account registration page
   def new

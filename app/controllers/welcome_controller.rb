@@ -1,4 +1,6 @@
 class WelcomeController < ApplicationController
+  skip_before_filter :authenticate_user!
+
   # GET /
   # GET /.xml
   def index
@@ -10,8 +12,4 @@ class WelcomeController < ApplicationController
     end
   end
 
-  private
-
-  def authenticate_user!
-  end
 end
