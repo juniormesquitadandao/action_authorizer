@@ -9,7 +9,7 @@ RSpec.describe "users/index", :type => :view do
     @link_to_new = link_to 'New User', new_user_path
     @link_to_show = link_to 'Show', user
     @link_to_edit = link_to 'Edit', edit_user_path(user)
-    @link_to_destroy = link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete
+    @link_to_destroy = link_to 'Destroy', user, data: { confirm: 'Are you sure?' }, method: :delete
   end
 
   it "renders a list of users" do

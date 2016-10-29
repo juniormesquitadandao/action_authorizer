@@ -9,7 +9,7 @@ RSpec.describe "welcome/index", :type => :view do
     @link_to_new = link_to 'New Product', new_product_path
     @link_to_show = link_to 'Show', product
     @link_to_edit = link_to 'Edit', edit_product_path(product)
-    @link_to_destroy = link_to 'Destroy', product, :confirm => 'Are you sure?', :method => :delete
+    @link_to_destroy = link_to 'Destroy', product, data: { confirm: 'Are you sure?' }, method: :delete
   end
 
   it "renders a list of products" do
