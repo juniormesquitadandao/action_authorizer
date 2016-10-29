@@ -6,6 +6,7 @@ class CreateProducts < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :products, :user
   end
 
   def self.down
