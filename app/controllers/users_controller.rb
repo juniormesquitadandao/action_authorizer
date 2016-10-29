@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   respond_to :html
 
   def index
-    @users = User.all
+    @users = User.for current_user
     respond_with(@users)
   end
 
