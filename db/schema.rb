@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(:version => 20161023015139) do
     t.datetime "updated_at"
   end
 
+  add_index "products", ["user_id"], :name => "index_products_on_user_id"
+
   create_table "users", :force => true do |t|
     t.string   "name",                                                     :null => false
     t.boolean  "admin",                                 :default => false
