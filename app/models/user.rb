@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   def self.for user
     if user && user.admin?
-      where("id <> #{user.id}").load
+      where("id <> #{user.id}").to_a
     else
       []
     end
