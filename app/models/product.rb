@@ -7,9 +7,9 @@ class Product < ActiveRecord::Base
 
   def self.for user
     if user && !user.admin?
-      user.products.all
+      user.products.load
     else
-      all
+      load
     end
   end
 

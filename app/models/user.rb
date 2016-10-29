@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :products, dependent: :restrict
+  has_many :products, dependent: :restrict_with_error
 
   validates_presence_of :name
 
@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   def self.for user
     if user && user.admin?
-      where("id <> #{user.id}").all
+      where("id <> #{user.id}").load
     else
       []
     end
