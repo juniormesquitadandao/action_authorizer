@@ -1,5 +1,9 @@
 ActionAuthorizer::Application.routes.draw do
-  devise_for :users
+  devise_for :users, path: 'accounts'
+  authenticated do
+    root to: redirect('/products'), as: :account_root
+  end
+
   resources :products
 
   resources :users
@@ -8,7 +12,7 @@ ActionAuthorizer::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
