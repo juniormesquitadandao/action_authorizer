@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   respond_to :html
 
   def index
-    @users = User.all
+    @users = User.for current_user
     respond_with(@users)
   end
 
@@ -42,6 +42,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:email, :admin)
+      params.require(:user).permit(:name, :admin, :email, :password, :password_confirmation)
     end
 end
