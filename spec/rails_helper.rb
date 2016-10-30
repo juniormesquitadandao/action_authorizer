@@ -54,8 +54,8 @@ RSpec.configure do |config|
 
   config.include Devise::TestHelpers, type: :controller
   config.before :each, type: :controller do
-    expect(controller).to receive(:authenticate_user!)
-    expect(controller).to receive(:authorize!)
+    allow(controller).to receive(:authenticate_user!)
+    allow(controller).to receive(:authorize!)
   end
 
   config.include Devise::TestHelpers, type: :view
