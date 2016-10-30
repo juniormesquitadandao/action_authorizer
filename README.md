@@ -59,20 +59,16 @@ now configure your: spec/rails_helper.rb
 
 ```ruby
 RSpec.configure do |config|
-  config.include Devise::TestHelpers, type: :controller
+  # Controllers Spec with ActionAuthorizer
   config.before :each, type: :controller do
-    expect(controller).to receive(:authenticate_user!)
-    expect(controller).to receive(:authorize!)
+    allow(controller).to receive(:authorize!)
   end
 
-  config.include Devise::TestHelpers, type: :view
-  config.before :each, type: :view do
-    view.extend ActionAuthorizerHelper if Rails.version > '3'
-
-    @user = FactoryGirl.create :user
-    @other = FactoryGirl.create :user, email: 'other@email.com'
-    @admin = FactoryGirl.create :user, email: 'admin@email.com', admin: true
-  end
+  # Views Spec with ActionAuthorizer
+  # case rails < 3.1
+  # config.before :each, type: :view do
+  #   view.extend ActionAuthorizerHelper
+  # end
 end
 ```
 
