@@ -35,6 +35,10 @@ group :development, :test do
   gem 'byebug', platform: :mri
 
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'shoulda-matchers'
+  gem 'rspec-json_expectations'
+  gem 'rails-controller-testing'
 end
 
 group :development do
@@ -48,3 +52,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'devise'
+
+gem 'action_authorizer', '~> 1.3', git: 'git@github.com:juniormesquitadandao/action_authorizer.git', branch: 'developer'
