@@ -37,6 +37,9 @@ group :development, :test do
   gem 'byebug'
 
   gem 'rspec-rails', '~> 3.5'
+  gem 'factory_girl_rails'
+  gem 'shoulda-matchers'
+  gem 'rspec-json_expectations'
 end
 
 group :development do
@@ -46,3 +49,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
+
+gem 'devise'
+
+gem 'action_authorizer', '~> 1.3', git: 'git@github.com:juniormesquitadandao/action_authorizer.git', branch: 'developer'
