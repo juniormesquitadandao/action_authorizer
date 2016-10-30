@@ -69,11 +69,4 @@ RSpec.configure do |config|
   config.before :each, type: :controller do
     allow(controller).to receive(:authorize!)
   end
-
-  # Views Spec with ActionAuthorizer
-  # case rails < 3.1
-  # config.before :each, type: :view do
-  #   view.extend ActionAuthorizerHelper
-  # end
-
 end
