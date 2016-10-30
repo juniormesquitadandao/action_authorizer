@@ -57,20 +57,22 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
+  # # Controllers Spec with Devise
+  # config.include Devise::TestHelpers, type: :controller
+  # config.before :each, type: :controller do
+  #   allow(controller).to receive(:authenticate_user!)
+  # end
 
-  config.include Devise::Test::ControllerHelpers, type: :controller
-  config.before :each, type: :controller do
-    allow(controller).to receive(:authenticate_user!)
-    allow(controller).to receive(:authorize!)
-  end
+  # # Views Spec with Devise
+  # config.include Devise::TestHelpers, type: :view
+  # config.before :each, type: :view do
+  #   @user = FactoryGirl.create :user
+  #   @other = FactoryGirl.create :user, email: 'other@email.com'
+  #   @admin = FactoryGirl.create :user, email: 'admin@email.com', admin: true
+  # end
 
-  config.include Devise::Test::ControllerHelpers, type: :view
-  config.before :each, type: :view do
-    view.extend ActionAuthorizerHelper if Rails.version < '3.1'
-
-    @user = FactoryGirl.create :user
-    @other = FactoryGirl.create :user, email: 'other@email.com'
-    @admin = FactoryGirl.create :user, email: 'admin@email.com', admin: true
-  end
-
+  # # Controllers Spec with ActionAuthorizer
+  # config.before :each, type: :controller do
+  #   allow(controller).to receive(:authorize!)
+  # end
 end
