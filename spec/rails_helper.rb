@@ -58,13 +58,13 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   # Controllers Spec with Devise
-  config.include Devise::TestHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.before :each, type: :controller do
     allow(controller).to receive(:authenticate_user!)
   end
 
   # Views Spec with Devise
-  config.include Devise::TestHelpers, type: :view
+  config.include Devise::Test::ControllerHelpers, type: :view
   config.before :each, type: :view do
     @user = FactoryGirl.create :user
     @other = FactoryGirl.create :user, email: 'other@email.com'
