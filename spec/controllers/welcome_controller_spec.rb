@@ -32,6 +32,9 @@ RSpec.describe WelcomeController, :type => :controller do
   # WelcomeController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  it { is_expected.not_to use_before_filter(:authenticate_user!) }
+  it { is_expected.to use_before_filter(:authorize!) }
+
   describe "GET #index" do
     it "assigns all products as @products" do
       product = Product.create! valid_attributes
