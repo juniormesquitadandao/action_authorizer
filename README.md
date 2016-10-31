@@ -1,10 +1,28 @@
-# ActionAuthorizer
+# Action Authorizer
 
 [![Gem Version](https://badge.fury.io/rb/action_authorizer.svg)](https://badge.fury.io/rb/action_authorizer)
+[![Build Status](https://travis-ci.org/juniormesquitadandao/action_authorizer.svg?branch=master)](https://travis-ci.org/juniormesquitadandao/action_authorizer)
 
 Rails authorization with controllers's actions.
 
 ActionAuthorizer is a gem to authorize the controllers's actions. Designed to work with RSpec and Devise. Where each controller will have an authorizer with the same actions. Each authorizer's action will return your permission's result.
+
+## Tested against Rails >= 3.0 and Ruby >= 1.9
+
+  - Rails 3.0 and Ruby 1.9
+  [![Build Status](https://travis-ci.org/juniormesquitadandao/action_authorizer.svg?branch=rails-3.0)](https://travis-ci.org/juniormesquitadandao/action_authorizer)
+  - Rails 3.1 and Ruby 1.9
+  [![Build Status](https://travis-ci.org/juniormesquitadandao/action_authorizer.svg?branch=rails-3.1)](https://travis-ci.org/juniormesquitadandao/action_authorizer)
+  - Rails 3.2 and Ruby 2.0
+  [![Build Status](https://travis-ci.org/juniormesquitadandao/action_authorizer.svg?branch=rails-3.2)](https://travis-ci.org/juniormesquitadandao/action_authorizer)
+  - Rails 4.0 and Ruby 2.0
+  [![Build Status](https://travis-ci.org/juniormesquitadandao/action_authorizer.svg?branch=rails-4.0)](https://travis-ci.org/juniormesquitadandao/action_authorizer)
+  - Rails 4.1 and Ruby 2.1
+  [![Build Status](https://travis-ci.org/juniormesquitadandao/action_authorizer.svg?branch=rails-4.1)](https://travis-ci.org/juniormesquitadandao/action_authorizer)
+  - Rails 4.2 and Ruby 2.2
+  [![Build Status](https://travis-ci.org/juniormesquitadandao/action_authorizer.svg?branch=rails-4.2)](https://travis-ci.org/juniormesquitadandao/action_authorizer)
+  - Rails 5.0 and Ruby 2.3
+  [![Build Status](https://travis-ci.org/juniormesquitadandao/action_authorizer.svg?branch=rails-5.0)](https://travis-ci.org/juniormesquitadandao/action_authorizer)
 
 ## Getting Started
 
