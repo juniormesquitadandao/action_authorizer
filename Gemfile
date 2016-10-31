@@ -51,5 +51,4 @@ group :development do
 end
 
 gem 'devise'
-
-gem 'action_authorizer', '~> 1.3', git: 'git@github.com:juniormesquitadandao/action_authorizer.git', branch: 'developer'
+gem 'action_authorizer', '~> 1.3'
