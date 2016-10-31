@@ -11,27 +11,23 @@ ActionAuthorizer is a gem to authorize the controllers's actions. Designed to wo
 After setting up your Rspec and Devise! Set up your ActionAuthorizer.
 
 now configure your: Gemfile
-
 ```ruby
 gem 'action_authorizer', '~> 1.3'
 ```
 
 run
-
 ```console
 bundle install
 rails generate action_authorizer:install
 ```
 
 it will be generated: app/authorizers/application_authorizer.rb
-
 ```ruby
 class ApplicationAuthorizer < ActionAuthorizer::Base
 end
 ```
 
 it will be generated: app/helpers/action_authorizer_helper.rb
-
 ```ruby
 module ActionAuthorizerHelper
   # Add helpers to check authorization authenticated.
@@ -56,7 +52,6 @@ end
 ```
 
 now configure your: spec/rails_helper.rb
-
 ```ruby
 RSpec.configure do |config|
   # Controllers Spec with ActionAuthorizer
@@ -73,7 +68,6 @@ end
 ```
 
 now configure your: app/controllers/application_controller.rb
-
 ```ruby
 class ApplicationController < ActionController::Base
   include ActionAuthorizer::Config
@@ -98,7 +92,6 @@ end
 ### Authorizing models with module
 
 run
-
 ```console
 rails generate action_authorizer:authorizer namespace/model
 ```
@@ -106,13 +99,11 @@ rails generate action_authorizer:authorizer namespace/model
 ### Authorizing models without module
 
 run
-
 ```console
 rails generate action_authorizer:authorizer model
 ```
 
 it will be generated: app/authorizers/models_authorizer.rb
-
 ```ruby
 # Authorize reference controller actions when return:
 #   Present values different hash:
@@ -204,7 +195,6 @@ end
 ```
 
 it will be generated: spec/authorizers/models_authorizer_spec.rb
-
 ```ruby
 require 'rails_helper'
 
@@ -315,3 +305,150 @@ end
 ```
 
 ## Authorizing Account's Record or Cancellation (Optional)
+
+now edit your: app/controllers/application_controller.rb
+```ruby
+class ApplicationController < ActionController::Base
+  include ActionAuthorizer::Config
+
+  # Prevent CSRF attacks by raising an exception.
+  # For APIs, you may want to use :null_session instead.
+  protect_from_forgery with: :exception
+
+  before_action :authenticate_user!
+  before_action :authorize!, if: :authorizer_controller?
+
+  # def authenticated
+  #   current_user
+  # end
+
+  # def respond_unauthorized_on_production_environment
+  #   render file: Rails.root.join('public/404'), layout: false, status: :not_found
+  # end
+
+  private
+
+  def authorizer_controller?
+    controller_path == 'devise/registrations' || !devise_controller?
+  end
+end
+```
+
+now edit your: /app/views/devise/registrations/edit.html.erb
+```ruby
+<% if authorized? 'devise/registrations', :cancel %>
+<h3>Cancel my account</h3>
+
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<% end %>
+```
+
+now edit your: /app/views/devise/shared/_links.html.erb
+```ruby
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <%= link_to "Sign up", new_registration_path(resource_name) if authorized? 'devise/registrations', :new %><br />
+<% end -%>
+```
+
+run
+```console
+rails generate action_authorizer:authorizer devise/registration
+```
+
+now edit your: app/authorizers/devise/registrations_authorizer.rb
+```ruby
+class Devise::RegistrationsAuthorizer < ApplicationAuthorizer
+  skip_authentication_only :new, :create
+
+  # Account registration page
+  def new
+  end
+
+  # Account edition page
+  def edit
+    true
+  end
+
+  # Account registration submition
+  def create
+  end
+
+  # Account edition submition
+  def update
+    true
+  end
+
+  # Account cancellation page
+  def destroy
+  end
+
+  # Account cancellation submition
+  def cancel
+  end
+
+end
+```
+
+now edit your: /spec/authorizers/devise/registrations_authorizer_spec.rb
+```ruby
+require 'rails_helper'
+
+RSpec.describe Devise::RegistrationsAuthorizer, type: :authorizer do
+
+  let(:guest_user) { nil }
+  let(:user) { double('Authenticated') }
+
+  context '#new' do
+    describe 'not authorize' do
+      it { expect(Devise::RegistrationsAuthorizer.new(user, :new)).to be_unauthorized }
+
+      it { expect(Devise::RegistrationsAuthorizer.new(guest_user, :new)).to be_unauthorized }
+    end
+  end
+
+  context '#edit' do
+    describe 'authorize' do
+      it { expect(Devise::RegistrationsAuthorizer.new(user, :edit)).to be_authorized }
+    end
+
+    describe 'not authorize' do
+      it { expect(Devise::RegistrationsAuthorizer.new(guest_user, :edit)).to be_unauthorized }
+    end
+  end
+
+  context '#create' do
+    describe 'not authorize' do
+      it { expect(Devise::RegistrationsAuthorizer.new(user, :create)).to be_unauthorized }
+
+      it { expect(Devise::RegistrationsAuthorizer.new(guest_user, :create)).to be_unauthorized }
+    end
+  end
+
+  context '#update' do
+    describe 'authorize' do
+      it { expect(Devise::RegistrationsAuthorizer.new(user, :update)).to be_authorized }
+    end
+
+    describe 'not authorize' do
+      it { expect(Devise::RegistrationsAuthorizer.new(guest_user, :update)).to be_unauthorized }
+    end
+  end
+
+  context '#destroy' do
+    describe 'not authorize' do
+      it { expect(Devise::RegistrationsAuthorizer.new(user, :destroy)).to be_unauthorized }
+
+      it { expect(Devise::RegistrationsAuthorizer.new(guest_user, :destroy)).to be_unauthorized }
+    end
+  end
+
+  context '#cancel' do
+    describe 'not authorize' do
+      it { expect(Devise::RegistrationsAuthorizer.new(user, :cancel)).to be_unauthorized }
+
+      it { expect(Devise::RegistrationsAuthorizer.new(guest_user, :cancel)).to be_unauthorized }
+    end
+  end
+
+end
+```
