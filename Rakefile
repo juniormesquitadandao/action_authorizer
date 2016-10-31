@@ -14,17 +14,4 @@ RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-
-require "rake"
-require "rspec/core/rake_task"
-
-RSpec::Core::RakeTask.new("spec") do |task|
-  task.exclude_pattern = "spec/**/*.rb"
-  task.verbose = false
-end
-
-desc "Run the specs and acceptance tests"
-task default: %w(spec)
-
-
 Bundler::GemHelper.install_tasks
