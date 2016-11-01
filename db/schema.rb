@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 20161030165130) do
   create_table "products", force: true do |t|
     t.string   "name",       null: false
     t.integer  "user_id",    null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "products", ["user_id"], name: "index_products_on_user_id"
@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 20161030165130) do
   create_table "users", force: true do |t|
     t.string   "name",                                   null: false
     t.boolean  "admin",                  default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
