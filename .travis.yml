@@ -1,4 +1,4 @@
 language: ruby
 rvm: 2.3.1
 script:
-  - "bundle exec rails db:environment:set RAILS_ENV=development db:drop db:create db:migrate db:seed spec"
+  - "bundle exec rails db:environment:set RAILS_ENV=test db:drop db:create db:migrate spec"
