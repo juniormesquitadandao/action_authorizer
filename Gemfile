@@ -54,5 +54,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
-
-gem 'action_authorizer', '~> 1.3', git: 'git@github.com:juniormesquitadandao/action_authorizer.git', branch: 'developer'
+gem 'action_authorizer', '~> 1.3'
