@@ -470,3 +470,147 @@ RSpec.describe Devise::RegistrationsAuthorizer, type: :authorizer do
 
 end
 ```
+# Extras
+## Helpers
+
+file: app/helpers/action_authorizer_helper.rb
+```ruby
+def current_controller_authozired? action, _params = params
+  authorized? controller_path, action, _params
+end  
+```
+### How To
+file: app/views/models/show.json.jbuilder
+```ruby
+json.destroy model_path(@model) if current_controller_authozired? :destroy
+```
+## Specs
+file: spec/action_authorizer_matchers_helper.rb
+```ruby
+RSpec::Matchers.define :access do |action|
+  match do |actual|
+    actual.new(@authenticated, action, @params.to_h).authorized?
+  end
+
+  chain :by do |authenticated|
+    @authenticated = authenticated
+  end
+
+  chain :with do |params|
+    @params = param
+  end
+end
+```
+file: spec/rails_helper.rb
+```ruby
+require 'action_authorizer_matchers_helper'
+```
+### How To
+file: spec/authorizers/models_authorizer_spec.rb
+```ruby
+require 'rails_helper'
+
+RSpec.describe ModelsAuthorizer, type: :authorizer do
+
+  # let(:guest_user) { nil }
+  # let(:one_user) { double('Authenticated', user_group?: true, model_ids: [1]) }
+  # let(:two_user) { double('Authenticated', user_group?: true, model_ids: [2]) }
+  # let(:admin_user) { double('Authenticated', admin_group?: true) }
+
+  # context '#index' do
+  #   describe 'authorize' do
+  #     it { is_expected.to access(:index).by(one_user) }
+  #     it { is_expected.to access(:index).by(two_user) }
+  #     it { is_expected.to access(:index).by(admin_user) }
+  #   end
+  #
+  #   describe 'not authorize' do
+  #     it { is_expected.not_to access(:index).by(guest_user) }
+  #   end
+  # end
+
+  # context '#show' do
+  #   describe 'authorize' do
+  #     it { is_expected.to access(:show).by(one_user).with(id: 1) }
+  #     it { is_expected.to access(:show).by(two_user).with(id: 2) }
+  #     it { is_expected.to access(:show).by(admin_user).with(id: 1) }
+  #     it { is_expected.to access(:show).by(admin_user).with(id: 2) }
+  #   end
+  #
+  #   describe 'not authorize' do
+  #     it { is_expected.not_to access(:show).by(guest_user).with(id: 1) }
+  #     it { is_expected.not_to access(:show).by(one_user).with(id: 2) }
+  #     it { is_expected.not_to access(:show).by(two_user).with(id: 1) }
+  #   end
+  # end
+
+  # context '#new' do
+  #   describe 'authorize' do
+  #     it { is_expected.to access(:new).by(one_user) }
+  #     it { is_expected.to access(:new).by(two_user) }
+  #     it { is_expected.to access(:new).by(admin_user) }
+  #   end
+  #
+  #   describe 'not authorize' do
+  #     it { is_expected.not_to access(:new).by(guest_user) }
+  #   end
+  # end
+
+  # context '#edit' do
+  #   describe 'authorize' do
+  #     it { is_expected.to access(:edit).by(one_user).with(id: 1) }
+  #     it { is_expected.to access(:edit).by(two_user).with(id: 2) }
+  #     it { is_expected.to access(:edit).by(admin_user).with(id: 1) }
+  #     it { is_expected.to access(:edit).by(admin_user).with(id: 2) }
+  #   end
+  #
+  #   describe 'not authorize' do
+  #     it { is_expected.not_to access(:edit).by(guest_user).with(id: 1) }
+  #     it { is_expected.not_to access(:edit).by(one_user).with(id: 2) }
+  #     it { is_expected.not_to access(:edit).by(two_user).with(id: 1) }
+  #   end
+  # end
+
+  # context '#create' do
+  #   describe 'authorize' do
+  #     it { is_expected.to access(:create).by(one_user) }
+  #     it { is_expected.to access(:create).by(two_user) }
+  #     it { is_expected.to access(:create).by(admin_user) }
+  #   end
+  #
+  #   describe 'not authorize' do
+  #     it { is_expected.not_to access(:create).by(guest_user) }
+  #   end
+  # end
+
+  # context '#update' do
+  #   describe 'authorize' do
+  #     it { is_expected.to access(:update).by(one_user).with(id: 1) }
+  #     it { is_expected.to access(:update).by(two_user).with(id: 2) }
+  #     it { is_expected.to access(:update).by(admin_user).with(id: 1) }
+  #     it { is_expected.to access(:update).by(admin_user).with(id: 2) }
+  #   end
+  #
+  #   describe 'not authorize' do
+  #     it { is_expected.not_to access(:update).by(guest_user).with(id: 1) }
+  #     it { is_expected.not_to access(:update).by(one_user).with(id: 2) }
+  #     it { is_expected.not_to access(:update).by(two_user).with(id: 1) }
+  #   end
+  # end
+
+  # context '#destroy' do
+  #   describe 'authorize' do
+  #     it { is_expected.to access(:destroy).by(one_user).with(id: 1) }
+  #     it { is_expected.to access(:destroy).by(two_user).with(id: 2) }
+  #     it { is_expected.to access(:destroy).by(admin_user).with(id: 1) }
+  #     it { is_expected.to access(:destroy).by(admin_user).with(id: 2) }
+  #   end
+  #
+  #   describe 'not authorize' do
+  #     it { is_expected.not_to access(:destroy).by(guest_user).with(id: 1) }
+  #     it { is_expected.not_to access(:destroy).by(one_user).with(id: 2) }
+  #     it { is_expected.not_to access(:destroy).by(two_user).with(id: 1) }
+  #   end
+  # end
+end
+```
