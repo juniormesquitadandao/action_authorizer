@@ -1,7 +1,7 @@
 # Action Authorizer
 
 [![Gem Version](https://badge.fury.io/rb/action_authorizer.svg)](https://badge.fury.io/rb/action_authorizer)
-[![Build Status](https://travis-ci.org/juniormesquitadandao/action_authorizer.svg?branch=1.3.0)](https://travis-ci.org/juniormesquitadandao/action_authorizer/branches)
+[![Build Status](https://travis-ci.org/juniormesquitadandao/action_authorizer.svg?branch=v2)](https://travis-ci.org/juniormesquitadandao/action_authorizer/branches)
 
 Rails authorization with controllers's actions.
 
