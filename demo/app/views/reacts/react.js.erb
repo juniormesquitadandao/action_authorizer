@@ -1,0 +1,30 @@
+$('#t-concordo, #t-amei, #t-discordo').attr({class:"btn btn-default btn-circle btn-lg"})
+$('#t-concordo').attr({
+  href:"/react/<%= @reactable.class.name %>/<%= @reactable.id %>/agree"
+});
+$('#t-amei').attr({
+  href:"/react/<%= @reactable.class.name %>/<%= @reactable.id %>/love"
+});
+$('#t-discordo').attr({
+  href:"/react/<%= @reactable.class.name %>/<%= @reactable.id %>/disagree"
+});
+
+<% if @reactable.react?(current_user) %>
+  switch("<%= @reactable.react?(current_user).reaction %>") {
+  case 'agree':
+    $('#t-concordo').attr({ href:"/react-delete/<%= @reactable.class.name %>/<%=@reactable.id %>",
+    class:"btn btn-info btn-circle btn-lg"
+  });
+  break;
+  case 'love':
+    $('#t-amei').attr({ href:"/react-delete/<%= @reactable.class.name %>/<%=@reactable.id %>",
+    class:"btn btn-danger btn-circle btn-lg"
+  });
+  break;
+  case 'disagree':
+    $('#t-discordo').attr({ href:"/react-delete/<%= @reactable.class.name %>/<%=@reactable.id %>",
+    class:"btn btn-warning btn-circle btn-lg"
+  });
+  break;
+}
+<% end %>

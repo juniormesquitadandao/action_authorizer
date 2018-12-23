@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-lg-8">
+        <h1><%= @thought.title %></h1>
+      </div>
+      <div class="col-lg-4 text-right">
+        <%= link_to t('.back', :default => t("helpers.links.back")),
+                      thoughts_path, :class => 'btn btn-default'  %>
+        <% if @thought.user == current_user %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_thought_path(@thought), :class => 'btn btn-default' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                        thought_path(@thought),
+                        :method => 'delete',
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                        :class => 'btn btn-danger' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-8">
+      <blockquote>
+      <p><%= @thought.body %></p>
+      <footer>written by <cite title="Source Title"><%= @thought.user.email %></cite></footer>
+    </blockquote>
+    <p>
+      <div id="comment-react">
+        <%= link_to "/react/#{@thought.class.name}/#{@thought.id}/agree", id:'t-concordo', title:'concordo', class:'btn btn-default btn-circle btn-lg', remote:true do %>
+          <i class="glyphicon glyphicon-thumbs-up"></i>
+        <% end %>
+        <%= link_to "/react/#{@thought.class.name}/#{@thought.id}/love", id:"t-amei", title:"amei", class:"btn btn-default btn-circle btn-lg", remote:true do %>
+          <i class="glyphicon glyphicon-heart"></i>
+        <% end %>
+        <%= link_to "/react/#{@thought.class.name}/#{@thought.id}/disagree", id:'t-discordo', title:"discordo", class:"btn btn-default btn-circle btn-lg", remote:true do %>
+          <i class="glyphicon glyphicon-thumbs-down"></i>
+        <% end %>
+      </div>
+    </p>
+    </div>
+  </div>
+  <hr />
+  <div class="container">
+    <%= form_with url: create_observation_path(@thought.id), local: true, class:"row form-inline margin-bottom" do |form| %>
+      <div class="col-md-6">
+        <%= form.text_area :comment, class:"form-control", style:"min-width:100%;", rows:"3"%>
+      </div>
+      <div class="col-md-2 align-right">
+        <button type="submit" class="btn btn-info">make an observation</button>
+      </div>
+    <% end %>
+  </div>
+  <h3>Observations(<%= @observations.length %>)</h3>
+  <% if @observations.length > 0 %>
+    <% @observations.each do |observation| %>
+      <div class="row">
+        <div class='col-md-8'>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p><strong><%= observation.user.email %>:</strong>
+              <p><%= observation.comment %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<script>
+<% if @thought.react?(current_user) %>
+  switch("<%= @thought.react?(current_user).reaction %>") {
+    case 'agree':
+      $('#t-concordo').attr({ href:"/react-delete/<%= @thought.class.name %>/<%=@thought.id %>",
+                              class:"btn btn-info btn-circle btn-lg"
+                      });
+      break;
+    case 'love':
+      $('#t-amei').attr({ href:"/react-delete/<%= @thought.class.name %>/<%=@thought.id %>",
+                          class:"btn btn-danger btn-circle btn-lg"
+                       });
+      break;
+    case 'disagree':
+      $('#t-discordo').attr({ href:"/react-delete/<%= @thought.class.name %>/<%=@thought.id %>",
+                              class:"btn btn-warning btn-circle btn-lg"
+                      });
+      break;
+  }
+<% end %>
+</script>

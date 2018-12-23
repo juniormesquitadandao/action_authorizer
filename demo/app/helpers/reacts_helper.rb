@@ -1,0 +1,2 @@
+module ReactsHelper
+end
