@@ -9,15 +9,15 @@ Rails authorization with controllers's actions.
 
 ActionAuthorizer is a gem to authorize the controllers's actions. Designed to work with RSpec and Devise. Where each controller will have an authorizer with the same actions. Each authorizer's action will return permission's result.
 
-## Getting Started
-
-After setting up Rspec and Devise! Set up ActionAuthorizer.
-
 ```ruby
 <% if authorized? :new %>
   <a hre="<%= new_model_path %>">New</a>
 <% end %>
 ```
+
+## Getting Started
+
+After setting up Rspec and Devise! Set up ActionAuthorizer.
 
 - Edit: Gemfile
 ```ruby
