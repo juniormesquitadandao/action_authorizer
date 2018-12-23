@@ -1,0 +1,10 @@
+$('#t-concordo, #t-amei, #t-discordo').attr({class:"btn btn-default btn-circle btn-lg"})
+$('#t-concordo').attr({
+  href:"/react/<%= @reactable.class.name %>/<%= @reactable.id %>/agree"
+});
+$('#t-amei').attr({
+  href:"/react/<%= @reactable.class.name %>/<%= @reactable.id %>/love"
+});
+$('#t-discordo').attr({
+  href:"/react/<%= @reactable.class.name %>/<%= @reactable.id %>/disagree"
+});

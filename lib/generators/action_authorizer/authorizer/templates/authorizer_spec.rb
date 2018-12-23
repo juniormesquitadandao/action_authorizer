@@ -1,134 +1,106 @@
 require 'rails_helper'
 
 RSpec.describe <%= controller_class_name %>Authorizer, type: :authorizer do
-
   # let(:guest_user) { nil }
-  # let(:one_user) { double('Authenticated', admin_group?: false, user_group?: true, <%= singular_table_name %>_ids: [1]) }
-  # let(:two_user) { double('Authenticated', admin_group?: false, user_group?: true, <%= singular_table_name %>_ids: [2]) }
-  # let(:admin_user) { double('Authenticated', admin_group?: true, user_group?: false) }
+  # let(:one_user) { double('User', admin_group?: false, user_group?: true, <%= singular_table_name %>_ids: [1]) }
+  # let(:two_user) { double('User', admin_group?: false, user_group?: true, <%= singular_table_name %>_ids: [2]) }
+  # let(:admin_user) { double('User', admin_group?: true, user_group?: false) }
 
 <% unless options[:singleton] -%>
-  # context '#index' do
-  #   describe 'authorize' do
-  #     it { expect(<%= controller_class_name %>Authorizer.new(one_user, :index)).to be_authorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(two_user, :index)).to be_authorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(admin_user, :index)).to be_authorized }
+  # describe '#index' do
+  #   context 'when authorize' do
+  #     it { expect(one_user).to be_authorized(:index) }
+  #     it { expect(two_user).to be_authorized(:index) }
+  #     it { expect(admin_user).to be_authorized(:index) }
   #   end
 
-  #   describe 'not authorize' do
-  #     it { expect(<%= controller_class_name %>Authorizer.new(guest_user, :index)).to be_unauthorized }
+  #   context 'when not authorize' do
+  #     it { expect(guest_user).to be_unauthorized(:index) }
   #   end
   # end
 <% end -%>
 
-  # context '#show' do
-  #   describe 'authorize' do
-  #     it { expect(<%= controller_class_name %>Authorizer.new(one_user, :show, id: 1)).to be_authorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(two_user, :show, id: 2)).to be_authorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(admin_user, :show, id: 1)).to be_authorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(admin_user, :show, id: 2)).to be_authorized }
+  # describe '#show' do
+  #   context 'when authorize' do
+  #     it { expect(one_user).to be_authorized(:show, id: 1) }
+  #     it { expect(two_user).to be_authorized(:show, id: 2) }
+  #     it { expect(admin_user).to be_authorized(:show, id: 1) }
+  #     it { expect(admin_user).to be_authorized(:show, id: 2) }
   #   end
 
-  #   describe 'not authorize' do
-  #     it { expect(<%= controller_class_name %>Authorizer.new(guest_user, :show, id: 1)).to be_unauthorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(one_user, :show, id: 2)).to be_unauthorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(two_user, :show, id: 1)).to be_unauthorized }
+  #   context 'when not authorize' do
+  #     it { expect(guest_user).to be_unauthorized(:show, id: 1) }
+  #     it { expect(one_user).to be_unauthorized(:show, id: 2) }
+  #     it { expect(two_user).to be_unauthorized(:show, id: 1) }
   #   end
   # end
 
-  # context '#new' do
-  #   describe 'authorize' do
-  #     it { expect(<%= controller_class_name %>Authorizer.new(one_user, :new)).to be_authorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(two_user, :new)).to be_authorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(admin_user, :new)).to be_authorized }
+  # describe '#new' do
+  #   context 'when authorize' do
+  #     it { expect(one_user).to be_authorized(:new) }
+  #     it { expect(two_user).to be_authorized(:new) }
+  #     it { expect(admin_user).to be_authorized(:new) }
   #   end
 
-  #   describe 'not authorize' do
-  #     it { expect(<%= controller_class_name %>Authorizer.new(guest_user, :new)).to be_unauthorized }
+  #   context 'when not authorize' do
+  #     it { expect(guest_user).to be_unauthorized(:new) }
   #   end
   # end
 
-  # context '#edit' do
-  #   describe 'authorize' do
-  #     it { expect(<%= controller_class_name %>Authorizer.new(one_user, :edit, id: 1)).to be_authorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(two_user, :edit, id: 2)).to be_authorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(admin_user, :edit, id: 1)).to be_authorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(admin_user, :edit, id: 2)).to be_authorized }
+  # describe '#edit' do
+  #   context 'when authorize' do
+  #     it { expect(one_user).to be_authorized(:edit, id: 1) }
+  #     it { expect(two_user).to be_authorized(:edit, id: 2) }
+  #     it { expect(admin_user).to be_authorized(:edit, id: 1) }
+  #     it { expect(admin_user).to be_authorized(:edit, id: 2) }
   #   end
 
-  #   describe 'not authorize' do
-  #     it { expect(<%= controller_class_name %>Authorizer.new(guest_user, :edit, id: 1)).to be_unauthorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(one_user, :edit, id: 2)).to be_unauthorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(two_user, :edit, id: 1)).to be_unauthorized }
+  #   context 'when not authorize' do
+  #     it { expect(guest_user).to be_unauthorized(:edit, id: 1) }
+  #     it { expect(one_user).to be_unauthorized(:edit, id: 2) }
+  #     it { expect(two_user).to be_unauthorized(:edit, id: 1) }
   #   end
   # end
 
-  # context '#create' do
-  #   describe 'authorize' do
-  #     it { expect(<%= controller_class_name %>Authorizer.new(one_user, :create)).to be_authorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(two_user, :create)).to be_authorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(admin_user, :create)).to be_authorized }
+  # describe '#create' do
+  #   context 'when authorize' do
+  #     it { expect(one_user).to be_authorized(:create) }
+  #     it { expect(two_user).to be_authorized(:create) }
+  #     it { expect(admin_user).to be_authorized(:create) }
   #   end
 
-  #   describe 'not authorize' do
-  #     it { expect(<%= controller_class_name %>Authorizer.new(guest_user, :create)).to be_unauthorized }
+  #   context 'when not authorize' do
+  #     it { expect(guest_user).to be_unauthorized(:create) }
   #   end
   # end
 
-  # context '#update' do
-  #   describe 'authorize' do
-  #     it { expect(<%= controller_class_name %>Authorizer.new(one_user, :update, id: 1)).to be_authorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(two_user, :update, id: 2)).to be_authorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(admin_user, :update, id: 1)).to be_authorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(admin_user, :update, id: 2)).to be_authorized }
+  # describe '#update' do
+  #   context 'when authorize' do
+  #     it { expect(one_user).to be_authorized(:update, id: 1) }
+  #     it { expect(two_user).to be_authorized(:update, id: 2) }
+  #     it { expect(admin_user).to be_authorized(:update, id: 1) }
+  #     it { expect(admin_user).to be_authorized(:update, id: 2) }
   #   end
 
-  #   describe 'not authorize' do
-  #     it { expect(<%= controller_class_name %>Authorizer.new(guest_user, :update, id: 1)).to be_unauthorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(one_user, :update, id: 2)).to be_unauthorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(two_user, :update, id: 1)).to be_unauthorized }
+  #   context 'when not authorize' do
+  #     it { expect(guest_user).to be_unauthorized(:update, id: 1) }
+  #     it { expect(one_user).to be_unauthorized(:update, id: 2) }
+  #     it { expect(two_user).to be_unauthorized(:update, id: 1) }
   #   end
   # end
 
-  # context '#destroy' do
-  #   describe 'authorize' do
-  #     it { expect(<%= controller_class_name %>Authorizer.new(one_user, :destroy, id: 1)).to be_authorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(two_user, :destroy, id: 2)).to be_authorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(admin_user, :destroy, id: 1)).to be_authorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(admin_user, :destroy, id: 2)).to be_authorized }
+  # describe '#destroy' do
+  #   context 'when authorize' do
+  #     it { expect(one_user).to be_authorized(:destroy, id: 1) }
+  #     it { expect(two_user).to be_authorized(:destroy, id: 2) }
+  #     it { expect(admin_user).to be_authorized(:destroy, id: 1) }
+  #     it { expect(admin_user).to be_authorized(:destroy, id: 2) }
   #   end
 
-  #   describe 'not authorize' do
-  #     it { expect(<%= controller_class_name %>Authorizer.new(guest_user, :destroy, id: 1)).to be_unauthorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(one_user, :destroy, id: 2)).to be_unauthorized }
-
-  #     it { expect(<%= controller_class_name %>Authorizer.new(two_user, :destroy, id: 1)).to be_unauthorized }
+  #   context 'when not authorize' do
+  #     it { expect(guest_user).to be_unauthorized(:destroy, id: 1) }
+  #     it { expect(one_user).to be_unauthorized(:destroy, id: 2) }
+  #     it { expect(two_user).to be_unauthorized(:destroy, id: 1) }
   #   end
   # end
-
 end
