@@ -9,7 +9,7 @@ Rails authorization with controllers's actions.
 
 ActionAuthorizer is a gem to authorize the controllers's actions. Designed to work with RSpec and Devise. Where each controller will have an authorizer with the same actions. Each authorizer's action will return permission's result.
 
-```ruby
+```erb
 <% if authorized? :new %>
   <a hre="<%= new_model_path %>">New</a>
 <% end %>
@@ -91,7 +91,7 @@ end
 ```
 
 - Edit: /app/views/devise/registrations/edit.html.erb
-```ruby
+```erb
 <% if authorized? 'devise/registrations', :cancel %>
 <h3>Cancel my account</h3>
 
@@ -100,7 +100,7 @@ end
 ```
 
 - Edit: /app/views/devise/shared/_links.html.erb
-```ruby
+```erb
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
   <%= link_to "Sign up", new_registration_path(resource_name) if authorized? 'devise/registrations', :new %><br />
 <% end -%>
