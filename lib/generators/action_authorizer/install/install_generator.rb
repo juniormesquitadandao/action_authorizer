@@ -20,6 +20,7 @@ module ActionAuthorizerHelper
   #   <%= link_to 'Model', model_path(@model) if authorized? :models, :show, id: @model.id %>
   #   <%= link_to 'Model', edit_model_path(@model) if authorized? :models, :edit, id: @model.to_param %>
   include ActionAuthorizer::Helper
+
   # def authenticated
   #   current_user
   # end
