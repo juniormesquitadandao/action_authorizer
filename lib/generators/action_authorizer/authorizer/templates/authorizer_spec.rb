@@ -15,7 +15,7 @@ RSpec.describe <%= controller_class_name %>Authorizer, type: :authorizer do
   #   end
 
   #   context 'when not authorize' do
-  #     it { expect(guest_user).to be_authorized(:index) }
+  #     it { expect(guest_user).to be_unauthorized(:index) }
   #   end
   # end
 <% end -%>
