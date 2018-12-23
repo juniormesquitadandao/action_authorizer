@@ -10,7 +10,7 @@ class <%= controller_class_name %>Authorizer < ApplicationAuthorizer
 <% end -%>
 
   def show
-    # current_user.<%= plural_table_name.classify %>.exists?(id: params[:id])
+    # current_user.<%= plural_table_name %>.exists?(id: params[:id])
     # <%= singular_table_name.classify %>.exists?(id: params[:id])
   end
 
@@ -19,7 +19,7 @@ class <%= controller_class_name %>Authorizer < ApplicationAuthorizer
   end
 
   def edit
-    # current_user.<%= plural_table_name.classify %>.exists?(id: params[:id])
+    # current_user.<%= plural_table_name %>.exists?(id: params[:id])
   end
 
   def create
@@ -27,10 +27,10 @@ class <%= controller_class_name %>Authorizer < ApplicationAuthorizer
   end
 
   def update
-    # current_user.<%= plural_table_name.classify %>.exists?(id: params[:id])
+    # current_user.<%= plural_table_name %>.exists?(id: params[:id])
   end
 
   def destroy
-    # current_user.<%= plural_table_name.classify %>.exists?(id: params[:id])
+    # current_user.<%= plural_table_name %>.exists?(id: params[:id])
   end
 end

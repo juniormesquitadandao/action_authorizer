@@ -21,9 +21,12 @@
 
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       thought_path(thought), :class => 'btn btn-default btn-xs' %>
-          <% if thought.user == current_user %>
+          <% if authorized? :edit, id: thought.id %>
             <%= link_to t('.edit', :default => t("helpers.links.edit")),
                         edit_thought_path(thought), :class => 'btn btn-default btn-xs' %>
+          <% end %>
+
+          <% if authorized? :destroy, id: thought.id %>
             <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                         thought_path(thought),
                         :method => :delete,

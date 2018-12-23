@@ -6,10 +6,6 @@ class ActionAuthorizer::InstallGenerator < Rails::Generators::Base # :nodoc:
     template 'app/authorizers/application_authorizer.rb'
   end
 
-  def create_controllers
-    template 'app/controllers/concerns/action_authorizer.rb'
-  end
-
   def create_helpers
     template 'app/helpers/action_authorizer_helper.rb'
   end

@@ -7,9 +7,11 @@
       <div class="col-lg-4 text-right">
         <%= link_to t('.back', :default => t("helpers.links.back")),
                       thoughts_path, :class => 'btn btn-default'  %>
-        <% if @thought.user == current_user %>
+        <% if authorized? :edit, id: @thought.id %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                         edit_thought_path(@thought), :class => 'btn btn-default' %>
+        <% end %>
+        <% if authorized? :destroy, id: @thought.id %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                         thought_path(@thought),
                         :method => 'delete',
