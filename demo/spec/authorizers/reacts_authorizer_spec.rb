@@ -1,104 +1,39 @@
 require 'rails_helper'
 
 RSpec.describe ReactsAuthorizer, type: :authorizer do
-  # let(:guest_user) { nil }
-  # let(:one_user) { double('User', admin_group?: false, user_group?: true, react_ids: [1]) }
-  # let(:two_user) { double('User', admin_group?: false, user_group?: true, react_ids: [2]) }
-  # let(:admin_user) { double('User', admin_group?: true, user_group?: false) }
+  let(:guest_user) { nil }
+  before(:each) do
+    @user1 = User.create!(email: 'user1@email.com', password: '123456')
+    @user2 = User.create!(email: 'user2@email.com', password: '123456')
 
-  # describe '#index' do
-  #   context 'when authorize' do
-  #     it { expect.to authorize(one_user).access(:index) }
-  #     it { expect.to authorize(two_user).access(:index) }
-  #     it { expect.to authorize(admin_user).access(:index) }
-  #   end
+    @thought1 = Thought.create!(user: @user1)
+    @thought2 = Thought.create!(user: @user2)
 
-  #   context 'when not authorize' do
-  #     it { expect.not_to authorize(guest_user).access(:index) }
-  #   end
-  # end
+    @react1 = @thought1.react(:agree, @user1)
+    @react2 = @thought2.react(:agree, @user2)
+  end
 
-  # describe '#show' do
-  #   context 'when authorize' do
-  #     it { expect.to authorize(one_user).access(:show).with(id: 1) }
-  #     it { expect.to authorize(two_user).access(:show).with(id: 2) }
-  #     it { expect.to authorize(admin_user).access(:show).with(id: 1) }
-  #     it { expect.to authorize(admin_user).access(:show).with(id: 2) }
-  #   end
+  describe '#react' do
+    context 'when authorize' do
+      it { expect(@user1).to be_authorized(:react) }
+      it { expect(@user2).to be_authorized(:react) }
+    end
 
-  #   context 'when not authorize' do
-  #     it { expect.not_to authorize(guest_user).access(:show).with(id: 1) }
-  #     it { expect.not_to authorize(one_user).access(:show).with(id: 2) }
-  #     it { expect.not_to authorize(two_user).access(:show).with(id: 1) }
-  #   end
-  # end
+    context 'when not authorize' do
+      it { expect(guest_user).to be_unauthorized(:react) }
+    end
+  end
 
-  # describe '#new' do
-  #   context 'when authorize' do
-  #     it { expect.to authorize(one_user).access(:new) }
-  #     it { expect.to authorize(two_user).access(:new) }
-  #     it { expect.to authorize(admin_user).access(:new) }
-  #   end
+  describe '#remove_reaction' do
+    context 'when authorize' do
+      it { expect(@user1).to be_authorized(:remove_reaction, reactable_id: @thought1, reactable_type: 'Thought') }
+      it { expect(@user2).to be_authorized(:remove_reaction, reactable_id: @thought2, reactable_type: 'Thought') }
+    end
 
-  #   context 'when not authorize' do
-  #     it { expect.not_to authorize(guest_user).access(:new) }
-  #   end
-  # end
-
-  # describe '#edit' do
-  #   context 'when authorize' do
-  #     it { expect.to authorize(one_user).access(:edit).with(id: 1) }
-  #     it { expect.to authorize(two_user).access(:edit).with(id: 2) }
-  #     it { expect.to authorize(admin_user).access(:edit).with(id: 1) }
-  #     it { expect.to authorize(admin_user).access(:edit).with(id: 2) }
-  #   end
-
-  #   context 'when not authorize' do
-  #     it { expect.not_to authorize(guest_user).access(:edit).with(id: 1) }
-  #     it { expect.not_to authorize(one_user).access(:edit).with(id: 2) }
-  #     it { expect.not_to authorize(two_user).access(:edit).with(id: 1) }
-  #   end
-  # end
-
-  # describe '#create' do
-  #   context 'when authorize' do
-  #     it { expect.to authorize(one_user).access(:create) }
-  #     it { expect.to authorize(two_user).access(:create) }
-  #     it { expect.to authorize(admin_user).access(:create) }
-  #   end
-
-  #   context 'when not authorize' do
-  #     it { expect.not_to authorize(guest_user).access(:create) }
-  #   end
-  # end
-
-  # describe '#update' do
-  #   context 'when authorize' do
-  #     it { expect.to authorize(one_user).access(:update).with(id: 1) }
-  #     it { expect.to authorize(two_user).access(:update).with(id: 2) }
-  #     it { expect.to authorize(admin_user).access(:update).with(id: 1) }
-  #     it { expect.to authorize(admin_user).access(:update).with(id: 2) }
-  #   end
-
-  #   context 'when not authorize' do
-  #     it { expect.not_to authorize(guest_user).access(:update).with(id: 1) }
-  #     it { expect.not_to authorize(one_user).access(:update).with(id: 2) }
-  #     it { expect.not_to authorize(two_user).access(:update).with(id: 1) }
-  #   end
-  # end
-
-  # describe '#destroy' do
-  #   context 'when authorize' do
-  #     it { expect.to authorize(one_user).access(:destroy).with(id: 1) }
-  #     it { expect.to authorize(two_user).access(:destroy).with(id: 2) }
-  #     it { expect.to authorize(admin_user).access(:destroy).with(id: 1) }
-  #     it { expect.to authorize(admin_user).access(:destroy).with(id: 2) }
-  #   end
-
-  #   context 'when not authorize' do
-  #     it { expect.not_to authorize(guest_user).access(:destroy).with(id: 1) }
-  #     it { expect.not_to authorize(one_user).access(:destroy).with(id: 2) }
-  #     it { expect.not_to authorize(two_user).access(:destroy).with(id: 1) }
-  #   end
-  # end
+    context 'when not authorize' do
+      it { expect(@user1).to be_unauthorized(:edit, id: @thought2) }
+      it { expect(@user2).to be_unauthorized(:edit, id: @thought1) }
+      it { expect(guest_user).to be_unauthorized(:remove_reaction, reactable_type: 'Thought') }
+    end
+  end
 end

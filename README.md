@@ -174,49 +174,49 @@ RSpec.describe Devise::RegistrationsAuthorizer, type: :authorizer do
 
   describe '#new' do
     context 'when not authorize' do
-      it { expect.not_to authorize(user).access(:new) }
-      it { expect.not_to authorize(guest_user).access(:new) }
+      it { expect(user).to be_unauthorized(:new) }
+      it { expect(guest_user).to be_unauthorized(:new) }
     end
   end
 
   describe '#edit' do
     context 'when authorize' do
-      it { expect.to authorize(user).access(:edit) }
+      it { expect(user).to be_authorized(:edit) }
     end
 
     context 'when not authorize' do
-      it { expect.not_to authorize(guest_user).access(:edit) }
+      it { expect(guest_user).to be_unauthorized(:edit) }
     end
   end
 
   describe '#create' do
     context 'when not authorize' do
-      it { expect.not_to authorize(user).access(:create) }
-      it { expect.not_to authorize(guest_user).access(:create) }
+      it { expect(user).to be_unauthorized(:create) }
+      it { expect(guest_user).to be_unauthorized(:create) }
     end
   end
 
   describe '#update' do
     context 'when authorize' do
-      it { expect.to authorize(user).access(:update) }
+      it { expect(user).to be_authorized(:update) }
     end
 
     describe 'not authorize' do
-      it { expect.not_to authorize(guest_user).access(:update) }
+      it { expect(guest_user).to be_unauthorized(:update) }
     end
   end
 
   describe '#destroy' do
     context 'when not authorize' do
-      it { expect.not_to authorize(user).access(:destroy) }
-      it { expect.not_to authorize(guest_user).access(:destroy) }
+      it { expect(user).to be_unauthorized(:destroy) }
+      it { expect(guest_user).to be_unauthorized(:destroy) }
     end
   end
 
   describe '#cancel' do
     context 'when not authorize' do
-      it { expect.not_to authorize(user).access(:cancel) }
-      it { expect.not_to authorize(guest_user).access(:cancel) }
+      it { expect(user).to be_unauthorized(:cancel) }
+      it { expect(guest_user).to be_unauthorized(:cancel) }
     end
   end
 end

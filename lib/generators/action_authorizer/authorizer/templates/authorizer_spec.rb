@@ -9,98 +9,98 @@ RSpec.describe <%= controller_class_name %>Authorizer, type: :authorizer do
 <% unless options[:singleton] -%>
   # describe '#index' do
   #   context 'when authorize' do
-  #     it { expect.to authorize(one_user).access(:index) }
-  #     it { expect.to authorize(two_user).access(:index) }
-  #     it { expect.to authorize(admin_user).access(:index) }
+  #     it { expect(one_user).to be_authorized(:index) }
+  #     it { expect(two_user).to be_authorized(:index) }
+  #     it { expect(admin_user).to be_authorized(:index) }
   #   end
 
   #   context 'when not authorize' do
-  #     it { expect.not_to authorize(guest_user).access(:index) }
+  #     it { expect(guest_user).to be_authorized(:index) }
   #   end
   # end
 <% end -%>
 
   # describe '#show' do
   #   context 'when authorize' do
-  #     it { expect.to authorize(one_user).access(:show).with(id: 1) }
-  #     it { expect.to authorize(two_user).access(:show).with(id: 2) }
-  #     it { expect.to authorize(admin_user).access(:show).with(id: 1) }
-  #     it { expect.to authorize(admin_user).access(:show).with(id: 2) }
+  #     it { expect(one_user).to be_authorized(:show, id: 1) }
+  #     it { expect(two_user).to be_authorized(:show, id: 2) }
+  #     it { expect(admin_user).to be_authorized(:show, id: 1) }
+  #     it { expect(admin_user).to be_authorized(:show, id: 2) }
   #   end
 
   #   context 'when not authorize' do
-  #     it { expect.not_to authorize(guest_user).access(:show).with(id: 1) }
-  #     it { expect.not_to authorize(one_user).access(:show).with(id: 2) }
-  #     it { expect.not_to authorize(two_user).access(:show).with(id: 1) }
+  #     it { expect(guest_user).to be_unauthorized(:show, id: 1) }
+  #     it { expect(one_user).to be_unauthorized(:show, id: 2) }
+  #     it { expect(two_user).to be_unauthorized(:show, id: 1) }
   #   end
   # end
 
   # describe '#new' do
   #   context 'when authorize' do
-  #     it { expect.to authorize(one_user).access(:new) }
-  #     it { expect.to authorize(two_user).access(:new) }
-  #     it { expect.to authorize(admin_user).access(:new) }
+  #     it { expect(one_user).to be_authorized(:new) }
+  #     it { expect(two_user).to be_authorized(:new) }
+  #     it { expect(admin_user).to be_authorized(:new) }
   #   end
 
   #   context 'when not authorize' do
-  #     it { expect.not_to authorize(guest_user).access(:new) }
+  #     it { expect(guest_user).to be_unauthorized(:new) }
   #   end
   # end
 
   # describe '#edit' do
   #   context 'when authorize' do
-  #     it { expect.to authorize(one_user).access(:edit).with(id: 1) }
-  #     it { expect.to authorize(two_user).access(:edit).with(id: 2) }
-  #     it { expect.to authorize(admin_user).access(:edit).with(id: 1) }
-  #     it { expect.to authorize(admin_user).access(:edit).with(id: 2) }
+  #     it { expect(one_user).to be_authorized(:edit, id: 1) }
+  #     it { expect(two_user).to be_authorized(:edit, id: 2) }
+  #     it { expect(admin_user).to be_authorized(:edit, id: 1) }
+  #     it { expect(admin_user).to be_authorized(:edit, id: 2) }
   #   end
 
   #   context 'when not authorize' do
-  #     it { expect.not_to authorize(guest_user).access(:edit).with(id: 1) }
-  #     it { expect.not_to authorize(one_user).access(:edit).with(id: 2) }
-  #     it { expect.not_to authorize(two_user).access(:edit).with(id: 1) }
+  #     it { expect(guest_user).to be_unauthorized(:edit, id: 1) }
+  #     it { expect(one_user).to be_unauthorized(:edit, id: 2) }
+  #     it { expect(two_user).to be_unauthorized(:edit, id: 1) }
   #   end
   # end
 
   # describe '#create' do
   #   context 'when authorize' do
-  #     it { expect.to authorize(one_user).access(:create) }
-  #     it { expect.to authorize(two_user).access(:create) }
-  #     it { expect.to authorize(admin_user).access(:create) }
+  #     it { expect(one_user).to be_authorized(:create) }
+  #     it { expect(two_user).to be_authorized(:create) }
+  #     it { expect(admin_user).to be_authorized(:create) }
   #   end
 
   #   context 'when not authorize' do
-  #     it { expect.not_to authorize(guest_user).access(:create) }
+  #     it { expect(guest_user).to be_unauthorized(:create) }
   #   end
   # end
 
   # describe '#update' do
   #   context 'when authorize' do
-  #     it { expect.to authorize(one_user).access(:update).with(id: 1) }
-  #     it { expect.to authorize(two_user).access(:update).with(id: 2) }
-  #     it { expect.to authorize(admin_user).access(:update).with(id: 1) }
-  #     it { expect.to authorize(admin_user).access(:update).with(id: 2) }
+  #     it { expect(one_user).to be_authorized(:update, id: 1) }
+  #     it { expect(two_user).to be_authorized(:update, id: 2) }
+  #     it { expect(admin_user).to be_authorized(:update, id: 1) }
+  #     it { expect(admin_user).to be_authorized(:update, id: 2) }
   #   end
 
   #   context 'when not authorize' do
-  #     it { expect.not_to authorize(guest_user).access(:update).with(id: 1) }
-  #     it { expect.not_to authorize(one_user).access(:update).with(id: 2) }
-  #     it { expect.not_to authorize(two_user).access(:update).with(id: 1) }
+  #     it { expect(guest_user).to be_unauthorized(:update, id: 1) }
+  #     it { expect(one_user).to be_unauthorized(:update, id: 2) }
+  #     it { expect(two_user).to be_unauthorized(:update, id: 1) }
   #   end
   # end
 
   # describe '#destroy' do
   #   context 'when authorize' do
-  #     it { expect.to authorize(one_user).access(:destroy).with(id: 1) }
-  #     it { expect.to authorize(two_user).access(:destroy).with(id: 2) }
-  #     it { expect.to authorize(admin_user).access(:destroy).with(id: 1) }
-  #     it { expect.to authorize(admin_user).access(:destroy).with(id: 2) }
+  #     it { expect(one_user).to be_authorized(:destroy, id: 1) }
+  #     it { expect(two_user).to be_authorized(:destroy, id: 2) }
+  #     it { expect(admin_user).to be_authorized(:destroy, id: 1) }
+  #     it { expect(admin_user).to be_authorized(:destroy, id: 2) }
   #   end
 
   #   context 'when not authorize' do
-  #     it { expect.not_to authorize(guest_user).access(:destroy).with(id: 1) }
-  #     it { expect.not_to authorize(one_user).access(:destroy).with(id: 2) }
-  #     it { expect.not_to authorize(two_user).access(:destroy).with(id: 1) }
+  #     it { expect(guest_user).to be_unauthorized(:destroy, id: 1) }
+  #     it { expect(one_user).to be_unauthorized(:destroy, id: 2) }
+  #     it { expect(two_user).to be_unauthorized(:destroy, id: 1) }
   #   end
   # end
 end

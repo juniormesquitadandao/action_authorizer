@@ -1,13 +1,13 @@
-RSpec::Matchers.define :authorize do |current_user|
-  match do
-    described_class.new(current_user, @params.to_h).send(@action)
+RSpec::Matchers.define :be_authorized do |action, params = {}|
+  match do |current_user|
+    controller = described_class.to_s.underscore.gsub('_authorizer', '')
+    ActionAuthorizer::Base.authorized?(current_user, controller, action, params)
   end
+end
 
-  chain :access do |action|
-    @action = action
-  end
-
-  chain :with do |params|
-    @params = param
+RSpec::Matchers.define :be_unauthorized do |action, params = {}|
+  match do |current_user|
+    controller = described_class.to_s.underscore.gsub('_authorizer', '')
+    !ActionAuthorizer::Base.authorized?(current_user, controller, action, params)
   end
 end
