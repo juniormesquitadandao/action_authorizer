@@ -71,4 +71,4 @@ gem 'devise-bootstrapped'
 
 gem 'acts_as_commentable'
 
-gem 'action_authorizer', path: '../'
+gem 'action_authorizer', '~> 2.0'
