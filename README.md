@@ -21,7 +21,7 @@ After setting up Rspec and Devise! Set up ActionAuthorizer.
 
 - Edit: Gemfile
 ```ruby
-gem 'action_authorizer', '~> 1.3'
+gem 'action_authorizer', '~> 2.0'
 ```
 
 - Run
