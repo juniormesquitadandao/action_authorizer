@@ -1,5 +1,3 @@
-https://onebitcode.com/rails-concerns
-
 # Action Authorizer
 
 [![Gem Version](https://badge.fury.io/rb/action_authorizer.svg)](https://badge.fury.io/rb/action_authorizer)
