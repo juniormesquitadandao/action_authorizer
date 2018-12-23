@@ -1,10 +1,8 @@
 class ActionAuthorizer::InstallGenerator < Rails::Generators::Base # :nodoc:
-  desc 'Creates an initializer with default action_authorizer configuration and copy locale file'
+  source_root File.expand_path('../templates', __FILE__)
 
-  def create_application_authorize_file
-    create_file 'app/authorizers/application_authorizer.rb', <<~RUBY
-      class ApplicationAuthorizer < ActionAuthorizer::Base
-      end
-    RUBY
+  def create_authorizers
+    template 'app/authorizers/action_authorizer/base.rb'
+    template 'app/authorizers/application_authorizer.rb'
   end
 end
