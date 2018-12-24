@@ -31,7 +31,6 @@ rails generate action_authorizer:install
 - Edit: app/controllers/application_controller.rb
 ```ruby
 class ApplicationController < ActionController::Base
-  include ActionAuthorizer
   ...
   before_action :authenticate_user!
   before_action :authorize!, unless: :devise_controller?
