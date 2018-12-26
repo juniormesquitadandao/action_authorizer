@@ -3,7 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/action_authorizer.svg)](https://badge.fury.io/rb/action_authorizer)
 [![Build Status](https://travis-ci.org/juniormesquitadandao/action_authorizer.svg?branch=1.3.0)](https://travis-ci.org/juniormesquitadandao/action_authorizer/branches)
 
-Rails authorization with controllers's actions.
+Rails authorization with controllers actions.
 
 ActionAuthorizer is a gem to authorize the controllers's actions. Designed to work with RSpec and Devise. Where each controller will have an authorizer with the same actions. Each authorizer's action will return your permission's result.
 
